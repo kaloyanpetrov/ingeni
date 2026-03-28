@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>INGENI | Modern Interior Architecture</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Work+Sans:ital,wght@0,300;0,400;0,500;1,300&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#d5d4d4",
+                        "on-tertiary-fixed": "#4d4940",
+                        "outline": "#767c79",
+                        "inverse-surface": "#0d0f0e",
+                        "surface-dim": "#d4dcd8",
+                        "tertiary-fixed": "#faf3e5",
+                        "on-tertiary": "#fff8ed",
+                        "on-tertiary-container": "#605b51",
+                        "outline-variant": "#adb3b0",
+                        "on-surface": "#2d3432",
+                        "secondary-dim": "#525353",
+                        "tertiary": "#635f54",
+                        "surface-container-high": "#e5e9e6",
+                        "surface-tint": "#5f5e5e",
+                        "primary": "#5f5e5e",
+                        "on-primary-container": "#525151",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "surface-bright": "#f9f9f7",
+                        "secondary-fixed": "#e3e2e2",
+                        "surface": "#f9f9f7",
+                        "surface-container": "#ecefec",
+                        "secondary": "#5f5f5f",
+                        "surface-container-highest": "#dee4e0",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "error-dim": "#4e0309",
+                        "on-error-container": "#752121",
+                        "on-tertiary-fixed-variant": "#6a665b",
+                        "surface-container-low": "#f2f4f2",
+                        "surface-variant": "#dee4e0",
+                        "tertiary-fixed-dim": "#ece4d7",
+                        "tertiary-dim": "#575349",
+                        "on-secondary": "#faf8f8",
+                        "on-primary-fixed": "#403f3f",
+                        "on-background": "#2d3432",
+                        "on-surface-variant": "#5a605e",
+                        "error": "#9f403d",
+                        "on-secondary-fixed-variant": "#5b5b5c",
+                        "tertiary-container": "#faf3e5",
+                        "secondary-container": "#e3e2e2",
+                        "primary-dim": "#535252",
+                        "on-primary": "#faf7f6",
+                        "inverse-on-surface": "#9c9d9b",
+                        "inverse-primary": "#ffffff",
+                        "on-secondary-container": "#515252",
+                        "error-container": "#fe8983",
+                        "on-secondary-fixed": "#3f3f40",
+                        "background": "#f9f9f7",
+                        "primary-fixed": "#e5e2e1",
+                        "primary-container": "#e5e2e1",
+                        "on-error": "#fff7f6"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Work Sans"],
+                        "label": ["Work Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f9f9f7;
+            color: #2d3432;
+        }
+
+        h1,
+        h2,
+        h3,
+        .brand-logo {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Custom hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-white/40 backdrop-blur-2xl border border-white/20 rounded-full shadow-lg transition-all duration-500 ease-in-out">
+        <div class="flex justify-between items-center px-6 md:px-10 py-4 w-full mx-auto">
+            <a class="font-['Manrope'] text-2xl font-bold tracking-tighter text-[#0d0f0e]" href="#">INGENI</a>
+            <div class="hidden md:flex items-center space-x-12">
+                <a class="font-['Manrope'] font-bold tracking-[0.05em] uppercase text-[0.6875rem] text-[#0d0f0e] transition-colors duration-400 ease-linear"
+                    href="#">Portfolio</a>
+                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
+                    href="#">Services</a>
+                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
+                    href="#">Studio</a>
+                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
+                    href="#">Journal</a>
+                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
+                    href="#">Contact</a>
+            </div>
+            <button
+                class="bg-inverse-surface text-inverse-primary px-8 py-3 font-['Manrope'] font-bold tracking-[0.05em] uppercase text-[0.6875rem] transition-all hover:bg-primary rounded-full">
+                Enquire
+            </button>
+        </div>
+    </nav>
+    <main>
+        <!-- Header: Video Banner (Cinematic Image Placeholder) -->
+        <section class="relative h-screen flex items-end pb-24 px-8 md:px-16 bg-surface overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" preload="auto">
+                    <source src="assets/interior-hd.mp4" type="video/mp4" />
+                    <source src="assets/interior-hd.mov" type="video/quicktime" />
+                </video>
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl">
+                <span class="font-label text-[0.6875rem] uppercase tracking-[0.2em] text-on-surface mb-6 block">The
+                    Curated Space</span>
+                <h1
+                    class="font-headline text-5xl md:text-[5rem] font-extrabold leading-[1.1] tracking-tighter text-inverse-surface mb-8">
+                    INGENI<br /><span class="italic font-normal">Aesthetic Interiors.</span>
+                </h1>
+                <p class="font-body text-lg text-on-surface-variant max-w-xl leading-relaxed mb-10">
+                    INGENI transforms residential and commercial environments into tactile experiences, balancing
+                    architectural precision with the warmth of human habitation.
+                </p>
+            </div>
+        </section>
+        <!-- Who stays behind INGENI? -->
+        <section class="py-32 px-8 md:px-16 bg-surface">
+            <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mb-6 block">The
+                        Visionary</span>
+                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface mb-8">Who stays behind
+                        <span class="italic font-light">INGENI?</span></h2>
+                    <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-8">
+                        Vessela Jeleva, the creative force and founder of INGENI, brings over a decade of international
+                        experience in high-end interior architecture. Her approach is defined by a meticulous eye for
+                        detail and a deep understanding of spatial psychology.
+                    </p>
+                    <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-12">
+                        "Design is not just about aesthetics; it's about how a space breathes and how it makes you
+                        feel." Vessela continues to push the boundaries of minimalist luxury, creating homes that are
+                        both functional masterpieces and soulful retreats.
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <div class="h-[1px] w-12 bg-outline"></div>
+                        <span class="font-label text-[0.6875rem] uppercase tracking-widest text-primary">Read her
+                            story</span>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="aspect-[4/5] bg-surface-variant relative overflow-hidden">
+                        <img alt="Vessela Jeleva" class="w-full h-full object-cover grayscale"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwLGY0Me55ICHjruOGxq6Pp5AHDO318va6n-6a9YRnfyUafildTmYziFzwzFPWFmfj1WpTCVOVwWa4sjqZjv_tQWcFD2esWmCuyZ3Yu_R2LxdouGlvUyH5MMuYeMDNqQmXKhGnxSWIfFBDp2OBExJdr5FzeBJAdRopGz3mL97W9G_xnqFGFjRwzcrQVhhkJKkya_mZ88TfdX7NqKg0s_qnk7rjj85FU0PXdqGMaU6nTHlWuW79xds27lgK6Gx8EyZGfrxp1hCWV2so" />
+                        <div class="absolute bottom-0 left-0 bg-surface px-8 py-6">
+                            <span class="font-headline font-bold text-xl block">Vessela Jeleva</span>
+                            <span class="font-label text-[0.625rem] uppercase tracking-widest text-outline">Founder
+                                &amp; Creative Director</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Interactive Services Section -->
+        <section class="py-32 px-8 md:px-16 bg-surface-container-low overflow-hidden">
+            <div class="max-w-[1920px] mx-auto">
+                <div class="mb-24">
+                    <h2 class="font-headline text-[1.75rem] font-bold text-inverse-surface">Services</h2>
+                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-2">Get familiar with
+                        the processes</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1: Plan -->
+                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Technical Plan"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwJ4m1mXF5uwlOiJ2Kkp-y96sfYLnctOKgcfjwyhcZT8gzh5A9y118dv_FVDGRb8jn6b1rGj9CiTd_IH4c-MZfjeLeI6juFBzZwr0YWLlO4zx5rSqgJi573XS9Q0VIs7FNHY6t0PO64RKq6ZL_7dVmSxIDtcXwp-hShjT-cOEhgtzit-JlO25BfJ_iBSFp_lqZ6pS0pUWm26-xcN6-mKpiUjVScCaJ-uCj_vA8yfG1wZrMMZiKppE4tr3mWsYwbs6jax4qvkvqO6pm" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 01</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Plan</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Defining the spatial DNA through rigorous floor plans and structural choreography.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 2: 3D Visualization -->
+                    <div
+                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="3D Visualization Render"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqrSksym14mTzrx8qiO-m6UEWMu-ylwd1ruZ3c0dHpOlzvI41mZ8ujia170nBWRzZyhbWbBOcMnzohTFW0J_p5hYkxo-ICHgd7EvI2YazGasSolGXfALyG5XmS0H2xKwI0-Vi1INT9WlOtj5VRpUUXavv-Eiul9dSvzz7E3Vt5dSzlAhYclfh4aspP9rYAWZFtV2gklBEBOjnRV7cgL04m7AiOYmrIq8QAaBPAgb_nrsJ91RAlKNId1MFjxsL_HOLecxWy_4v4oihM" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 02</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">3D Visualization</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Photorealistic high-end renders that bring the conceptual atmosphere to life before a
+                                single brick is laid.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 3: Technical Documentation -->
+                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Technical Documentation Plan"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRB3ApqBjh-1gWNWlNbNmx7cx9IHRXFGYKquQdHp4O6ddcbud3DQ-6Kf_3KzpwExAweg3c268XpZjiB4761dMQj5sK_prRALKSgsGTfgqPFt-dyvoxZHN2YvoEO6HYeJGARQNzt31G6oJL5936BGr5n4Kk2GbxOJh-3cPYpoRlPOtV2Dg6Okc2ZbXNiyHwIzDtj3F1csE5MaSs8vlEindRRIFf3_YHdp_KEetx0YnqJYXhulOy7cE1ySJ5u4s22bEDF842ifHW2F5E" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 03</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Technical Documentation</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Detailed architectural drawings and specifications for seamless execution by
+                                contractors.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 4: Control -->
+                    <div
+                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Construction Oversight"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcC3iQ9H1W7wC8dFXqqsCSTMLGZlOGwvuvgswtT-HokEKS25dtbMWaKLccikH5fWvYIBIzkncQ7F2Tmgdj1oO5eeqZ9z2gLMDLeHYdPLp0B6GWCzXXZy504FSbxnIULmM0RH3F_Iz1mItvDoTSkHJUly1t8R9jB5k0HgAOt7aCf-7nI_DAoQ5t-8jzglhNj_RhUJRj2qGnK_TvJTCOu4XaDRQnWCGYM6jSFKaPwwpP1PDMicxBxLSCNlXl-esWlz93sD1X2aff8N-U" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 04</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Control</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                On-site architectural oversight ensuring the physical space aligns perfectly with the
+                                original vision.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects: Aesthetic Slider Section -->
+        <section class="py-32 bg-surface">
+            <div class="px-8 md:px-16 max-w-[1920px] mx-auto mb-16 flex justify-between items-end">
+                <div>
+                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface">Selected Projects</h2>
+                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-4">Curation of
+                        Timeless Environments</p>
+                </div>
+                <div class="flex space-x-4">
+                    <button
+                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
+                        <span class="material-symbols-outlined">west</span>
+                    </button>
+                    <button
+                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
+                        <span class="material-symbols-outlined">east</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex overflow-x-auto no-scrollbar gap-8 px-8 md:px-16 pb-12 snap-x">
+                <!-- Project Card 1 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Obsidian Residence"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6vIy4CukTKgeO60BuSitZsWMiqD7Z2Ehc4sPpK7i_OP8Zy5RAQkdPXg_dKvjIIlzQETGQ2x0zbDWUmONVrDZhxp6la5FX7M-A1fcqOkUt96btNTd9405xeA0TNL2RBJDFG273pCTjSjWcfpGI8l4XQHewQYWztalXOuh7jlicpbtUV4trhxIg9lwNfWVjf4Vxs5Mny963lhmn5yAVfjRl-Am4WLeEeoWxQZyoxBC_cI0PlU9Tz5ksnjHJFLOQLG4-jjl3eIQRB3tQ" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Obsidian Residence</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">London, UK • 2023</p>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Plaster &amp; Light"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYaJBvvJPddSO-oFWdYasSgpkpMT25m9piBxwQfeH5ig_GlBZ75jEuyhC3OLkON8lP53ON20BtMdsN2jQ9O_jOf-rrTX0RgHEz423WnphSa8hQe3oQmDQYFN57TJblbhmeGCe-6zF6V4wHyvk_e5aP7MXhoCjIW6yYwZWdeDzFW7GgligtxtZGjJ13dXQs258qtjBRf89hMpeqEcw7lPZDQQNPhQp8pbNT4rDQOkil57lNJCCEk5Vftq3_5An-21ooeyEe5MNBxH" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Plaster &amp; Light</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Ibiza, ES • 2022</p>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Concrete Loft"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlnbaHovCF8oUkiwXallxIU4kGfUBk6ElCqIVNkuH3jNPsUwQAc93ROOAkK_-uaHkoDXajXsgqZURkFKOmY_X9XC1rqlp6LKMKyrAsVqbnRuZYLIVD9QX3ry2LmI29AFh4fsCoukEp26bvfArYdrNJ8v3sVYhe1LPVd_Z6xpYS67vrPewXMcc2XNGQTKfR6Q2Qy-i4V7WIwyihHdWWEtWqezjGARNUIhQKFvPVk1pfGGiHZxwWcMuIBzBxkm2YoM5N84-znlbvLFuP" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Concrete Loft</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Berlin, DE • 2023</p>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Ethos Office"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuClWpf1POGODXBlGJOJwspfDOkMsA6TKfcTtPMahRw5KKqypXJxqTicIBaj8uiJ4OBthGGzz3ap-uyCqtfYal35Y31EXzs25uP0VqGChuGnqyVYU2KEOCSY8GlSmGBpW3uKqJIlmo41R0yp4OHnmHEi0Bc5FyTvq-_4f855Vy94NEd_T2DU2IhjSami05IAK-TIhPss4wU_D0S86bw-UAsZ-KhMehWta3iDic3wFJozMljL-DSis0TnXA8HD48R1dMIYpGQnbQRDvAw" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Ethos Office</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Stockholm, SE • 2024
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-40 px-8 md:px-16 bg-inverse-surface text-inverse-primary text-center">
+            <div class="max-w-2xl mx-auto">
+                <span
+                    class="font-label text-[0.6875rem] uppercase tracking-[0.3em] text-outline-variant mb-8 block">Ready
+                    to Transform Your Space?</span>
+                <h2 class="font-headline text-4xl md:text-6xl font-extrabold mb-12 leading-tight">Let's create something
+                    <span class="italic font-light">timeless</span>.</h2>
+                <button
+                    class="bg-surface text-inverse-surface px-12 py-5 font-headline font-bold uppercase text-xs tracking-widest hover:bg-surface-dim transition-colors">
+                    Start a Conversation
+                </button>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full pt-24 pb-12 bg-[#f2f4f2] transition-colors duration-300">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-8 md:px-16 border-t border-[#0d0f0e]/5 max-w-[1920px] mx-auto pt-12">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <a class="font-['Manrope'] text-lg font-bold text-[#0d0f0e]" href="#">INGENI</a>
+                <p class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] mt-4">© 2024 INGENI
+                    INTERIORS. ALL RIGHTS RESERVED.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
+                    href="#">Privacy Policy</a>
+                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
+                    href="#">Terms of Service</a>
+                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
+                    href="#">Instagram</a>
+                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
+                    href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
