@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="bg">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>INGENI | Модерна интериорна архитектура</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap&amp;subset=cyrillic"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8C8C8C",
+                        "primary-dim": "#6B6B6B",
+                        "on-primary": "#F5F5F3",
+                        "primary-container": "#EDE8DF",
+                        "on-primary-container": "#1A1A1A",
+                        "primary-fixed": "#D9D2C5",
+                        "primary-fixed-dim": "#C4BCB0",
+                        "on-primary-fixed": "#1A1A1A",
+                        "on-primary-fixed-variant": "#5A5A5A",
+                        "secondary": "#8C8C8C",
+                        "secondary-dim": "#6B6B6B",
+                        "on-secondary": "#F5F5F3",
+                        "secondary-container": "#E8E5DF",
+                        "on-secondary-container": "#3D3D3D",
+                        "secondary-fixed": "#E8E5DF",
+                        "secondary-fixed-dim": "#D9D2C5",
+                        "on-secondary-fixed": "#1A1A1A",
+                        "on-secondary-fixed-variant": "#5A5A5A",
+                        "tertiary": "#D9D2C5",
+                        "tertiary-dim": "#C4BCB0",
+                        "on-tertiary": "#1A1A1A",
+                        "tertiary-container": "#EDE8DF",
+                        "on-tertiary-container": "#3D3D3D",
+                        "tertiary-fixed": "#EDE8DF",
+                        "tertiary-fixed-dim": "#D9D2C5",
+                        "on-tertiary-fixed": "#1A1A1A",
+                        "on-tertiary-fixed-variant": "#5A5A5A",
+                        "surface": "#F5F5F3",
+                        "surface-dim": "#E8E5DF",
+                        "surface-bright": "#FAFAF8",
+                        "surface-container-lowest": "#FFFFFF",
+                        "surface-container-low": "#EDE8DF",
+                        "surface-container": "#E8E3DA",
+                        "surface-container-high": "#DDD8CF",
+                        "surface-container-highest": "#D5D0C7",
+                        "surface-variant": "#E8E5DF",
+                        "surface-tint": "#D9D2C5",
+                        "on-surface": "#1A1A1A",
+                        "on-surface-variant": "#5A5A5A",
+                        "outline": "#8C8C8C",
+                        "outline-variant": "#C4BCB0",
+                        "inverse-surface": "#1A1A1A",
+                        "inverse-on-surface": "#A0A0A0",
+                        "inverse-primary": "#F5F5F3",
+                        "background": "#F5F5F3",
+                        "on-background": "#1A1A1A",
+                        "error": "#9f403d",
+                        "error-dim": "#4e0309",
+                        "error-container": "#fe8983",
+                        "on-error": "#fff7f6",
+                        "on-error-container": "#752121",
+                        "accent": "#D9D2C5",
+                        "accent-light": "#EDE8DF",
+                        "accent-dark": "#B8AFA2"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .hero-vignette {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.62) 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F3;
+            color: #1A1A1A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        .brand-logo {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-[#F5F5F3]/70 backdrop-blur-2xl border border-[#D9D2C5]/30 rounded-full shadow-[0_8px_32px_rgba(26,26,26,0.06)] transition-all duration-500 ease-in-out">
+        <div class="flex justify-between items-center px-6 md:px-10 py-4 w-full mx-auto">
+            <a class="font-headline text-2xl font-bold tracking-tighter text-[#1A1A1A]" href="#top">INGENI</a>
+            <div class="hidden md:flex items-center space-x-12">
+                <a class="font-headline font-bold tracking-[0.05em] uppercase text-[0.6875rem] text-[#1A1A1A] transition-colors duration-400 ease-linear"
+                    href="#studio">Студио</a>
+                <a class="font-headline font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-400 ease-linear"
+                    href="#services">Услуги</a>
+                <a class="font-headline font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-400 ease-linear"
+                    href="#portfolio">Проекти</a>
+                <a class="font-headline font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-400 ease-linear"
+                    href="#journal">Запитване</a>
+                <a class="font-headline font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-400 ease-linear"
+                    href="#contact">Контакти</a>
+            </div>
+            <a
+                class="bg-[#1A1A1A] text-[#F5F5F3] px-8 py-3 font-headline font-bold tracking-[0.05em] uppercase text-[0.6875rem] transition-all hover:bg-[#D9D2C5] hover:text-[#1A1A1A] rounded-full"
+                href="#contact">
+                Запитване
+            </a>
+        </div>
+    </nav>
+    <main>
+        <!-- Header: Video Banner (Cinematic Image Placeholder) -->
+        <section class="relative h-screen flex items-end pb-24 px-8 md:px-16 bg-surface overflow-hidden" id="top">
+            <div class="absolute inset-0 z-0">
+                <video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" preload="auto">
+                    <source src="assets/interior-hd.mp4" type="video/mp4" />
+                    <source src="assets/interior-hd.mov" type="video/quicktime" />
+                </video>
+                <div class="absolute inset-0 bg-black/45"></div>
+                <div class="absolute inset-0 hero-vignette"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl">
+                <span class="font-label text-[0.6875rem] uppercase tracking-[0.2em] text-[#D9D2C5] mb-6 block">Прецизно
+                    създадени пространства</span>
+                <h1
+                    class="font-headline text-5xl md:text-[5rem] font-extrabold leading-[1.1] tracking-tighter text-white mb-8">
+                    INGENI<br /><span class="italic font-normal text-[#D9D2C5]">Интериори с характер.</span>
+                </h1>
+                <p class="font-body text-lg text-[#D9D2C5]/80 max-w-xl leading-relaxed mb-10">
+                    INGENI създава жилищни и обществени пространства като завършени преживявания, в които
+                    архитектурната прецизност среща спокойствието, уюта и логиката на ежедневния живот.
+                </p>
+            </div>
+        </section>
+        <!-- Who stays behind INGENI? -->
+        <section class="py-32 px-8 md:px-16 bg-surface" id="studio">
+            <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mb-6 block">Лицето
+                        зад студиото</span>
+                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface mb-8">Кой стои зад
+                        <span class="italic font-light text-[#8C8C8C]">INGENI?</span></h2>
+                    <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-8">
+                        Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн. Нейният професионален успех е изграден върху ясно структурирани концепции, които съчетават функционалност, дълготрайност и естетика с висок стандарт. В продължение на две десетилетия Весела Желева разглежда всеки жилищен проект, офис, магазин, хотел или заведение като архитектурно предизвикателство. За нея интериорът не е просто визия и декор, а логика, изразена във форма – среда, която работи за хората, които я обитават. Работата ѝ винаги е подчинена на индивидуалността и реалните нужди на клиента, от първоначалния анализ до финалното реализиране. Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си, търсят яснота и спокойствие и очакват завършен резултат без компромиси.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="aspect-[4/5] bg-surface-variant relative overflow-hidden">
+                        <img alt="Весела Желева" class="w-full h-full object-cover"
+                            src="assets/vessela.png" />
+                        <div class="absolute bottom-0 left-0 bg-[#F5F5F3]/95 backdrop-blur-sm px-8 py-6">
+                            <span class="font-headline font-bold text-xl text-[#1A1A1A] block">Весела Желева</span>
+                            <span class="font-label text-[0.625rem] uppercase tracking-widest text-[#8C8C8C]">Основател
+                                и творчески директор</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Interactive Services Section -->
+        <section class="py-32 px-8 md:px-16 bg-surface-container-low overflow-hidden" id="services">
+            <div class="max-w-[1920px] mx-auto">
+                <div class="mb-24">
+                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface">Услуги</h2>
+                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-2">Запознайте се
+                        с процеса</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1: Plan -->
+                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Технически план"
+                                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+                                src="assets/plan.png" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Етап 01</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Планиране</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Дефиниране на пространствената логика чрез прецизни разпределения и ясна
+                                архитектурна структура.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 2: 3D Visualization -->
+                    <div
+                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="3D визуализация"
+                                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+                                src="assets/pexels-the-ghazi-2152398165-33962193.jpg" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Етап 02</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">3D визуализация</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия
+                                още преди реализацията да започне.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 3: Technical Documentation -->
+                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Техническа документация"
+                                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+                                src="assets/pexels-tiago-alves-710726839-19357343.jpg" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Етап 03</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Техническа документация</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Подробни чертежи, спецификации и детайли за уверено и безпроблемно изпълнение на
+                                обекта.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 4: Control -->
+                    <div
+                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
+                        <div class="aspect-square relative overflow-hidden mb-8">
+                            <img alt="Авторски контрол"
+                                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+                                src="assets/workers-helmet.png" />
+                            <div
+                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Етап 04</span>
+                            <h3 class="font-headline text-2xl font-bold mb-4">Авторски контрол</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Проследяване на изпълнението на място, така че всеки детайл да остане верен на
+                                първоначалната концепция.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects: Aesthetic Slider Section -->
+        <section class="py-32 bg-surface" id="portfolio">
+            <div class="px-8 md:px-16 max-w-[1920px] mx-auto mb-16 flex justify-between items-end">
+                <div>
+                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface">Избрани проекти</h2>
+                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-4">Подбрани
+                        пространства с характер</p>
+                </div>
+                <div class="flex space-x-4">
+                    <button
+                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
+                        <span class="material-symbols-outlined">west</span>
+                    </button>
+                    <button
+                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
+                        <span class="material-symbols-outlined">east</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex overflow-x-auto no-scrollbar gap-8 px-8 md:px-16 pb-12 snap-x">
+                <!-- Project Card 1 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Резиденция Обсидиан"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">Виж проекта</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Резиденция Обсидиан</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Лондон, Великобритания • 2023</p>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Мазилка и светлина"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="assets/projects/pexels-orlovamaria-4906249.jpg" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">Виж проекта</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Мазилка и светлина</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Ибиса, Испания • 2022</p>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Бетонен лофт"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="assets/projects/pexels-perqued-9757618.jpg" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">Виж проекта</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Бетонен лофт</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Берлин, Германия • 2023</p>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
+                        <img alt="Офис Етос"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
+                            src="assets/projects/pexels-sinara-bianchet-2154511749-36247605.jpg" />
+                        <div
+                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-headline font-bold uppercase tracking-widest text-xs">Виж проекта</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                    <h4 class="font-headline font-bold text-lg mb-1">Офис Етос</h4>
+                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Стокхолм, Швеция • 2024
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-40 px-8 md:px-16 bg-[#1A1A1A] text-[#F5F5F3] text-center" id="journal">
+            <div class="max-w-2xl mx-auto">
+                <span
+                    class="font-label text-[0.6875rem] uppercase tracking-[0.3em] text-[#8C8C8C] mb-8 block">Готови
+                    ли сте да преобразите своето пространство?</span>
+                <h2 class="font-headline text-4xl md:text-6xl font-extrabold mb-12 leading-tight text-[#F5F5F3]">Нека създадем нещо
+                    <span class="italic font-light text-[#D9D2C5]">стойностно</span>.</h2>
+                <button
+                    class="bg-[#D9D2C5] text-[#1A1A1A] px-12 py-5 font-headline font-bold uppercase text-xs tracking-widest hover:bg-[#C4BCB0] transition-colors">
+                    Започнете разговор
+                </button>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full pt-24 pb-12 bg-[#EDEAE4] transition-colors duration-300" id="contact">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-8 md:px-16 border-t border-[#D9D2C5]/40 max-w-[1920px] mx-auto pt-12">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <a class="font-headline text-lg font-bold text-[#1A1A1A]" href="#">INGENI</a>
+                <p class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] mt-4">© <span id="current-year"></span> INGENI
+                    INTERIORS. ВСИЧКИ ПРАВА ЗАПАЗЕНИ.</p>
+                <a class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] mt-3 inline-block hover:text-[#1A1A1A] transition-colors duration-300"
+                    href="mailto:office@ingeni.bg">office@ingeni.bg</a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-300"
+                    href="#">Политика за поверителност</a>
+                <a class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-300"
+                    href="#">Общи условия</a>
+                <a class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-300"
+                    href="#">Instagram</a>
+                <a class="font-body text-[0.75rem] tracking-widest uppercase text-[#8C8C8C] hover:text-[#1A1A1A] transition-colors duration-300"
+                    href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

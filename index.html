@@ -1,85 +1,36 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en">
+<html class="light" lang="bg">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>INGENI | Modern Interior Architecture</title>
-    <!-- Fonts -->
+    <title>INGENI | Модерна интериорна архитектура</title>
+    <!-- Fonts: Inter (sans-serif) -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Work+Sans:ital,wght@0,300;0,400;0,500;1,300&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic"
         rel="stylesheet" />
     <!-- Icons -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-fixed-dim": "#d5d4d4",
-                        "on-tertiary-fixed": "#4d4940",
-                        "outline": "#767c79",
-                        "inverse-surface": "#0d0f0e",
-                        "surface-dim": "#d4dcd8",
-                        "tertiary-fixed": "#faf3e5",
-                        "on-tertiary": "#fff8ed",
-                        "on-tertiary-container": "#605b51",
-                        "outline-variant": "#adb3b0",
-                        "on-surface": "#2d3432",
-                        "secondary-dim": "#525353",
-                        "tertiary": "#635f54",
-                        "surface-container-high": "#e5e9e6",
-                        "surface-tint": "#5f5e5e",
-                        "primary": "#5f5e5e",
-                        "on-primary-container": "#525151",
-                        "on-primary-fixed-variant": "#5c5b5b",
-                        "surface-bright": "#f9f9f7",
-                        "secondary-fixed": "#e3e2e2",
-                        "surface": "#f9f9f7",
-                        "surface-container": "#ecefec",
-                        "secondary": "#5f5f5f",
-                        "surface-container-highest": "#dee4e0",
-                        "primary-fixed-dim": "#d6d4d3",
-                        "error-dim": "#4e0309",
-                        "on-error-container": "#752121",
-                        "on-tertiary-fixed-variant": "#6a665b",
-                        "surface-container-low": "#f2f4f2",
-                        "surface-variant": "#dee4e0",
-                        "tertiary-fixed-dim": "#ece4d7",
-                        "tertiary-dim": "#575349",
-                        "on-secondary": "#faf8f8",
-                        "on-primary-fixed": "#403f3f",
-                        "on-background": "#2d3432",
-                        "on-surface-variant": "#5a605e",
-                        "error": "#9f403d",
-                        "on-secondary-fixed-variant": "#5b5b5c",
-                        "tertiary-container": "#faf3e5",
-                        "secondary-container": "#e3e2e2",
-                        "primary-dim": "#535252",
-                        "on-primary": "#faf7f6",
-                        "inverse-on-surface": "#9c9d9b",
-                        "inverse-primary": "#ffffff",
-                        "on-secondary-container": "#515252",
-                        "error-container": "#fe8983",
-                        "on-secondary-fixed": "#3f3f40",
-                        "background": "#f9f9f7",
-                        "primary-fixed": "#e5e2e1",
-                        "primary-container": "#e5e2e1",
-                        "on-error": "#fff7f6"
+                        "sand": { 900: "#F5F5F3", 800: "#EDEAE4", 700: "#E3DED5", 600: "#D9D2C5", 500: "#C4BCB0", 400: "#B8AFA2", 300: "#8C8C8C", 200: "#6B6B6B", 100: "#3D3D3D", 50: "#1A1A1A" },
                     },
                     fontFamily: {
-                        "headline": ["Manrope"],
-                        "body": ["Work Sans"],
-                        "label": ["Work Sans"]
+                        "display": ['"Inter"', 'system-ui', 'sans-serif'],
+                        "body": ['"Inter"', 'system-ui', 'sans-serif'],
                     },
                     borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
                 },
@@ -88,327 +39,604 @@
     </script>
     <style>
         .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
         }
+
+        * { -webkit-font-smoothing: antialiased; }
 
         body {
-            font-family: 'Work Sans', sans-serif;
-            background-color: #f9f9f7;
-            color: #2d3432;
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F3;
+            color: #1A1A1A;
+            overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3,
-        .brand-logo {
-            font-family: 'Manrope', sans-serif;
+        body.reveal-active {
+            overflow: hidden;
         }
 
-        /* Custom hide scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .font-display {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        /* No scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ─── Reveal overlay ─── */
+        #page-reveal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #F5F5F3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            clip-path: inset(0 0 0 0);
+        }
+        #page-reveal .reveal-char {
+            display: inline-block;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            font-size: clamp(3rem, 12vw, 10rem);
+            color: #8C8C8C;
+            letter-spacing: -0.03em;
+            perspective: 600px;
+        }
+
+        /* ─── Horizontal lines ─── */
+        .h-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(26,26,26,0.25) 20%, rgba(26,26,26,0.25) 80%, transparent);
+        }
+        .v-line {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(26,26,26,0.2) 20%, rgba(26,26,26,0.2) 80%, transparent);
+        }
+
+        /* ─── Glass ─── */
+        .glass {
+            background: rgba(245, 245, 243, 0.6);
+            backdrop-filter: blur(40px) saturate(1.3);
+            -webkit-backdrop-filter: blur(40px) saturate(1.3);
+            border: 1px solid rgba(26,26,26,0.08);
+        }
+        .glass-light {
+            background: rgba(217, 210, 197, 0.06);
+            backdrop-filter: blur(60px) saturate(1.2);
+            -webkit-backdrop-filter: blur(60px) saturate(1.2);
+            border: 1px solid rgba(217,210,197,0.08);
+        }
+
+        /* ─── Service accordion ─── */
+        .service-expandable {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .service-item {
+            cursor: pointer;
+        }
+        .service-item:hover .service-num {
+            color: #D9D2C5;
+        }
+
+        /* ─── Marquee ─── */
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            will-change: transform;
+        }
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 3rem;
+        }
+
+        /* ─── Hero vignette ─── */
+        .hero-vignette {
+            background: radial-gradient(ellipse at 50% 80%, rgba(26,26,26,0) 0%, rgba(26,26,26,0.85) 70%);
+        }
+
+        /* ─── Magnetic btn ─── */
+        .magnetic-btn {
+            will-change: transform;
+        }
+
+        /* ─── Large stroke text ─── */
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(217,210,197,0.2);
+            color: transparent;
+        }
+
+        /* ─── Project card overlay ─── */
+        .project-overlay {
+            background: linear-gradient(0deg, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0) 60%);
         }
     </style>
 </head>
 
-<body class="bg-surface text-on-surface">
-    <!-- TopNavBar -->
-    <nav
-        class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-white/40 backdrop-blur-2xl border border-white/20 rounded-full shadow-lg transition-all duration-500 ease-in-out">
-        <div class="flex justify-between items-center px-6 md:px-10 py-4 w-full mx-auto">
-            <a class="font-['Manrope'] text-2xl font-bold tracking-tighter text-[#0d0f0e]" href="#">INGENI</a>
-            <div class="hidden md:flex items-center space-x-12">
-                <a class="font-['Manrope'] font-bold tracking-[0.05em] uppercase text-[0.6875rem] text-[#0d0f0e] transition-colors duration-400 ease-linear"
-                    href="#">Portfolio</a>
-                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
-                    href="#">Services</a>
-                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
-                    href="#">Studio</a>
-                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
-                    href="#">Journal</a>
-                <a class="font-['Manrope'] font-medium tracking-[0.05em] uppercase text-[0.6875rem] text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-400 ease-linear"
-                    href="#">Contact</a>
+<body class="bg-sand-900 text-sand-50">
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- PAGE REVEAL — IN ● GE ● NI mirror animation                   -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div id="page-reveal">
+        <div class="reveal-left flex" style="perspective:600px">
+            <span class="reveal-char">I</span>
+            <span class="reveal-char">N</span>
+        </div>
+        <div class="flex items-center mx-4 md:mx-8">
+            <span class="reveal-char" style="font-style:italic; color:#8C8C8C">G</span>
+            <span class="reveal-char" style="font-style:italic; color:#8C8C8C">E</span>
+        </div>
+        <div class="reveal-right flex" style="perspective:600px">
+            <span class="reveal-char">N</span>
+            <span class="reveal-char">I</span>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- NAV                                                             -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <nav class="site-nav fixed top-6 left-1/2 -translate-x-1/2 w-[94%] max-w-7xl z-50 glass-light backdrop-blur-3xl rounded-full transition-all duration-500">
+        <div class="relative flex justify-center items-center px-6 md:px-10 py-4">
+            <a class="absolute left-6 md:left-10 font-display text-2xl tracking-tight text-sand-300" href="#top">INGENI</a>
+            <div class="hidden md:flex items-center space-x-10">
+                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#studio">Студио</a>
+                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#services">Услуги</a>
+                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#portfolio">Проекти</a>
+                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#contact">Контакти</a>
             </div>
-            <button
-                class="bg-inverse-surface text-inverse-primary px-8 py-3 font-['Manrope'] font-bold tracking-[0.05em] uppercase text-[0.6875rem] transition-all hover:bg-primary rounded-full">
-                Enquire
+            <!-- Mobile menu button -->
+            <button class="absolute right-6 md:right-10 md:hidden text-sand-300 hover:text-sand-50 transition-colors">
+                <span class="material-symbols-outlined">menu</span>
             </button>
         </div>
     </nav>
+
     <main>
-        <!-- Header: Video Banner (Cinematic Image Placeholder) -->
-        <section class="relative h-screen flex items-end pb-24 px-8 md:px-16 bg-surface overflow-hidden">
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- HERO                                                        -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative h-screen flex items-end overflow-hidden" id="top">
+            <!-- Video -->
             <div class="absolute inset-0 z-0">
-                <video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" preload="auto">
+                <video autoplay loop muted playsinline preload="auto" class="w-full h-full object-cover scale-105">
                     <source src="assets/interior-hd.mp4" type="video/mp4" />
-                    <source src="assets/interior-hd.mov" type="video/quicktime" />
                 </video>
-                <div class="absolute inset-0 bg-black/20"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-sand-900/50"></div>
+                <div class="absolute inset-0 hero-vignette"></div>
             </div>
-            <div class="relative z-10 max-w-4xl">
-                <span class="font-label text-[0.6875rem] uppercase tracking-[0.2em] text-on-surface mb-6 block">The
-                    Curated Space</span>
-                <h1
-                    class="font-headline text-5xl md:text-[5rem] font-extrabold leading-[1.1] tracking-tighter text-inverse-surface mb-8">
-                    INGENI<br /><span class="italic font-normal">Aesthetic Interiors.</span>
+
+            <!-- Floating decorative number -->
+            <div class="parallax-number absolute top-[15%] right-[8%] z-[1] pointer-events-none select-none hidden md:block">
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 w-full px-8 md:px-16 max-w-[1920px] mx-auto flex flex-col items-center justify-center h-full">
+
+                <h1 class="hero-title font-display text-[15vw] md:text-[18vw] leading-none tracking-tight text-sand-50 uppercase text-center mt-20">
+                    INGENI
                 </h1>
-                <p class="font-body text-lg text-on-surface-variant max-w-xl leading-relaxed mb-10">
-                    INGENI transforms residential and commercial environments into tactile experiences, balancing
-                    architectural precision with the warmth of human habitation.
-                </p>
             </div>
         </section>
-        <!-- Who stays behind INGENI? -->
-        <section class="py-32 px-8 md:px-16 bg-surface">
-            <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="order-2 md:order-1">
-                    <span class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mb-6 block">The
-                        Visionary</span>
-                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface mb-8">Who stays behind
-                        <span class="italic font-light">INGENI?</span></h2>
-                    <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-8">
-                        Vessela Jeleva, the creative force and founder of INGENI, brings over a decade of international
-                        experience in high-end interior architecture. Her approach is defined by a meticulous eye for
-                        detail and a deep understanding of spatial psychology.
-                    </p>
-                    <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-12">
-                        "Design is not just about aesthetics; it's about how a space breathes and how it makes you
-                        feel." Vessela continues to push the boundaries of minimalist luxury, creating homes that are
-                        both functional masterpieces and soulful retreats.
-                    </p>
-                    <div class="flex items-center space-x-4">
-                        <div class="h-[1px] w-12 bg-outline"></div>
-                        <span class="font-label text-[0.6875rem] uppercase tracking-widest text-primary">Read her
-                            story</span>
-                    </div>
-                </div>
-                <div class="order-1 md:order-2">
-                    <div class="aspect-[4/5] bg-surface-variant relative overflow-hidden">
-                        <img alt="Vessela Jeleva" class="w-full h-full object-cover grayscale"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwLGY0Me55ICHjruOGxq6Pp5AHDO318va6n-6a9YRnfyUafildTmYziFzwzFPWFmfj1WpTCVOVwWa4sjqZjv_tQWcFD2esWmCuyZ3Yu_R2LxdouGlvUyH5MMuYeMDNqQmXKhGnxSWIfFBDp2OBExJdr5FzeBJAdRopGz3mL97W9G_xnqFGFjRwzcrQVhhkJKkya_mZ88TfdX7NqKg0s_qnk7rjj85FU0PXdqGMaU6nTHlWuW79xds27lgK6Gx8EyZGfrxp1hCWV2so" />
-                        <div class="absolute bottom-0 left-0 bg-surface px-8 py-6">
-                            <span class="font-headline font-bold text-xl block">Vessela Jeleva</span>
-                            <span class="font-label text-[0.625rem] uppercase tracking-widest text-outline">Founder
-                                &amp; Creative Director</span>
+                            <p class="font-body text-[0.6rem] uppercase tracking-[0.15em] text-sand-600 mt-2">Години опит</p>
                         </div>
-                    </div>
-                </div>
+                        <div class="v-line h-12 self-center"></div>
+                        <div>
+                            <span class="stat-number font-display text-5xl md:text-6xl text-sand-300" data-value="150">0</span>
             </div>
         </section>
-        <!-- Interactive Services Section -->
-        <section class="py-32 px-8 md:px-16 bg-surface-container-low overflow-hidden">
-            <div class="max-w-[1920px] mx-auto">
-                <div class="mb-24">
-                    <h2 class="font-headline text-[1.75rem] font-bold text-inverse-surface">Services</h2>
-                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-2">Get familiar with
-                        the processes</p>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- STUDIO / ABOUT                                              -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative py-32 md:py-44 px-8 md:px-16 overflow-hidden min-h-screen flex items-center" id="studio">
+            <!-- Background decorative number -->
+            <div class="parallax-number absolute -left-[5%] top-[10%] pointer-events-none select-none">
+                <span class="font-display text-[30vw] leading-none text-stroke opacity-20">01</span>
+            </div>
+
+            <div class="max-w-[1920px] mx-auto relative z-10">
+                <!-- Section heading with line -->
+                <div class="section-heading mb-20 md:mb-28">
+                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Студио</h2>
+                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Лицето зад студиото</p>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Service 1: Plan -->
-                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
-                        <div class="aspect-square relative overflow-hidden mb-8">
-                            <img alt="Technical Plan"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwJ4m1mXF5uwlOiJ2Kkp-y96sfYLnctOKgcfjwyhcZT8gzh5A9y118dv_FVDGRb8jn6b1rGj9CiTd_IH4c-MZfjeLeI6juFBzZwr0YWLlO4zx5rSqgJi573XS9Q0VIs7FNHY6t0PO64RKq6ZL_7dVmSxIDtcXwp-hShjT-cOEhgtzit-JlO25BfJ_iBSFp_lqZ6pS0pUWm26-xcN6-mKpiUjVScCaJ-uCj_vA8yfG1wZrMMZiKppE4tr3mWsYwbs6jax4qvkvqO6pm" />
-                            <div
-                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+                    <!-- Image -->
+                    <div class="studio-img md:col-span-5 relative">
+                        <div class="relative overflow-hidden">
+                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" />
+                            <!-- Glass label -->
+                            <div class="absolute bottom-0 left-0 right-0 glass px-8 py-6">
+                                <span class="font-display text-xl text-sand-50 block">Весела Желева</span>
+                                <span class="font-body text-[0.6rem] uppercase tracking-[0.15em] text-sand-400">Основател и творчески директор</span>
                             </div>
                         </div>
-                        <div class="px-6 pb-8">
-                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 01</span>
-                            <h3 class="font-headline text-2xl font-bold mb-4">Plan</h3>
-                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
-                                Defining the spatial DNA through rigorous floor plans and structural choreography.
-                            </p>
-                        </div>
+                        <!-- Decorative vertical line -->
+                        <div class="v-line absolute -right-8 top-0 h-full hidden md:block"></div>
                     </div>
-                    <!-- Service 2: 3D Visualization -->
-                    <div
-                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
-                        <div class="aspect-square relative overflow-hidden mb-8">
-                            <img alt="3D Visualization Render"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqrSksym14mTzrx8qiO-m6UEWMu-ylwd1ruZ3c0dHpOlzvI41mZ8ujia170nBWRzZyhbWbBOcMnzohTFW0J_p5hYkxo-ICHgd7EvI2YazGasSolGXfALyG5XmS0H2xKwI0-Vi1INT9WlOtj5VRpUUXavv-Eiul9dSvzz7E3Vt5dSzlAhYclfh4aspP9rYAWZFtV2gklBEBOjnRV7cgL04m7AiOYmrIq8QAaBPAgb_nrsJ91RAlKNId1MFjxsL_HOLecxWy_4v4oihM" />
-                            <div
-                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
-                            </div>
-                        </div>
-                        <div class="px-6 pb-8">
-                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 02</span>
-                            <h3 class="font-headline text-2xl font-bold mb-4">3D Visualization</h3>
-                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
-                                Photorealistic high-end renders that bring the conceptual atmosphere to life before a
-                                single brick is laid.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Service 3: Technical Documentation -->
-                    <div class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl">
-                        <div class="aspect-square relative overflow-hidden mb-8">
-                            <img alt="Technical Documentation Plan"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRB3ApqBjh-1gWNWlNbNmx7cx9IHRXFGYKquQdHp4O6ddcbud3DQ-6Kf_3KzpwExAweg3c268XpZjiB4761dMQj5sK_prRALKSgsGTfgqPFt-dyvoxZHN2YvoEO6HYeJGARQNzt31G6oJL5936BGr5n4Kk2GbxOJh-3cPYpoRlPOtV2Dg6Okc2ZbXNiyHwIzDtj3F1csE5MaSs8vlEindRRIFf3_YHdp_KEetx0YnqJYXhulOy7cE1ySJ5u4s22bEDF842ifHW2F5E" />
-                            <div
-                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
-                            </div>
-                        </div>
-                        <div class="px-6 pb-8">
-                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 03</span>
-                            <h3 class="font-headline text-2xl font-bold mb-4">Technical Documentation</h3>
-                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
-                                Detailed architectural drawings and specifications for seamless execution by
-                                contractors.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Service 4: Control -->
-                    <div
-                        class="group relative bg-surface p-1 transition-all duration-500 hover:shadow-2xl md:mt-12 lg:mt-0">
-                        <div class="aspect-square relative overflow-hidden mb-8">
-                            <img alt="Construction Oversight"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcC3iQ9H1W7wC8dFXqqsCSTMLGZlOGwvuvgswtT-HokEKS25dtbMWaKLccikH5fWvYIBIzkncQ7F2Tmgdj1oO5eeqZ9z2gLMDLeHYdPLp0B6GWCzXXZy504FSbxnIULmM0RH3F_Iz1mItvDoTSkHJUly1t8R9jB5k0HgAOt7aCf-7nI_DAoQ5t-8jzglhNj_RhUJRj2qGnK_TvJTCOu4XaDRQnWCGYM6jSFKaPwwpP1PDMicxBxLSCNlXl-esWlz93sD1X2aff8N-U" />
-                            <div
-                                class="absolute inset-0 bg-inverse-surface/10 group-hover:bg-transparent transition-colors">
-                            </div>
-                        </div>
-                        <div class="px-6 pb-8">
-                            <span class="font-label text-[0.6875rem] text-outline mb-4 block">Process 04</span>
-                            <h3 class="font-headline text-2xl font-bold mb-4">Control</h3>
-                            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
-                                On-site architectural oversight ensuring the physical space aligns perfectly with the
-                                original vision.
-                            </p>
-                        </div>
+
+                    <!-- Text -->
+                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-center items-center">
+                        <h3 class="font-display text-3xl md:text-5xl text-sand-50 mb-8 leading-tight">
+                            Кой стои зад <span class="italic text-sand-300">INGENI?</span>
+                        </h3>
+                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed mb-6 max-w-2xl">
+                            Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн.
+                        </p>
+                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed mb-6 max-w-2xl">
+                            Нейният професионален успех е изграден върху ясно структурирани концепции, които съчетават функционалност, дълготрайност и естетика с висок стандарт. В продължение на две десетилетия всеки проект — жилищен, офис, магазин, хотел или заведение — е архитектурно предизвикателство.
+                        </p>
+                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed max-w-2xl">
+                            Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си и очакват завършен резултат без компромиси.
+                        </p>
+                        <!-- Decorative line -->
+                        <div class="draw-line h-line w-full mt-12"></div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Projects: Aesthetic Slider Section -->
-        <section class="py-32 bg-surface">
-            <div class="px-8 md:px-16 max-w-[1920px] mx-auto mb-16 flex justify-between items-end">
-                <div>
-                    <h2 class="font-headline text-4xl md:text-5xl font-bold text-inverse-surface">Selected Projects</h2>
-                    <p class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mt-4">Curation of
-                        Timeless Environments</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button
-                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
-                        <span class="material-symbols-outlined">west</span>
-                    </button>
-                    <button
-                        class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:bg-inverse-surface hover:text-inverse-primary transition-colors">
-                        <span class="material-symbols-outlined">east</span>
-                    </button>
-                </div>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- SERVICES — Accordion + Background Images                    -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative py-32 md:py-44 overflow-hidden" id="services">
+            <!-- Background images (switch on accordion click) -->
+            <div class="absolute inset-0 z-0">
+                <img src="assets/plan.png" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
+                <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
+                <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
+                <img src="assets/workers-helmet.png" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
+                <div class="absolute inset-0 bg-sand-900/80 backdrop-blur-sm"></div>
             </div>
-            <div class="flex overflow-x-auto no-scrollbar gap-8 px-8 md:px-16 pb-12 snap-x">
-                <!-- Project Card 1 -->
-                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
-                        <img alt="Obsidian Residence"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6vIy4CukTKgeO60BuSitZsWMiqD7Z2Ehc4sPpK7i_OP8Zy5RAQkdPXg_dKvjIIlzQETGQ2x0zbDWUmONVrDZhxp6la5FX7M-A1fcqOkUt96btNTd9405xeA0TNL2RBJDFG273pCTjSjWcfpGI8l4XQHewQYWztalXOuh7jlicpbtUV4trhxIg9lwNfWVjf4Vxs5Mny963lhmn5yAVfjRl-Am4WLeEeoWxQZyoxBC_cI0PlU9Tz5ksnjHJFLOQLG4-jjl3eIQRB3tQ" />
-                        <div
-                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
-                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                        </div>
+
+            <!-- Floating number -->
+            <div class="parallax-number absolute right-[5%] top-[5%] pointer-events-none select-none z-[1]">
+                <span class="font-display text-[25vw] leading-none text-stroke opacity-15">04</span>
+            </div>
+
+            <div class="relative z-10 max-w-[1920px] mx-auto px-8 md:px-16">
+                <!-- Heading -->
+                <div class="section-heading mb-20 md:mb-28">
+                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Процес</h2>
+                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Четири етапа до завършения интериор</p>
                     </div>
-                    <h4 class="font-headline font-bold text-lg mb-1">Obsidian Residence</h4>
-                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">London, UK • 2023</p>
                 </div>
-                <!-- Project Card 2 -->
-                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
-                        <img alt="Plaster &amp; Light"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnBYaJBvvJPddSO-oFWdYasSgpkpMT25m9piBxwQfeH5ig_GlBZ75jEuyhC3OLkON8lP53ON20BtMdsN2jQ9O_jOf-rrTX0RgHEz423WnphSa8hQe3oQmDQYFN57TJblbhmeGCe-6zF6V4wHyvk_e5aP7MXhoCjIW6yYwZWdeDzFW7GgligtxtZGjJ13dXQs258qtjBRf89hMpeqEcw7lPZDQQNPhQp8pbNT4rDQOkil57lNJCCEk5Vftq3_5An-21ooeyEe5MNBxH" />
-                        <div
-                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
-                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+
+                <!-- Accordion -->
+                <div class="space-y-0">
+                    <!-- Service 1 -->
+                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
+                        <div class="flex items-start md:items-center gap-6 md:gap-12">
+                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">01</span>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Планиране</h3>
+                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
+                                </div>
+                                <div class="service-expandable">
+                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Тук започва всичко — с разговор. Запознаваме се с вашия начин на живот, навиците и нуждите на всеки, който ще обитава пространството. Всичко това се преработва в ясна концепция и структура на разпределението.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура. Всяко помещение се разглежда не само като площ, а като функционална зона с конкретна роля в общия баланс на интериора.
+                                            </p>
+                                        </div>
+                                        <div class="md:col-span-2 flex gap-8 items-center">
+                                            <div class="h-line flex-1"></div>
+                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 2–3 седмици</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h4 class="font-headline font-bold text-lg mb-1">Plaster &amp; Light</h4>
-                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Ibiza, ES • 2022</p>
-                </div>
-                <!-- Project Card 3 -->
-                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
-                        <img alt="Concrete Loft"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlnbaHovCF8oUkiwXallxIU4kGfUBk6ElCqIVNkuH3jNPsUwQAc93ROOAkK_-uaHkoDXajXsgqZURkFKOmY_X9XC1rqlp6LKMKyrAsVqbnRuZYLIVD9QX3ry2LmI29AFh4fsCoukEp26bvfArYdrNJ8v3sVYhe1LPVd_Z6xpYS67vrPewXMcc2XNGQTKfR6Q2Qy-i4V7WIwyihHdWWEtWqezjGARNUIhQKFvPVk1pfGGiHZxwWcMuIBzBxkm2YoM5N84-znlbvLFuP" />
-                        <div
-                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
-                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+
+                    <!-- Service 2 -->
+                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
+                        <div class="flex items-start md:items-center gap-6 md:gap-12">
+                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">02</span>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">3D Визуализация</h3>
+                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
+                                </div>
+                                <div class="service-expandable">
+                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия още преди реализацията да започне. Виждате материали, осветление и пространствени пропорции в реален контекст.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Всяка визуализация е изградена с внимание към детайла — от текстурата на стената до отражението на естествената светлина. Представете си как ще изглежда завършеното пространство и участвайте в решенията с увереност.
+                                            </p>
+                                        </div>
+                                        <div class="md:col-span-2 flex gap-8 items-center">
+                                            <div class="h-line flex-1"></div>
+                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 3–4 седмици</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h4 class="font-headline font-bold text-lg mb-1">Concrete Loft</h4>
-                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Berlin, DE • 2023</p>
-                </div>
-                <!-- Project Card 4 -->
-                <div class="min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[4/5] overflow-hidden mb-6">
-                        <img alt="Ethos Office"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuClWpf1POGODXBlGJOJwspfDOkMsA6TKfcTtPMahRw5KKqypXJxqTicIBaj8uiJ4OBthGGzz3ap-uyCqtfYal35Y31EXzs25uP0VqGChuGnqyVYU2KEOCSY8GlSmGBpW3uKqJIlmo41R0yp4OHnmHEi0Bc5FyTvq-_4f855Vy94NEd_T2DU2IhjSami05IAK-TIhPss4wU_D0S86bw-UAsZ-KhMehWta3iDic3wFJozMljL-DSis0TnXA8HD48R1dMIYpGQnbQRDvAw" />
-                        <div
-                            class="absolute bottom-6 left-6 right-6 flex justify-between items-center bg-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="font-headline font-bold uppercase tracking-widest text-xs">View Project</span>
-                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+
+                    <!-- Service 3 -->
+                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
+                        <div class="flex items-start md:items-center gap-6 md:gap-12">
+                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">03</span>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Техническа документация</h3>
+                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
+                                </div>
+                                <div class="service-expandable">
+                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Подробни чертежи, спецификации и детайли за уверено и безпроблемно изпълнение на обекта. Всеки елемент — от електрически инсталации до мебелировка — е отразен с прецизност.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Документацията е мостът между визията и строителния процес. Тя гарантира, че изпълнителите разполагат с пълна и еднозначна информация, и минимизира рисковете от грешки или забавяния на обекта.
+                                            </p>
+                                        </div>
+                                        <div class="md:col-span-2 flex gap-8 items-center">
+                                            <div class="h-line flex-1"></div>
+                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 4–6 седмици</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h4 class="font-headline font-bold text-lg mb-1">Ethos Office</h4>
-                    <p class="font-label text-[0.625rem] text-primary uppercase tracking-widest">Stockholm, SE • 2024
-                    </p>
+
+                    <!-- Service 4 -->
+                    <div class="service-item group border-t border-sand-300/10 border-b py-8 md:py-10">
+                        <div class="flex items-start md:items-center gap-6 md:gap-12">
+                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">04</span>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Авторски контрол</h3>
+                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
+                                </div>
+                                <div class="service-expandable">
+                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Проследяване на изпълнението на място, така че всеки детайл да остане верен на първоначалната концепция. Редовни посещения на обекта и комуникация с изпълнителите.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="font-body text-sand-400 leading-relaxed">
+                                                Авторският контрол не е формалност — той е гаранцията, че пространството ще изглежда и функционира точно както е проектирано. Всяка промяна на обекта минава през нашата преценка и одобрение.
+                                            </p>
+                                        </div>
+                                        <div class="md:col-span-2 flex gap-8 items-center">
+                                            <div class="h-line flex-1"></div>
+                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">До финализиране на обекта</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- CTA Section -->
-        <section class="py-40 px-8 md:px-16 bg-inverse-surface text-inverse-primary text-center">
-            <div class="max-w-2xl mx-auto">
-                <span
-                    class="font-label text-[0.6875rem] uppercase tracking-[0.3em] text-outline-variant mb-8 block">Ready
-                    to Transform Your Space?</span>
-                <h2 class="font-headline text-4xl md:text-6xl font-extrabold mb-12 leading-tight">Let's create something
-                    <span class="italic font-light">timeless</span>.</h2>
-                <button
-                    class="bg-surface text-inverse-surface px-12 py-5 font-headline font-bold uppercase text-xs tracking-widest hover:bg-surface-dim transition-colors">
-                    Start a Conversation
-                </button>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- PROJECTS                                                    -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative py-32 md:py-44" id="portfolio">
+            <!-- Background decorative -->
+            <div class="parallax-number absolute left-[50%] -translate-x-1/2 -top-[5%] pointer-events-none select-none">
+                <span class="font-display text-[20vw] leading-none text-stroke opacity-10">WORK</span>
+            </div>
+
+            <div class="px-8 md:px-16 max-w-[1920px] mx-auto relative z-10">
+                <!-- Heading -->
+                <div class="section-heading mb-16">
+                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Избрани проекти</h2>
+                        <div class="flex items-center gap-4">
+                            <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Подбрани пространства</p>
+                            <div class="flex gap-3">
+                                <button class="magnetic-btn w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors">
+                                    <span class="material-symbols-outlined text-sand-400">west</span>
+                                </button>
+                                <button class="magnetic-btn w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors">
+                                    <span class="material-symbols-outlined text-sand-400">east</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex overflow-x-auto no-scrollbar gap-6 md:gap-8 px-8 md:px-16 pb-12 snap-x">
+                <!-- Project 1 -->
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
+                        <img alt="Резиденция Обсидиан" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
+                        <div class="absolute inset-0 project-overlay"></div>
+                        <!-- Glass info bar -->
+                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                            <div class="flex justify-between items-center">
+                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
+                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                            </div>
+                        </div>
+                        <!-- Large project number -->
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">01</span>
+                    </div>
+                    <h4 class="font-display text-xl text-sand-50 mb-1">Резиденция Обсидиан</h4>
+                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Лондон, Великобритания • 2023</p>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
+                        <img alt="Мазилка и светлина" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            src="assets/projects/pexels-orlovamaria-4906249.jpg" />
+                        <div class="absolute inset-0 project-overlay"></div>
+                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                            <div class="flex justify-between items-center">
+                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
+                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                            </div>
+                        </div>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">02</span>
+                    </div>
+                    <h4 class="font-display text-xl text-sand-50 mb-1">Мазилка и светлина</h4>
+                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Ибиса, Испания • 2022</p>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
+                        <img alt="Бетонен лофт" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            src="assets/projects/pexels-perqued-9757618.jpg" />
+                        <div class="absolute inset-0 project-overlay"></div>
+                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                            <div class="flex justify-between items-center">
+                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
+                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                            </div>
+                        </div>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">03</span>
+                    </div>
+                    <h4 class="font-display text-xl text-sand-50 mb-1">Бетонен лофт</h4>
+                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Берлин, Германия • 2023</p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
+                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
+                        <img alt="Офис Етос" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            src="assets/projects/pexels-sinara-bianchet-2154511749-36247605.jpg" />
+                        <div class="absolute inset-0 project-overlay"></div>
+                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                            <div class="flex justify-between items-center">
+                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
+                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                            </div>
+                        </div>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">04</span>
+                    </div>
+                    <h4 class="font-display text-xl text-sand-50 mb-1">Офис Етос</h4>
+                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Стокхолм, Швеция • 2024</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- CTA                                                         -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="cta-section relative py-40 md:py-52 px-8 md:px-16 overflow-hidden" id="journal">
+            <!-- Sand-toned background -->
+            <div class="absolute inset-0 bg-sand-300/[0.07]"></div>
+
+            <!-- Abstract floating elements -->
+            <div class="parallax-number absolute left-[10%] top-[20%] pointer-events-none select-none">
+                <span class="font-display text-[15vw] leading-none text-stroke opacity-15 italic">IN</span>
+            </div>
+            <div class="parallax-number absolute right-[10%] bottom-[15%] pointer-events-none select-none">
+                <span class="font-display text-[15vw] leading-none text-stroke opacity-15 italic">NI</span>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <div class="cta-line draw-line h-line w-48 mx-auto mb-10"></div>
+                <span class="cta-label font-body text-[0.65rem] uppercase tracking-[0.3em] text-sand-600 mb-8 block">
+                    Готови ли сте да преобразите своето пространство?
+                </span>
+                <h2 class="font-display text-5xl md:text-[5.5rem] leading-[1] text-sand-50 mb-12">
+                    Нека създадем нещо <span class="italic text-sand-300">стойностно</span>.
+                </h2>
+                <a href="#contact" class="magnetic-btn cta-btn inline-flex items-center gap-3 bg-sand-300 text-sand-900 px-14 py-5 font-body font-semibold uppercase text-xs tracking-[0.15em] hover:bg-sand-50 transition-colors duration-400">
+                    Започнете разговор
+                    <span class="material-symbols-outlined text-base">arrow_outward</span>
+                </a>
             </div>
         </section>
     </main>
-    <!-- Footer -->
-    <footer class="w-full pt-24 pb-12 bg-[#f2f4f2] transition-colors duration-300">
-        <div
-            class="flex flex-col md:flex-row justify-between items-center px-8 md:px-16 border-t border-[#0d0f0e]/5 max-w-[1920px] mx-auto pt-12">
-            <div class="mb-8 md:mb-0 text-center md:text-left">
-                <a class="font-['Manrope'] text-lg font-bold text-[#0d0f0e]" href="#">INGENI</a>
-                <p class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] mt-4">© 2024 INGENI
-                    INTERIORS. ALL RIGHTS RESERVED.</p>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- FOOTER                                                          -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <footer class="site-footer w-full pt-20 pb-10 px-8 md:px-16" id="contact">
+        <div class="max-w-[1920px] mx-auto">
+            <!-- Top line -->
+            <div class="h-line w-full mb-16"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+                <!-- Left: Brand -->
+                <div class="md:col-span-4">
+                    <a class="font-display text-3xl text-sand-300 block mb-6" href="#">INGENI</a>
+                    <p class="font-body text-sm text-sand-600 leading-relaxed max-w-xs">
+                        Модерна интериорна архитектура, създадена с прецизност и отношение към всеки детайл.
+                    </p>
+                </div>
+                <!-- Middle: Links -->
+                <div class="md:col-span-4">
+                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600 mb-6">Навигация</p>
+                    <div class="flex flex-col gap-3">
+                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#studio">Студио</a>
+                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#services">Услуги</a>
+                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#portfolio">Проекти</a>
+                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#">Политика за поверителност</a>
+                    </div>
+                </div>
+                <!-- Right: Contact -->
+                <div class="md:col-span-4">
+                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600 mb-6">Контакт</p>
+                    <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300 block mb-3" href="mailto:office@ingeni.bg">office@ingeni.bg</a>
+                    <div class="flex gap-6 mt-6">
+                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-sand-600 hover:text-sand-300 transition-colors" href="#">Instagram</a>
+                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-sand-600 hover:text-sand-300 transition-colors" href="#">Facebook</a>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
-                    href="#">Privacy Policy</a>
-                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
-                    href="#">Terms of Service</a>
-                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
-                    href="#">Instagram</a>
-                <a class="font-['Work_Sans'] text-[0.75rem] tracking-widest uppercase text-[#5f5e5e] hover:text-[#0d0f0e] transition-colors duration-300"
-                    href="#">LinkedIn</a>
+
+            <!-- Bottom -->
+            <div class="h-line w-full mb-8"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body text-[0.6rem] tracking-widest uppercase text-sand-700">
+                    © <span id="current-year"></span> INGENI INTERIORS. Всички права запазени.
+                </p>
+                <p class="font-body text-[0.6rem] tracking-widest uppercase text-sand-700">
+                    Дизайн и разработка — INGENI
+                </p>
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/animations.js"></script>
 </body>
 
 </html>
