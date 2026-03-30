@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>INGENI Reveal Study</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+	<style>
+		:root {
+			--bg: #ebe4d6;
+			--bg-deep: #d9cfbc;
+			--ink: #171512;
+			--muted: rgba(23, 21, 18, 0.48);
+			--line: rgba(23, 21, 18, 0.08);
+			--panel: rgba(255, 250, 242, 0.58);
+			--shadow: rgba(78, 56, 22, 0.16);
+			--accent: #8f6a31;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			min-height: 100%;
+		}
+
+		body {
+			display: grid;
+			place-items: center;
+			overflow: hidden;
+			background: white;
+			color: var(--ink);
+			font-family: "Manrope", sans-serif;
+			opacity: 0;
+		}
+
+		.centerpiece {
+			position: relative;
+			display: grid;
+			place-items: center;
+			padding: 2rem 0;
+		}
+
+		.wordmark-wrap {
+			position: relative;
+			display: inline-grid;
+			place-items: center;
+			padding: clamp(1rem, 2vw, 2rem);
+		}
+
+		.wordmark {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.04em;
+			font-family: "Sora", sans-serif;
+			font-size: clamp(4rem, 14vw, 10.5rem);
+			font-weight: 800;
+			letter-spacing: -0.08em;
+			text-transform: uppercase;
+			line-height: 0.9;
+			color: var(--ink);
+		}
+
+		.wordmark .letter {
+			position: relative;
+			display: inline-block;
+			will-change: transform, opacity, filter;
+		}
+
+		.split-n {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 0;
+			height: 0;
+			pointer-events: none;
+			isolation: isolate;
+			z-index: 3;
+		}
+
+		.n-half {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			font-family: "Sora", sans-serif;
+			font-size: clamp(4rem, 14vw, 10.5rem);
+			font-weight: 800;
+			letter-spacing: -0.08em;
+			line-height: 0.9;
+			color: var(--ink);
+			z-index: 1;
+			will-change: transform, opacity;
+		}
+
+		.n-half::before {
+			content: "";
+			position: absolute;
+			inset: -0.2em -0.2em !important;
+			background: white;
+			border-radius: 0.2em;
+			box-shadow: 50px 50px 50px red;
+			z-index: -1;
+		}
+
+		.n-half.left {
+			/* clip-path: inset(0 50% 0 0); */
+			clip-path: inset(0 0 0 0);
+		}
+
+		.n-half.right {
+			/* clip-path: inset(0 50% 0 0); */
+			clip-path: inset(0 0 0 0);
+		}
+
+		.glow {
+			position: absolute;
+			inset: auto 50% 16%;
+			width: min(62vw, 700px);
+			height: 3rem;
+			transform: translateX(-50%);
+			background: radial-gradient(circle, rgba(143, 106, 49, 0.3), transparent 72%);
+			filter: blur(14px);
+			opacity: 0.35;
+			pointer-events: none;
+		}
+
+		.caption {
+			position: absolute;
+			left: 50%;
+			bottom: clamp(3rem, 6vw, 4.5rem);
+			transform: translateX(-50%);
+			text-align: center;
+			max-width: 38rem;
+			padding: 0 1rem;
+		}
+
+		.caption h1 {
+			margin: 0 0 0.75rem;
+			font-family: "Sora", sans-serif;
+			font-size: clamp(1rem, 2vw, 1.25rem);
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			font-weight: 700;
+		}
+
+		.caption p {
+			margin: 0;
+			color: var(--muted);
+			font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+			line-height: 1.6;
+		}
+
+		@media (max-width: 700px) {
+			body::after {
+				inset: 1rem;
+				border-radius: 1rem;
+			}
+
+			.scene {
+				width: 100vw;
+				min-height: 100vh;
+				padding: 1rem;
+			}
+
+			.panel {
+				min-height: calc(100vh - 2rem);
+				border-radius: 1.4rem;
+			}
+
+			.panel-inner {
+				padding: 1rem;
+			}
+
+			.eyebrow,
+			.footer-note {
+				font-size: 0.65rem;
+				letter-spacing: 0.18em;
+			}
+
+			.caption {
+				bottom: 2.5rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wordmark-wrap" aria-label="INGENI logo reveal">
+		<div class="glow"></div>
+		<div class="wordmark" id="wordmark">
+			<span class="letter letter-i-left" data-role="outer-left">I</span>
+			<span class="letter letter-n-first" data-role="middle">N</span>
+			<span class="letter letter-g" data-role="middle">G</span>
+			<span class="letter letter-e" data-role="middle">E</span>
+			<span class="letter letter-n-second" data-role="middle">N</span>
+			<span class="letter letter-i-right" data-role="outer-right">I</span>
+		</div>
+		<div class="split-n" id="splitN" aria-hidden="true">
+			<span class="n-half left">N</span>
+			<span class="n-half right">N</span>
+		</div>
+	</div>
+	</main>
+
+	<script>
+		const body = document.body;
+		const wordmark = document.getElementById('wordmark');
+		const wrapEl = wordmark.closest('.wordmark-wrap');
+		const splitN = document.getElementById('splitN');
+		const leftHalf = splitN.querySelector('.left');
+		const rightHalf = splitN.querySelector('.right');
+		const leftI = wordmark.querySelector('.letter-i-left');
+		const rightI = wordmark.querySelector('.letter-i-right');
+		const middleLetters = [
+			wordmark.querySelector('.letter-n-first'),
+			wordmark.querySelector('.letter-g'),
+			wordmark.querySelector('.letter-e'),
+			wordmark.querySelector('.letter-n-second')
+		];
+
+		let measured = {};
+
+		function setInitialState() {
+			gsap.set(body, { opacity: 1 });
+			// Clear previous GSAP inline styles so measurements are clean
+			gsap.set([leftI, rightI, ...middleLetters, splitN, leftHalf, rightHalf], { clearProps: 'all' });
+
+			const wrapRect = wrapEl.getBoundingClientRect();
+			const wordRect = wordmark.getBoundingClientRect();
+
+			// Measure letters at their natural "INGENI" flex positions
+			const leftIRect = leftI.getBoundingClientRect();
+			const rightIRect = rightI.getBoundingClientRect();
+			const nRect = middleLetters[0].getBoundingClientRect();
+
+			const nW = nRect.width;
+			const iLW = leftIRect.width;
+			const iRW = rightIRect.width;
+			const gap = nW * 0.08;
+			measured = { nW };
+
+			// Center of wordmark relative to wordmark-wrap
+			const cx = wordRect.left - wrapRect.left + wordRect.width / 2;
+			const cy = wordRect.top - wrapRect.top + wordRect.height / 2;
+
+			// --- Position the overlay split-N at the exact center ---
+			// splitN has width/height 0, so (left, top) = its anchor point.
+			// n-halves use xPercent/yPercent:-50 so their center sits on that anchor.
+			gsap.set(splitN, { left: cx, top: cy, opacity: 1, zIndex: 3 });
+			gsap.set(leftHalf, { xPercent: -50, yPercent: -50, opacity: 1 });
+			gsap.set(rightHalf, { xPercent: -50, yPercent: -50, opacity: 1 });
+
+			// --- Move I's to compact "INI" positions ---
+			const compactLeftI  = cx - nW / 2 - gap - iLW / 2;
+			const compactRightI = cx + nW / 2 + gap + iRW / 2;
+			const curLeftI  = leftIRect.left  - wrapRect.left + iLW / 2;
+			const curRightI = rightIRect.left - wrapRect.left + iRW / 2;
+
+			gsap.set(leftI,  { x: compactLeftI  - curLeftI,  zIndex: 2 });
+			gsap.set(rightI, { x: compactRightI - curRightI, zIndex: 2 });
+
+			// --- Middle letters: hidden, stacked at center, behind I's ---
+			middleLetters.forEach(letter => {
+				const lr = letter.getBoundingClientRect();
+				const letterCX = lr.left - wrapRect.left + lr.width / 2;
+				gsap.set(letter, {
+					x: cx - letterCX,
+					// opacity: 0,
+					// scale: 0.82,
+					// filter: 'blur(10px)',
+					zIndex: 0
+				});
+			});
+		}
+
+		function playReveal() {
+			const { nW } = measured;
+			const splitDist = nW * 1.3575;
+
+			const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+			tl.from('.panel', {
+				y: 26,
+				scale: 0.985,
+				opacity: 0,
+				duration: 0.8,
+				ease: 'power2.out'
+			})
+			.from('.eyebrow, .footer-note, .caption', {
+				y: 18,
+				opacity: 0,
+				stagger: 0.08,
+				duration: 0.6,
+				ease: 'power2.out'
+			}, 0.2)
+			// Hold on "INI"
+			.to({}, { duration: 0.6 })
+			// Split the N halves apart
+			.to(leftHalf, {
+				x: -splitDist,
+				// opacity: 0,
+				duration: 1.15,
+				ease: 'expo.inOut'
+			}, 0.85)
+			.to(rightHalf, {
+				x: splitDist,
+				// opacity: 0,
+				duration: 1.15,
+				ease: 'expo.inOut'
+			}, 0.85)
+			// Move I's to final INGENI positions
+			.to(leftI, {
+				x: 0,
+				duration: 1.15,
+				ease: 'expo.inOut'
+			}, 0.85)
+			.to(rightI, {
+				x: 0,
+				duration: 1.15,
+				ease: 'expo.inOut'
+			}, 0.85)
+			// Reveal middle letters (NGEN) — they emerge from behind
+			.to(middleLetters, {
+				x: 0,
+				opacity: 1,
+				scale: 1,
+				filter: 'blur(0px)',
+				duration: 1.15,
+				// stagger: 0.09,
+				ease: 'expo.inOut'
+			}, 0.85)
+			.fromTo('.glow', {
+				scaleX: 0.6,
+				opacity: 0.1
+			}, {
+				scaleX: 1,
+				opacity: 0.4,
+				duration: 1.1,
+				ease: 'power2.out'
+			}, 1.25)
+			// Settle bounce
+			// .to('.wordmark .letter', {
+			// 	yPercent: -2,
+			// 	duration: 0.7,
+			// 	stagger: 0.03,
+			// 	ease: 'power2.out'
+			// }, 2.0)
+			// .to('.wordmark .letter', {
+			// 	yPercent: 0,
+			// 	duration: 1.2,
+			// 	stagger: 0.03,
+			// 	ease: 'elastic.out(1, 0.75)'
+			// }, 2.2);
+		}
+
+		function initReveal() {
+			setInitialState();
+			playReveal();
+		}
+
+		if (document.fonts && document.fonts.ready) {
+			document.fonts.ready.then(initReveal);
+		} else {
+			window.addEventListener('load', initReveal, { once: true });
+		}
+
+		window.addEventListener('resize', () => {
+			gsap.killTweensOf('*');
+			initReveal();
+		});
+	</script>
+</body>
+</html>

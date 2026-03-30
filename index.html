@@ -26,7 +26,7 @@
             theme: {
                 extend: {
                     colors: {
-                        "sand": { 900: "#F5F5F3", 800: "#EDEAE4", 700: "#E3DED5", 600: "#D9D2C5", 500: "#C4BCB0", 400: "#B8AFA2", 300: "#8C8C8C", 200: "#6B6B6B", 100: "#3D3D3D", 50: "#1A1A1A" },
+                        "sand": { 900: "#D9D2C5", 800: "#EDEAE4", 700: "#E3DED5", 600: "#D9D2C5", 500: "#C4BCB0", 400: "#B8AFA2", 300: "#8C8C8C", 200: "#6B6B6B", 100: "#3D3D3D", 50: "#1A1A1A" },
                     },
                     fontFamily: {
                         "display": ['"Inter"', 'system-ui', 'sans-serif'],
@@ -46,17 +46,14 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F5F5F3;
+            background-color: #D9D2C5;
             color: #1A1A1A;
             overflow-x: hidden;
         }
 
-        body.reveal-active {
-            overflow: hidden;
-        }
-
         html {
             scroll-behavior: smooth;
+            scrollbar-gutter: stable;
         }
 
         .font-display {
@@ -74,21 +71,125 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: #F5F5F3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
+            display: grid;
+            place-items: center;
+            background: #D9D2C5;
             clip-path: inset(0 0 0 0);
+            overflow: hidden;
         }
-        #page-reveal .reveal-char {
+        #page-reveal::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            /* background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.68), transparent 28%),
+                radial-gradient(circle at 80% 20%, rgba(143, 106, 49, 0.13), transparent 30%),
+                linear-gradient(135deg, #ebe4d6 0%, #d9cfbc 100%); */
+        }
+        .reveal-shell {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 1000px);
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+        }
+        .reveal-wordmark-wrap {
+            position: relative;
+            display: inline-grid;
+            place-items: center;
+            padding: clamp(1rem, 2vw, 2rem);
+        }
+        .reveal-wordmark {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.04em;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: clamp(5rem, 20vw, 15rem);
+            font-weight: 800;
+            letter-spacing: -0.08em;
+            text-transform: uppercase;
+            line-height: 0.9;
+            color: #171512;
+        }
+        .reveal-wordmark .reveal-letter {
+            position: relative;
+            display: inline-block;
+            will-change: transform, opacity, filter;
+        }
+        .reveal-split-n {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            isolation: isolate;
+            z-index: 3;
+        }
+        /* .reveal-split-n::before {
+			content: "";
+			position: absolute;
+			inset: -0.2em -0.2em !important;
+			background: red;
+			border-radius: 0.2em;
+			box-shadow: 50px 50px 50px red;
+			z-index: -1;
+		} */
+        .reveal-full-n {
+            position: absolute;
+            top: 0;
+            left: 0;
             display: inline-block;
             font-family: 'Inter', system-ui, sans-serif;
-            font-weight: 300;
-            font-size: clamp(3rem, 12vw, 10rem);
-            color: #8C8C8C;
-            letter-spacing: -0.03em;
-            perspective: 600px;
+            font-size: clamp(5rem, 20vw, 15rem);
+            font-weight: 800;
+            letter-spacing: -0.08em;
+            line-height: 0.9;
+            color: #171512;
+            z-index: 1;
+            will-change: transform, opacity;
+        }
+        .reveal-full-n::before {
+			content: "";
+			position: absolute;
+			inset: -0.03em -0.07em -0.07em -0.02em !important;
+			background: #D9D2C5;
+            /* opacity: 0.5; */
+			z-index: -1;
+        }
+        .reveal-glow {
+            position: absolute;
+            inset: auto 50% 16%;
+            width: min(62vw, 700px);
+            height: 3rem;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(143, 106, 49, 0.3), transparent 72%);
+            filter: blur(14px);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        .hero-wordmark-wrap {
+            position: relative;
+            display: inline-grid;
+            place-items: center;
+            padding: clamp(1rem, 2vw, 2rem);
+        }
+        .hero-title-lockup {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.04em;
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: clamp(5rem, 20vw, 15rem);
+            font-weight: 800;
+            letter-spacing: -0.08em;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+        .hero-title-lockup .hero-letter {
+            display: inline-block;
         }
 
         /* ─── Horizontal lines ─── */
@@ -108,11 +209,99 @@
             -webkit-backdrop-filter: blur(40px) saturate(1.3);
             border: 1px solid rgba(26,26,26,0.08);
         }
+        .glass-dark {
+            background: rgba(245, 245, 243, 0.12);
+            backdrop-filter: blur(28px) saturate(1.45);
+            -webkit-backdrop-filter: blur(28px) saturate(1.45);
+            border: 1px solid rgba(245, 245, 243, 0.14);
+        }
         .glass-light {
             background: rgba(217, 210, 197, 0.06);
             backdrop-filter: blur(60px) saturate(1.2);
             -webkit-backdrop-filter: blur(60px) saturate(1.2);
             border: 1px solid rgba(217,210,197,0.08);
+        }
+        .site-nav {
+            background: rgba(245, 245, 243, 0.12);
+            backdrop-filter: blur(28px) saturate(1.45);
+            -webkit-backdrop-filter: blur(28px) saturate(1.45);
+            border: 1px solid rgba(245, 245, 243, 0.14);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+        }
+        .site-nav .brand-link {
+            color: #ffffff;
+        }
+        .site-nav .nav-link,
+        .site-nav .nav-toggle {
+            color: #ffffff;
+            transition: color 0.25s ease;
+        }
+        .site-nav .nav-link:hover,
+        .site-nav .nav-toggle:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .site-nav .nav-toggle {
+            /* display set by Tailwind classes */
+            align-items: center;
+            justify-content: center;
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .mobile-nav-panel {
+            display: none;
+            padding: 0 1rem 1rem;
+        }
+        .mobile-nav-panel.is-open {
+            display: block;
+        }
+        .mobile-nav-inner {
+            padding: 0.9rem;
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px) saturate(1.35);
+            -webkit-backdrop-filter: blur(18px) saturate(1.35);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem 1.1rem;
+            border-radius: 1rem;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        @media (max-width: 767px) {
+            .site-nav {
+                width: calc(100vw - 1.5rem);
+                top: 0.75rem;
+                border-radius: 1.75rem;
+            }
+            .site-nav .brand-link {
+                left: 1.2rem;
+                font-size: 1.55rem;
+                letter-spacing: -0.03em;
+            }
+            .site-nav .nav-toggle {
+                right: 1rem;
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+            .site-nav .nav-toggle .material-symbols-outlined {
+                font-size: 1.6rem;
+            }
+            .site-nav .nav-bar-inner {
+                min-height: 4.75rem;
+                padding: 0.8rem 1rem;
+            }
         }
 
         /* ─── Service accordion ─── */
@@ -139,11 +328,6 @@
             padding: 0 3rem;
         }
 
-        /* ─── Hero vignette ─── */
-        .hero-vignette {
-            background: radial-gradient(ellipse at 50% 80%, rgba(26,26,26,0) 0%, rgba(26,26,26,0.85) 70%);
-        }
-
         /* ─── Magnetic btn ─── */
         .magnetic-btn {
             will-change: transform;
@@ -165,39 +349,52 @@
 <body class="bg-sand-900 text-sand-50">
 
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PAGE REVEAL — IN ● GE ● NI mirror animation                   -->
+    <!-- PAGE REVEAL — INI to INGENI                                   -->
     <!-- ════════════════════════════════════════════════════════════════ -->
     <div id="page-reveal">
-        <div class="reveal-left flex" style="perspective:600px">
-            <span class="reveal-char">I</span>
-            <span class="reveal-char">N</span>
-        </div>
-        <div class="flex items-center mx-4 md:mx-8">
-            <span class="reveal-char" style="font-style:italic; color:#8C8C8C">G</span>
-            <span class="reveal-char" style="font-style:italic; color:#8C8C8C">E</span>
-        </div>
-        <div class="reveal-right flex" style="perspective:600px">
-            <span class="reveal-char">N</span>
-            <span class="reveal-char">I</span>
+        <div class="reveal-shell" aria-label="INGENI logo reveal">
+            <div class="reveal-wordmark-wrap">
+                <div class="reveal-glow"></div>
+                <div class="reveal-wordmark" id="reveal-wordmark">
+                    <span class="reveal-letter reveal-i-left">I</span>
+                    <span class="reveal-letter reveal-n-first">N</span>
+                    <span class="reveal-letter reveal-g">G</span>
+                    <span class="reveal-letter reveal-e">E</span>
+                    <span class="reveal-letter reveal-n-second">N</span>
+                    <span class="reveal-letter reveal-i-right">I</span>
+                </div>
+                <div class="reveal-split-n" id="reveal-split-n" aria-hidden="true">
+                    <span class="reveal-full-n reveal-full-n-left">N</span>
+                    <span class="reveal-full-n reveal-full-n-right">N</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- ════════════════════════════════════════════════════════════════ -->
     <!-- NAV                                                             -->
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <nav class="site-nav fixed top-6 left-1/2 -translate-x-1/2 w-[94%] max-w-7xl z-50 glass-light backdrop-blur-3xl rounded-full transition-all duration-500">
-        <div class="relative flex justify-center items-center px-6 md:px-10 py-4">
-            <a class="absolute left-6 md:left-10 font-display text-2xl tracking-tight text-sand-300" href="#top">INGENI</a>
+    <nav class="site-nav fixed top-6 left-1/2 -translate-x-1/2 w-[94%] max-w-7xl z-50 rounded-full">
+        <div class="nav-bar-inner relative flex justify-center items-center px-6 md:px-10 py-4">
+            <a class="absolute left-6 md:left-10 font-display text-2xl tracking-tight brand-link" href="#top">INGENI</a>
             <div class="hidden md:flex items-center space-x-10">
-                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#studio">Студио</a>
-                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#services">Услуги</a>
-                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#portfolio">Проекти</a>
-                <a class="font-body font-medium tracking-[0.08em] uppercase text-[0.65rem] text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#contact">Контакти</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#studio">За нас</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Услуги</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#portfolio">Проекти</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#contact">Контакти</a>
             </div>
             <!-- Mobile menu button -->
-            <button class="absolute right-6 md:right-10 md:hidden text-sand-300 hover:text-sand-50 transition-colors">
+            <button class="nav-toggle absolute right-6 md:right-10 md:hidden flex transition-colors" type="button" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Open navigation menu">
                 <span class="material-symbols-outlined">menu</span>
             </button>
+        </div>
+        <div class="mobile-nav-panel md:hidden" id="mobile-nav-panel">
+            <div class="mobile-nav-inner">
+                <a class="mobile-nav-link" href="#studio">За нас</a>
+                <a class="mobile-nav-link" href="#services">Услуги</a>
+                <a class="mobile-nav-link" href="#portfolio">Проекти</a>
+                <a class="mobile-nav-link" href="#contact">Контакти</a>
+            </div>
         </div>
     </nav>
 
@@ -211,27 +408,27 @@
                 <video autoplay loop muted playsinline preload="auto" class="w-full h-full object-cover scale-105">
                     <source src="assets/interior-hd.mp4" type="video/mp4" />
                 </video>
-                <div class="absolute inset-0 bg-sand-900/50"></div>
-                <div class="absolute inset-0 hero-vignette"></div>
-            </div>
-
-            <!-- Floating decorative number -->
-            <div class="parallax-number absolute top-[15%] right-[8%] z-[1] pointer-events-none select-none hidden md:block">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80"></div>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 w-full px-8 md:px-16 max-w-[1920px] mx-auto flex flex-col items-center justify-center h-full">
-
-                <h1 class="hero-title font-display text-[15vw] md:text-[18vw] leading-none tracking-tight text-sand-50 uppercase text-center mt-20">
-                    INGENI
-                </h1>
-            </div>
-        </section>
-                            <p class="font-body text-[0.6rem] uppercase tracking-[0.15em] text-sand-600 mt-2">Години опит</p>
-                        </div>
-                        <div class="v-line h-12 self-center"></div>
-                        <div>
-                            <span class="stat-number font-display text-5xl md:text-6xl text-sand-300" data-value="150">0</span>
+                <div class="hero-wordmark-wrap flex flex-col items-start">
+                    <h1 class="hero-title hero-title-lockup text-white" aria-label="INGENI">
+                        <span class="hero-letter">I</span>
+                        <span class="hero-letter">N</span>
+                        <span class="hero-letter">G</span>
+                        <span class="hero-letter">E</span>
+                        <span class="hero-letter">N</span>
+                        <span class="hero-letter">I</span>
+                    </h1>
+                    <div class="mt-6 md:mt-8 flex items-center gap-3 md:gap-5 ml-1 md:ml-2">
+                        <div class="w-8 md:w-16 h-[1px] bg-white/60"></div>
+                        <p class="font-body text-[0.65rem] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-white/80 font-medium">
+                            INTERIOR DESIGN
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -247,9 +444,9 @@
             <div class="max-w-[1920px] mx-auto relative z-10">
                 <!-- Section heading with line -->
                 <div class="section-heading mb-20 md:mb-28">
-                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                    
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Студио</h2>
+                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">За нас</h2>
                         <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Лицето зад студиото</p>
                     </div>
                 </div>
@@ -258,21 +455,21 @@
                     <!-- Image -->
                     <div class="studio-img md:col-span-5 relative">
                         <div class="relative overflow-hidden">
-                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" />
+                            <!-- <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" /> -->
+                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
                             <!-- Glass label -->
                             <div class="absolute bottom-0 left-0 right-0 glass px-8 py-6">
                                 <span class="font-display text-xl text-sand-50 block">Весела Желева</span>
                                 <span class="font-body text-[0.6rem] uppercase tracking-[0.15em] text-sand-400">Основател и творчески директор</span>
                             </div>
                         </div>
-                        <!-- Decorative vertical line -->
-                        <div class="v-line absolute -right-8 top-0 h-full hidden md:block"></div>
+                        
                     </div>
 
                     <!-- Text -->
-                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-center items-center">
+                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start">
                         <h3 class="font-display text-3xl md:text-5xl text-sand-50 mb-8 leading-tight">
-                            Кой стои зад <span class="italic text-sand-300">INGENI?</span>
+                            Кой стои зад <span class="text-sand-300">INGENI?</span>
                         </h3>
                         <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed mb-6 max-w-2xl">
                             Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн.
@@ -283,8 +480,7 @@
                         <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed max-w-2xl">
                             Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си и очакват завършен резултат без компромиси.
                         </p>
-                        <!-- Decorative line -->
-                        <div class="draw-line h-line w-full mt-12"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -294,156 +490,95 @@
         <!-- SERVICES — Accordion + Background Images                    -->
         <!-- ════════════════════════════════════════════════════════════ -->
         <section class="relative py-32 md:py-44 overflow-hidden" id="services">
-            <!-- Background images (switch on accordion click) -->
-            <div class="absolute inset-0 z-0">
-                <img src="assets/plan.png" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
-                <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
-                <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
-                <img src="assets/workers-helmet.png" alt="" class="service-bg-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700" />
-                <div class="absolute inset-0 bg-sand-900/80 backdrop-blur-sm"></div>
-            </div>
-
-            <!-- Floating number -->
-            <div class="parallax-number absolute right-[5%] top-[5%] pointer-events-none select-none z-[1]">
-                <span class="font-display text-[25vw] leading-none text-stroke opacity-15">04</span>
-            </div>
-
+            <!-- Background element -->
+            <div class="absolute inset-0 bg-sand-900 pointer-events-none z-0"></div>
+            
             <div class="relative z-10 max-w-[1920px] mx-auto px-8 md:px-16">
                 <!-- Heading -->
-                <div class="section-heading mb-20 md:mb-28">
+                <div class="section-heading mb-16 md:mb-24">
                     <div class="heading-line draw-line h-line w-full mb-8"></div>
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                         <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Процес</h2>
                         <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Четири етапа до завършения интериор</p>
                     </div>
                 </div>
+            </div>
 
-                <!-- Accordion -->
-                <div class="space-y-0">
-                    <!-- Service 1 -->
-                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
-                        <div class="flex items-start md:items-center gap-6 md:gap-12">
-                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">01</span>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Планиране</h3>
-                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
-                                </div>
-                                <div class="service-expandable">
-                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Тук започва всичко — с разговор. Запознаваме се с вашия начин на живот, навиците и нуждите на всеки, който ще обитава пространството. Всичко това се преработва в ясна концепция и структура на разпределението.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура. Всяко помещение се разглежда не само като площ, а като функционална зона с конкретна роля в общия баланс на интериора.
-                                            </p>
-                                        </div>
-                                        <div class="md:col-span-2 flex gap-8 items-center">
-                                            <div class="h-line flex-1"></div>
-                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 2–3 седмици</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Process Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-y border-sand-300/10 w-full relative z-10 process-grid">
+                
+                <!-- Service 1 -->
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111] is-active">
+                    <img src="assets/plan.png" alt="Планиране" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">01</span>
                     </div>
-
-                    <!-- Service 2 -->
-                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
-                        <div class="flex items-start md:items-center gap-6 md:gap-12">
-                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">02</span>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">3D Визуализация</h3>
-                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
-                                </div>
-                                <div class="service-expandable">
-                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия още преди реализацията да започне. Виждате материали, осветление и пространствени пропорции в реален контекст.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Всяка визуализация е изградена с внимание към детайла — от текстурата на стената до отражението на естествената светлина. Представете си как ще изглежда завършеното пространство и участвайте в решенията с увереност.
-                                            </p>
-                                        </div>
-                                        <div class="md:col-span-2 flex gap-8 items-center">
-                                            <div class="h-line flex-1"></div>
-                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 3–4 седмици</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="service-item group border-t border-sand-300/10 py-8 md:py-10">
-                        <div class="flex items-start md:items-center gap-6 md:gap-12">
-                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">03</span>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Техническа документация</h3>
-                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
-                                </div>
-                                <div class="service-expandable">
-                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Подробни чертежи, спецификации и детайли за уверено и безпроблемно изпълнение на обекта. Всеки елемент — от електрически инсталации до мебелировка — е отразен с прецизност.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Документацията е мостът между визията и строителния процес. Тя гарантира, че изпълнителите разполагат с пълна и еднозначна информация, и минимизира рисковете от грешки или забавяния на обекта.
-                                            </p>
-                                        </div>
-                                        <div class="md:col-span-2 flex gap-8 items-center">
-                                            <div class="h-line flex-1"></div>
-                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">Среден срок: 4–6 седмици</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 4 -->
-                    <div class="service-item group border-t border-sand-300/10 border-b py-8 md:py-10">
-                        <div class="flex items-start md:items-center gap-6 md:gap-12">
-                            <span class="service-num font-display text-6xl md:text-8xl text-sand-700 transition-colors duration-500 leading-none">04</span>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="service-title font-display text-2xl md:text-4xl text-sand-50">Авторски контрол</h3>
-                                    <span class="service-arrow material-symbols-outlined text-sand-400 text-2xl transition-transform duration-300">arrow_outward</span>
-                                </div>
-                                <div class="service-expandable">
-                                    <div class="pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Проследяване на изпълнението на място, така че всеки детайл да остане верен на първоначалната концепция. Редовни посещения на обекта и комуникация с изпълнителите.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="font-body text-sand-400 leading-relaxed">
-                                                Авторският контрол не е формалност — той е гаранцията, че пространството ще изглежда и функционира точно както е проектирано. Всяка промяна на обекта минава през нашата преценка и одобрение.
-                                            </p>
-                                        </div>
-                                        <div class="md:col-span-2 flex gap-8 items-center">
-                                            <div class="h-line flex-1"></div>
-                                            <span class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600">До финализиране на обекта</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Планиране</h3>
+                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура
+                        </p>
                     </div>
                 </div>
+
+                <!-- Service 2 -->
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="3D Визуализация" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">02</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Визуализация</h3>
+                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="Техническа документация" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">03</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Документация</h3>
+                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Подробни чертежи, спецификации и детайли. Мостът между визията и строителния процес
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
+                    <img src="assets/workers-helmet.png" alt="Авторски контрол" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">04</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Тематичен контрол</h3>
+                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Проследяване на изпълнението. Гаранцията, че пространството ще изглежда точно както е проектирано
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -461,14 +596,14 @@
                 <div class="section-heading mb-16">
                     <div class="heading-line draw-line h-line w-full mb-8"></div>
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Избрани проекти</h2>
+                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Проекти</h2>
                         <div class="flex items-center gap-4">
                             <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Подбрани пространства</p>
                             <div class="flex gap-3">
-                                <button class="magnetic-btn w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors">
+                                <button class="w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors slider-prev">
                                     <span class="material-symbols-outlined text-sand-400">west</span>
                                 </button>
-                                <button class="magnetic-btn w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors">
+                                <button class="w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors slider-next">
                                     <span class="material-symbols-outlined text-sand-400">east</span>
                                 </button>
                             </div>
@@ -477,110 +612,110 @@
                 </div>
             </div>
 
-            <div class="flex overflow-x-auto no-scrollbar gap-6 md:gap-8 px-8 md:px-16 pb-12 snap-x">
+            <!-- Notice px-8 md:px-16 is moved back to the container, and scroll-pl-8 md:scroll-pl-16 added so snap-start doesn't swallow the padding -->
+            <div class="flex overflow-x-auto no-scrollbar gap-6 md:gap-8 max-w-[1920px] mx-auto px-8 md:px-16 pb-12 snap-x scroll-pl-8 md:scroll-pl-16 cursor-grab active:cursor-grabbing select-none" id="projects-slider">
                 <!-- Project 1 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
-                        <img alt="Резиденция Обсидиан" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <img draggable="false" alt="Резиденция Обсидиан" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
-                        <!-- Glass info bar -->
-                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                            <div class="flex justify-between items-center">
-                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
-                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                        
+                        <!-- Large project number -->
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">01</span>
+
+                        <!-- Bottom details -->
+                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Апартамент | Бояна</h4>
+                            <div class="flex justify-between items-center gap-4">
+                                <div class="glass-dark rounded-full px-5 py-3">
+                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Лондон, Великобритания • 2023</p>
+                                </div>
+                                <!-- Right arrow circle -->
+                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                    <span class="material-symbols-outlined text-white">arrow_outward</span>
+                                </div>
                             </div>
                         </div>
-                        <!-- Large project number -->
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">01</span>
                     </div>
-                    <h4 class="font-display text-xl text-sand-50 mb-1">Резиденция Обсидиан</h4>
-                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Лондон, Великобритания • 2023</p>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
-                        <img alt="Мазилка и светлина" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <img draggable="false" alt="Мазилка и светлина" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-orlovamaria-4906249.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
-                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                            <div class="flex justify-between items-center">
-                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
-                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                        
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">02</span>
+
+                        <!-- Bottom details -->
+                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Къща | Бистрица</h4>
+                            <div class="flex justify-between items-center gap-4">
+                                <div class="glass-dark rounded-full px-5 py-3">
+                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Ибиса, Испания • 2022</p>
+                                </div>
+                                <!-- Right arrow circle -->
+                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                    <span class="material-symbols-outlined text-white">arrow_outward</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">02</span>
                     </div>
-                    <h4 class="font-display text-xl text-sand-50 mb-1">Мазилка и светлина</h4>
-                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Ибиса, Испания • 2022</p>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
-                        <img alt="Бетонен лофт" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <img draggable="false" alt="Бетонен лофт" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-perqued-9757618.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
-                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                            <div class="flex justify-between items-center">
-                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
-                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                        
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">03</span>
+
+                        <!-- Bottom details -->
+                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Бетонен лофт</h4>
+                            <div class="flex justify-between items-center gap-4">
+                                <div class="glass-dark rounded-full px-5 py-3">
+                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Берлин, Германия • 2023</p>
+                                </div>
+                                <!-- Right arrow circle -->
+                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                    <span class="material-symbols-outlined text-white">arrow_outward</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">03</span>
                     </div>
-                    <h4 class="font-display text-xl text-sand-50 mb-1">Бетонен лофт</h4>
-                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Берлин, Германия • 2023</p>
                 </div>
 
                 <!-- Project 4 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden mb-6">
-                        <img alt="Офис Етос" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <img draggable="false" alt="Офис Етос" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-sinara-bianchet-2154511749-36247605.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
-                        <div class="absolute bottom-0 left-0 right-0 glass px-6 py-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                            <div class="flex justify-between items-center">
-                                <span class="font-body font-semibold uppercase tracking-widest text-[0.6rem] text-sand-50">Виж проекта</span>
-                                <span class="material-symbols-outlined text-sand-300 text-sm">arrow_outward</span>
+                        
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">04</span>
+
+                        <!-- Bottom details -->
+                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Офис Етос</h4>
+                            <div class="flex justify-between items-center gap-4">
+                                <div class="glass-dark rounded-full px-5 py-3">
+                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Стокхолм, Швеция • 2024</p>
+                                </div>
+                                <!-- Right arrow circle -->
+                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                    <span class="material-symbols-outlined text-white">arrow_outward</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10">04</span>
                     </div>
-                    <h4 class="font-display text-xl text-sand-50 mb-1">Офис Етос</h4>
-                    <p class="font-body text-[0.6rem] text-sand-600 uppercase tracking-[0.15em]">Стокхолм, Швеция • 2024</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- ════════════════════════════════════════════════════════════ -->
-        <!-- CTA                                                         -->
-        <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="cta-section relative py-40 md:py-52 px-8 md:px-16 overflow-hidden" id="journal">
-            <!-- Sand-toned background -->
-            <div class="absolute inset-0 bg-sand-300/[0.07]"></div>
-
-            <!-- Abstract floating elements -->
-            <div class="parallax-number absolute left-[10%] top-[20%] pointer-events-none select-none">
-                <span class="font-display text-[15vw] leading-none text-stroke opacity-15 italic">IN</span>
-            </div>
-            <div class="parallax-number absolute right-[10%] bottom-[15%] pointer-events-none select-none">
-                <span class="font-display text-[15vw] leading-none text-stroke opacity-15 italic">NI</span>
-            </div>
-
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <div class="cta-line draw-line h-line w-48 mx-auto mb-10"></div>
-                <span class="cta-label font-body text-[0.65rem] uppercase tracking-[0.3em] text-sand-600 mb-8 block">
-                    Готови ли сте да преобразите своето пространство?
-                </span>
-                <h2 class="font-display text-5xl md:text-[5.5rem] leading-[1] text-sand-50 mb-12">
-                    Нека създадем нещо <span class="italic text-sand-300">стойностно</span>.
-                </h2>
-                <a href="#contact" class="magnetic-btn cta-btn inline-flex items-center gap-3 bg-sand-300 text-sand-900 px-14 py-5 font-body font-semibold uppercase text-xs tracking-[0.15em] hover:bg-sand-50 transition-colors duration-400">
-                    Започнете разговор
-                    <span class="material-symbols-outlined text-base">arrow_outward</span>
-                </a>
+                <!-- Right padding spacer for overflow block to fix standard flex right-padding drop -->
+                <div class="shrink-0 w-8 md:w-16"></div>
             </div>
         </section>
     </main>
@@ -588,47 +723,47 @@
     <!-- ════════════════════════════════════════════════════════════════ -->
     <!-- FOOTER                                                          -->
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <footer class="site-footer w-full pt-20 pb-10 px-8 md:px-16" id="contact">
+    <footer class="site-footer w-full pt-20 pb-10 px-8 md:px-16 bg-[#111111]" id="contact">
         <div class="max-w-[1920px] mx-auto">
             <!-- Top line -->
-            <div class="h-line w-full mb-16"></div>
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"></div>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
                 <!-- Left: Brand -->
                 <div class="md:col-span-4">
-                    <a class="font-display text-3xl text-sand-300 block mb-6" href="#">INGENI</a>
-                    <p class="font-body text-sm text-sand-600 leading-relaxed max-w-xs">
+                    <a class="font-display text-3xl text-white block mb-6" href="#">INGENI</a>
+                    <p class="font-body text-sm text-white/50 leading-relaxed max-w-xs">
                         Модерна интериорна архитектура, създадена с прецизност и отношение към всеки детайл.
                     </p>
                 </div>
                 <!-- Middle: Links -->
                 <div class="md:col-span-4">
-                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600 mb-6">Навигация</p>
+                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-white/40 mb-6">Навигация</p>
                     <div class="flex flex-col gap-3">
-                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#studio">Студио</a>
-                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#services">Услуги</a>
-                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#portfolio">Проекти</a>
-                        <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300" href="#">Политика за поверителност</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#studio">За нас</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#services">Услуги</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#portfolio">Проекти</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#">Политика за поверителност</a>
                     </div>
                 </div>
                 <!-- Right: Contact -->
                 <div class="md:col-span-4">
-                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-sand-600 mb-6">Контакт</p>
-                    <a class="font-body text-sm text-sand-400 hover:text-sand-50 transition-colors duration-300 block mb-3" href="mailto:office@ingeni.bg">office@ingeni.bg</a>
+                    <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-white/40 mb-6">Контакт</p>
+                    <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300 block mb-3" href="mailto:office@ingeni.bg">office@ingeni.bg</a>
                     <div class="flex gap-6 mt-6">
-                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-sand-600 hover:text-sand-300 transition-colors" href="#">Instagram</a>
-                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-sand-600 hover:text-sand-300 transition-colors" href="#">Facebook</a>
+                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-white/60 hover:text-white transition-colors" href="#">Instagram</a>
+                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-white/60 hover:text-white transition-colors" href="#">Facebook</a>
                     </div>
                 </div>
             </div>
 
             <!-- Bottom -->
-            <div class="h-line w-full mb-8"></div>
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="font-body text-[0.6rem] tracking-widest uppercase text-sand-700">
+                <p class="font-body text-[0.6rem] tracking-widest uppercase text-white/30">
                     © <span id="current-year"></span> INGENI INTERIORS. Всички права запазени.
                 </p>
-                <p class="font-body text-[0.6rem] tracking-widest uppercase text-sand-700">
+                <p class="font-body text-[0.6rem] tracking-widest uppercase text-white/30">
                     Дизайн и разработка — INGENI
                 </p>
             </div>
@@ -636,7 +771,482 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="assets/js/animations.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        function splitIntoChars(el) {
+            const text = el.textContent;
+            el.innerHTML = '';
+            return [...text].map(ch => {
+                const span = document.createElement('span');
+                span.textContent = ch;
+                span.style.display = 'inline-block';
+                span.style.willChange = 'transform, opacity';
+                if (ch === ' ') span.style.width = '0.3em';
+                return el.appendChild(span);
+            });
+        }
+
+        function splitIntoWords(el) {
+            const words = el.textContent.trim().split(/\s+/);
+            el.innerHTML = '';
+            return words.map((w, i) => {
+                const span = document.createElement('span');
+                span.textContent = w;
+                span.style.display = 'inline-block';
+                span.style.willChange = 'transform, opacity';
+                if (i < words.length - 1) {
+                    const sp = document.createElement('span');
+                    sp.innerHTML = '&nbsp;';
+                    sp.style.display = 'inline-block';
+                    el.appendChild(span);
+                    el.appendChild(sp);
+                } else {
+                    el.appendChild(span);
+                }
+                return span;
+            });
+        }
+
+        function initPageReveal() {
+            const overlay = document.getElementById('page-reveal');
+            const wordmark = document.getElementById('reveal-wordmark');
+            const wrapEl = wordmark ? wordmark.closest('.reveal-wordmark-wrap') : null;
+            const splitN = document.getElementById('reveal-split-n');
+            if (!overlay || !wordmark || !wrapEl || !splitN) {
+                initEntranceAnimations();
+                return;
+            }
+
+            const leftFullN = splitN.querySelector('.reveal-full-n-left');
+            const rightFullN = splitN.querySelector('.reveal-full-n-right');
+            const leftI = wordmark.querySelector('.reveal-i-left');
+            const rightI = wordmark.querySelector('.reveal-i-right');
+            const middleLetters = [
+                wordmark.querySelector('.reveal-n-first'),
+                wordmark.querySelector('.reveal-g'),
+                wordmark.querySelector('.reveal-e'),
+                wordmark.querySelector('.reveal-n-second')
+            ];
+            const revealTargets = [leftI, rightI, ...middleLetters, splitN, leftFullN, rightFullN];
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    overlay.style.pointerEvents = 'none';
+                    initEntranceAnimations();
+                }
+            });
+
+            let measured = {};
+
+            function setInitialState() {
+                gsap.set(revealTargets, { clearProps: 'all' });
+
+                const wrapRect = wrapEl.getBoundingClientRect();
+                const wordRect = wordmark.getBoundingClientRect();
+                const leftIRect = leftI.getBoundingClientRect();
+                const rightIRect = rightI.getBoundingClientRect();
+                const nRect = middleLetters[0].getBoundingClientRect();
+
+                const nWidth = nRect.width;
+                const leftIWidth = leftIRect.width;
+                const rightIWidth = rightIRect.width;
+                const compactGap = nWidth * 0.08;
+
+                measured = { splitDist: nWidth * 1.485 };
+
+                const centerX = wordRect.left - wrapRect.left + wordRect.width / 2;
+                const centerY = wordRect.top - wrapRect.top + wordRect.height / 2;
+
+                gsap.set(splitN, { left: centerX, top: centerY, opacity: 1, zIndex: 3 });
+                gsap.set(leftFullN, { xPercent: -50, yPercent: -50, opacity: 1 });
+                gsap.set(rightFullN, { xPercent: -50, yPercent: -50, opacity: 1 });
+
+                const compactLeftCenter = centerX - nWidth / 2 - compactGap - leftIWidth / 2;
+                const compactRightCenter = centerX + nWidth / 2 + compactGap + rightIWidth / 2;
+                const currentLeftCenter = leftIRect.left - wrapRect.left + leftIWidth / 2;
+                const currentRightCenter = rightIRect.left - wrapRect.left + rightIWidth / 2;
+
+                gsap.set(leftI, { x: compactLeftCenter - currentLeftCenter, zIndex: 2 });
+                gsap.set(rightI, { x: compactRightCenter - currentRightCenter, zIndex: 2 });
+
+                middleLetters.forEach(letter => {
+                    const rect = letter.getBoundingClientRect();
+                    const letterCenter = rect.left - wrapRect.left + rect.width / 2;
+                    gsap.set(letter, {
+                        x: centerX - letterCenter,
+                        // opacity: 0,
+                        // scale: 0.82,
+                        // filter: 'blur(10px)',
+                        zIndex: 0
+                    });
+                });
+            }
+
+            setInitialState();
+
+            tl.to({}, { duration: 0.6 })
+              .to(leftFullN, {
+                  x: -measured.splitDist,
+                  opacity: 0,
+                  duration: 1.15,
+                  ease: 'expo.inOut'
+              }, 0.85)
+              .to(rightFullN, {
+                  x: measured.splitDist,
+                  opacity: 0,
+                  duration: 1.15,
+                  ease: 'expo.inOut'
+              }, 0.85)
+              .to(leftI, {
+                  x: 0,
+                  duration: 1.15,
+                  ease: 'expo.inOut'
+              }, 0.85)
+              .to(rightI, {
+                  x: 0,
+                  duration: 1.15,
+                  ease: 'expo.inOut'
+              }, 0.85)
+              .to(middleLetters, {
+                  x: 0,
+                  opacity: 1,
+                  scale: 1,
+                //   filter: 'blur(0px)',
+                  duration: 1.15,
+                  ease: 'expo.inOut'
+              }, 0.85)
+              .fromTo('.reveal-glow', {
+                  scaleX: 0.6,
+                  opacity: 0.1
+              }, {
+                  scaleX: 1,
+                  opacity: 0.4,
+                  duration: 1.1,
+                  ease: 'power2.out'
+              }, 1.25)
+              .to(overlay, {
+                  clipPath: 'inset(0 0 100% 0)',
+                  duration: 0.8,
+                  ease: 'power3.inOut'
+              }, 2.15);
+        }
+
+        function initNavAnimations() {
+            const nav = document.querySelector('.site-nav');
+            if (!nav) return;
+
+            gsap.set(nav, { y: 0, opacity: 1 });
+            gsap.from(nav, {
+                y: -28,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                delay: 0.15,
+                clearProps: 'opacity,transform'
+            });
+        }
+
+        function initMobileNav() {
+            const nav = document.querySelector('.site-nav');
+            const toggle = nav ? nav.querySelector('.nav-toggle') : null;
+            const panel = document.getElementById('mobile-nav-panel');
+            if (!nav || !toggle || !panel) return;
+
+            const icon = toggle.querySelector('.material-symbols-outlined');
+            const links = panel.querySelectorAll('.mobile-nav-link');
+
+            function closeMenu() {
+                panel.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', 'Open navigation menu');
+                if (icon) icon.textContent = 'menu';
+            }
+
+            function openMenu() {
+                panel.classList.add('is-open');
+                toggle.setAttribute('aria-expanded', 'true');
+                toggle.setAttribute('aria-label', 'Close navigation menu');
+                if (icon) icon.textContent = 'close';
+            }
+
+            toggle.addEventListener('click', () => {
+                if (panel.classList.contains('is-open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape') closeMenu();
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) closeMenu();
+            });
+        }
+
+        function initEntranceAnimations() {
+            initNavAnimations();
+        }
+
+        function initScrollAnimations() {
+            document.querySelectorAll('.draw-line').forEach(line => {
+                gsap.from(line, {
+                    scaleX: 0,
+                    scrollTrigger: {
+                        trigger: line,
+                        start: 'top 85%',
+                        end: 'top 40%',
+                        scrub: 1
+                    },
+                    ease: 'none'
+                });
+            });
+
+            document.querySelectorAll('.section-heading').forEach(heading => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: heading,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+                const line = heading.querySelector('.heading-line');
+                const text = heading.querySelector('.heading-text');
+                const sub = heading.querySelector('.heading-sub');
+
+                if (line) tl.from(line, { scaleX: 0, duration: 0.8, ease: 'power3.inOut' }, 0);
+                if (text) tl.from(text, { x: -60, opacity: 0, duration: 0.8, ease: 'power3.out' }, 0.2);
+                if (sub) tl.from(sub, { x: -40, opacity: 0, duration: 0.6, ease: 'power3.out' }, 0.4);
+            });
+
+            const studioText = document.querySelector('.studio-text');
+            const studioImg = document.querySelector('.studio-img');
+            if (studioText) {
+                gsap.from(studioText, {
+                    x: -80, opacity: 0, duration: 1, ease: 'power3.out',
+                    scrollTrigger: { trigger: studioText, start: 'top 75%' }
+                });
+            }
+            if (studioImg) {
+                gsap.from(studioImg, {
+                    x: 80, opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out',
+                    scrollTrigger: { trigger: studioImg, start: 'top 75%' }
+                });
+            }
+
+            document.querySelectorAll('.parallax-number').forEach(num => {
+                gsap.to(num, {
+                    y: -120,
+                    scrollTrigger: {
+                        trigger: num.parentElement,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1.5
+                    }
+                });
+            });
+
+            document.querySelectorAll('#services .grid > div').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 40, opacity: 0,
+                    duration: 0.8, ease: 'power3.out',
+                    delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            document.querySelectorAll('.project-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 60, opacity: 0, scale: 0.96,
+                    duration: 0.8, ease: 'power3.out',
+                    delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) {
+                const ctaHeading = ctaSection.querySelector('h2');
+                const ctaBtn = ctaSection.querySelector('button, a.cta-btn');
+                const ctaLine = ctaSection.querySelector('.cta-line');
+                const ctaLabel = ctaSection.querySelector('.cta-label');
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ctaSection,
+                        start: 'top 60%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+
+                if (ctaLine) tl.from(ctaLine, { scaleX: 0, duration: 1, ease: 'power3.inOut' }, 0);
+                if (ctaLabel) tl.from(ctaLabel, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.2);
+                if (ctaHeading) tl.from(ctaHeading, { y: 50, opacity: 0, duration: 0.9, ease: 'power3.out' }, 0.3);
+                if (ctaBtn) tl.from(ctaBtn, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.6);
+            }
+
+            const footer = document.querySelector('.site-footer');
+            if (footer) {
+                gsap.from(footer.children, {
+                    y: 40, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+                    scrollTrigger: { trigger: footer, start: 'top 85%' }
+                });
+            }
+        }
+
+        // function initServiceAccordion() removed as process section redesigned
+
+        function initMagneticButtons() {
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.4, ease: 'power2.out' });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+                });
+            });
+        }
+
+        function initMarquee() {
+            const marquee = document.querySelector('.marquee-track');
+            if (!marquee) return;
+
+            marquee.innerHTML += marquee.innerHTML;
+
+            gsap.to(marquee, {
+                xPercent: -50,
+                duration: 30,
+                ease: 'none',
+                repeat: -1
+            });
+        }
+
+        function initProcessInteraction() {
+            const processItems = document.querySelectorAll('.process-item');
+            if (processItems.length === 0) return;
+
+            let lastHoveredIndex = 0; // Starts with the first section being active (index 0)
+
+            processItems.forEach((item, index) => {
+                item.addEventListener('mouseenter', () => {
+                    // Remove active class from all
+                    processItems.forEach(i => i.classList.remove('is-active'));
+                    // Add active class to hovered
+                    item.classList.add('is-active');
+                    lastHoveredIndex = index;
+                });
+            });
+
+            const processGrid = document.querySelector('.process-grid');
+            if (processGrid) {
+                processGrid.addEventListener('mouseleave', () => {
+                    // Re-apply active state to the last hovered element
+                    processItems.forEach((i, idx) => {
+                        if (idx === lastHoveredIndex) {
+                            i.classList.add('is-active');
+                        } else {
+                            i.classList.remove('is-active');
+                        }
+                    });
+                });
+            }
+        }
+
+        function initProjectSlider() {
+            const slider = document.getElementById('projects-slider');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+
+            if (!slider || !prevBtn || !nextBtn) return;
+
+            // Calculate roughly the width of one card + gap
+            const getScrollAmount = () => {
+                const card = slider.querySelector('.project-card');
+                if (!card) return 300;
+                // Add gap (6=1.5rem=24px or 8=2rem=32px)
+                const gap = window.innerWidth >= 768 ? 32 : 24; 
+                return card.offsetWidth + gap;
+            };
+
+            prevBtn.addEventListener('click', () => {
+                slider.scrollBy({
+                    left: -getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                slider.scrollBy({
+                    left: getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+
+            // Make it draggable
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('cursor-grabbing');
+                slider.classList.remove('snap-x'); // disable snap while dragging
+                // Prevent ghost image drag
+                if(e.target.tagName.toLowerCase() === 'img') e.preventDefault();
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('cursor-grabbing');
+                slider.classList.add('snap-x');
+            });
+            
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('cursor-grabbing');
+                slider.classList.add('snap-x');
+            });
+            
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; // scroll-fast multiplier
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initPageReveal();
+            initScrollAnimations();
+            initProjectSlider();
+            // initServiceAccordion();
+            initProcessInteraction();
+            initMagneticButtons();
+            initMarquee();
+            initMobileNav();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
 </body>
 
 </html>

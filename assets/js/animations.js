@@ -356,6 +356,38 @@ function initMarquee() {
     });
 }
 
+// ─── 8. PROCESS GRID INTERACTION ─────────────────────────────────────
+function initProcessInteraction() {
+    const processItems = document.querySelectorAll('.process-item');
+    if (processItems.length === 0) return;
+
+    let lastHoveredIndex = 0; // Starts with the first section being active (index 0)
+
+    processItems.forEach((item, index) => {
+        item.addEventListener('mouseenter', () => {
+            // Remove active class from all
+            processItems.forEach(i => i.classList.remove('is-active'));
+            // Add active class to hovered
+            item.classList.add('is-active');
+            lastHoveredIndex = index;
+        });
+    });
+
+    const processGrid = document.querySelector('.process-grid');
+    if (processGrid) {
+        processGrid.addEventListener('mouseleave', () => {
+            // Re-apply active state to the last hovered element
+            processItems.forEach((i, idx) => {
+                if (idx === lastHoveredIndex) {
+                    i.classList.add('is-active');
+                } else {
+                    i.classList.remove('is-active');
+                }
+            });
+        });
+    }
+}
+
 // ─── INIT ───────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     initPageReveal();
@@ -363,5 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initServiceAccordion();
     initMagneticButtons();
     initMarquee();
+    initProcessInteraction();
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });
