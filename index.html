@@ -11,6 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic"
         rel="stylesheet" />
+    <!-- Playfair Display -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap&subset=cyrillic"
+        rel="stylesheet" />
     <!-- Icons -->
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
@@ -31,6 +35,7 @@
                     fontFamily: {
                         "display": ['"Inter"', 'system-ui', 'sans-serif'],
                         "body": ['"Inter"', 'system-ui', 'sans-serif'],
+                        "playfair": ['"Playfair Display"', 'serif'],
                     },
                     borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
                 },
@@ -231,6 +236,10 @@
         .site-nav .brand-link {
             color: #ffffff;
         }
+        .site-nav .nav-bar-inner {
+            position: relative;
+            z-index: 2;
+        }
         .site-nav .nav-link,
         .site-nav .nav-toggle {
             color: #ffffff;
@@ -248,42 +257,53 @@
             height: 3.25rem;
             border-radius: 9999px;
             background: rgba(255, 255, 255, 0.06);
+            z-index: 2;
         }
         .mobile-nav-panel {
-            display: none;
-            padding: 0 1rem 1rem;
-        }
-        .mobile-nav-panel.is-open {
             display: block;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            padding: 6.75rem 1.5rem 2rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
         .mobile-nav-inner {
-            padding: 0.9rem;
-            border-radius: 1.5rem;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(18px) saturate(1.35);
-            -webkit-backdrop-filter: blur(18px) saturate(1.35);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.85rem;
+            min-height: 100%;
+            padding: 0;
         }
         .mobile-nav-link {
             display: block;
-            padding: 1rem 1.1rem;
-            border-radius: 1rem;
+            width: min(100%, 28rem);
+            padding: 1.35rem 0;
+            border-radius: 0;
             color: #ffffff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.16em;
+            font-size: clamp(2.6rem, 10vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            transition: background-color 0.25s ease, color 0.25s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+            transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            text-align: center;
         }
         .mobile-nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-0.15rem);
         }
         @media (max-width: 767px) {
             .site-nav {
                 width: calc(100vw - 1.5rem);
-                top: 0.75rem;
-                border-radius: 1.75rem;
+                top: 0.5rem;
+                border-radius: 999px;
+                overflow: hidden;
+                will-change: width, height, top, left, border-radius;
             }
             .site-nav .brand-link {
                 left: 1.2rem;
@@ -292,8 +312,11 @@
             }
             .site-nav .nav-toggle {
                 right: 1rem;
-                width: 3.5rem;
-                height: 3.5rem;
+                width: auto;
+                height: auto;
+                padding: 0;
+                background: transparent;
+                border-radius: 0;
             }
             .site-nav .nav-toggle .material-symbols-outlined {
                 font-size: 1.6rem;
@@ -301,6 +324,22 @@
             .site-nav .nav-bar-inner {
                 min-height: 4.75rem;
                 padding: 0.8rem 1rem;
+                max-width: calc(100vw - 1.5rem);
+                margin: 0 auto;
+                width: 100%;
+            }
+            .site-nav.is-open {
+                max-width: none;
+            }
+            .site-nav.is-open .brand-link,
+            .site-nav.is-open .nav-toggle {
+                color: #ffffff;
+            }
+            .site-nav.is-open .mobile-nav-panel {
+                pointer-events: auto;
+            }
+            .site-nav.is-open .nav-bar-inner {
+                min-height: 4.75rem;
             }
         }
 
@@ -374,7 +413,7 @@
     <!-- ════════════════════════════════════════════════════════════════ -->
     <!-- NAV                                                             -->
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <nav class="site-nav fixed top-6 left-1/2 -translate-x-1/2 w-[94%] max-w-7xl z-50 rounded-full">
+    <nav class="site-nav fixed top-2 md:top-6 md:left-1/2 md:-translate-x-1/2 inset-x-0 mx-auto w-[94%] max-w-7xl z-50 rounded-full">
         <div class="nav-bar-inner relative flex justify-center items-center px-6 md:px-10 py-4">
             <a class="absolute left-6 md:left-10 font-display text-2xl tracking-tight brand-link" href="#top">INGENI</a>
             <div class="hidden md:flex items-center space-x-10">
@@ -435,7 +474,7 @@
         <!-- ════════════════════════════════════════════════════════════ -->
         <!-- STUDIO / ABOUT                                              -->
         <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative py-32 md:py-44 px-8 md:px-16 overflow-hidden min-h-screen flex items-center" id="studio">
+        <section class="relative py-20 md:py-28 px-8 md:px-16 overflow-hidden" id="studio">
             <!-- Background decorative number -->
             <div class="parallax-number absolute -left-[5%] top-[10%] pointer-events-none select-none">
                 <span class="font-display text-[30vw] leading-none text-stroke opacity-20">01</span>
@@ -443,10 +482,10 @@
 
             <div class="max-w-[1920px] mx-auto relative z-10">
                 <!-- Section heading with line -->
-                <div class="section-heading mb-20 md:mb-28">
+                <div class="section-heading mb-12 md:mb-16">
                     
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">За нас</h2>
+                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">За нас</h2>
                         <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Лицето зад студиото</p>
                     </div>
                 </div>
@@ -454,30 +493,29 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
                     <!-- Image -->
                     <div class="studio-img md:col-span-5 relative">
-                        <div class="relative overflow-hidden">
-                            <!-- <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" /> -->
-                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
-                            <!-- Glass label -->
-                            <div class="absolute bottom-0 left-0 right-0 glass px-8 py-6">
-                                <span class="font-display text-xl text-sand-50 block">Весела Желева</span>
-                                <span class="font-body text-[0.6rem] uppercase tracking-[0.15em] text-sand-400">Основател и творчески директор</span>
-                            </div>
+                        <div class="relative overflow-hidden group">
+                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" />
                         </div>
                         
+                        <!-- Moved details under image creatively -->
+                        <div class="mt-8 flex flex-col md:flex-row md:items-end justify-between border-t border-[#1A1A1A]/20 pt-5">
+                            <span class="font-display text-3xl text-[#1A1A1A] block tracking-tight">Весела Желева</span>
+                            <span class="font-body text-[0.65rem] uppercase tracking-[0.2em] text-black font-semibold mt-2 md:mt-0 text-left md:text-right">Основател и<br class="hidden md:block" /> творчески директор</span>
+                        </div>
                     </div>
 
                     <!-- Text -->
-                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start">
-                        <h3 class="font-display text-3xl md:text-5xl text-sand-50 mb-8 leading-tight">
-                            Кой стои зад <span class="text-sand-300">INGENI?</span>
+                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start md:pl-8">
+                        <h3 class="font-playfair text-4xl md:text-6xl text-[#1A1A1A] mb-8 leading-tight">
+                            Кой стои зад <span class="text-black font-display font-bold font-sans">INGENI?</span>
                         </h3>
-                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed mb-6 max-w-2xl">
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
                             Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн.
                         </p>
-                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed mb-6 max-w-2xl">
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
                             Нейният професионален успех е изграден върху ясно структурирани концепции, които съчетават функционалност, дълготрайност и естетика с висок стандарт. В продължение на две десетилетия всеки проект — жилищен, офис, магазин, хотел или заведение — е архитектурно предизвикателство.
                         </p>
-                        <p class="font-body text-base md:text-lg text-sand-400 leading-relaxed max-w-2xl">
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed max-w-2xl">
                             Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си и очакват завършен резултат без компромиси.
                         </p>
                         
@@ -489,27 +527,30 @@
         <!-- ════════════════════════════════════════════════════════════ -->
         <!-- SERVICES — Accordion + Background Images                    -->
         <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative py-32 md:py-44 overflow-hidden" id="services">
+        <section class="relative py-20 md:py-28 overflow-hidden" id="services">
             <!-- Background element -->
             <div class="absolute inset-0 bg-sand-900 pointer-events-none z-0"></div>
             
             <div class="relative z-10 max-w-[1920px] mx-auto px-8 md:px-16">
                 <!-- Heading -->
-                <div class="section-heading mb-16 md:mb-24">
-                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                <div class="section-heading mb-10 md:mb-16" data-scroll-start="top 100%">
+                    
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Процес</h2>
+                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">Процеси</h2>
                         <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Четири етапа до завършения интериор</p>
                     </div>
                 </div>
             </div>
 
             <!-- Process Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-y border-sand-300/10 w-full relative z-10 process-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full relative z-10 process-grid">
                 
                 <!-- Service 1 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111] is-active">
-                    <img src="assets/plan.png" alt="Планиране" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111] is-active">
+                    <img src="assets/plan.png" alt="Планиране" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
                     
                     <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
@@ -518,7 +559,7 @@
                     
                     <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
                         <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Планиране</h3>
-                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        
                         <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
                             Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура
                         </p>
@@ -526,8 +567,11 @@
                 </div>
 
                 <!-- Service 2 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
-                    <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="3D Визуализация" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="3D Визуализация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
                     
                     <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
@@ -536,7 +580,7 @@
                     
                     <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
                         <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Визуализация</h3>
-                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        
                         <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
                             Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия
                         </p>
@@ -544,8 +588,11 @@
                 </div>
 
                 <!-- Service 3 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
-                    <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="Техническа документация" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="Техническа документация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
                     
                     <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
@@ -554,7 +601,7 @@
                     
                     <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
                         <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Документация</h3>
-                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        
                         <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
                             Подробни чертежи, спецификации и детайли. Мостът между визията и строителния процес
                         </p>
@@ -562,8 +609,11 @@
                 </div>
 
                 <!-- Service 4 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer border-r border-sand-300/10 last:border-r-0 transition-all duration-500 bg-[#111111]">
-                    <img src="assets/workers-helmet.png" alt="Авторски контрол" class="absolute inset-0 w-full h-full object-cover opacity-0 group-[.is-active]:opacity-100 group-[.is-active]:scale-105 transition-all duration-700 ease-in-out z-0" />
+                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/workers-helmet.png" alt="Авторски контрол" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
                     
                     <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
@@ -572,7 +622,7 @@
                     
                     <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
                         <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Тематичен контрол</h3>
-                        <div class="w-8 h-px bg-sand-500 mb-4"></div>
+                        
                         <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
                             Проследяване на изпълнението. Гаранцията, че пространството ще изглежда точно както е проектирано
                         </p>
@@ -585,7 +635,7 @@
         <!-- ════════════════════════════════════════════════════════════ -->
         <!-- PROJECTS                                                    -->
         <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative py-32 md:py-44" id="portfolio">
+        <section class="relative py-20 md:py-28" id="portfolio">
             <!-- Background decorative -->
             <div class="parallax-number absolute left-[50%] -translate-x-1/2 -top-[5%] pointer-events-none select-none">
                 <span class="font-display text-[20vw] leading-none text-stroke opacity-10">WORK</span>
@@ -593,13 +643,13 @@
 
             <div class="px-8 md:px-16 max-w-[1920px] mx-auto relative z-10">
                 <!-- Heading -->
-                <div class="section-heading mb-16">
-                    <div class="heading-line draw-line h-line w-full mb-8"></div>
+                <div class="section-heading mb-10 md:mb-16">
+                    
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-display text-5xl md:text-7xl text-sand-50">Проекти</h2>
+                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">Проекти</h2>
                         <div class="flex items-center gap-4">
                             <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Подбрани пространства</p>
-                            <div class="flex gap-3">
+                            <div class="hidden md:flex gap-3">
                                 <button class="w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors slider-prev">
                                     <span class="material-symbols-outlined text-sand-400">west</span>
                                 </button>
@@ -725,8 +775,6 @@
     <!-- ════════════════════════════════════════════════════════════════ -->
     <footer class="site-footer w-full pt-20 pb-10 px-8 md:px-16 bg-[#111111]" id="contact">
         <div class="max-w-[1920px] mx-auto">
-            <!-- Top line -->
-            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"></div>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
                 <!-- Left: Brand -->
@@ -758,7 +806,6 @@
             </div>
 
             <!-- Bottom -->
-            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="font-body text-[0.6rem] tracking-widest uppercase text-white/30">
                     © <span id="current-year"></span> INGENI INTERIORS. Всички права запазени.
@@ -809,6 +856,9 @@
         }
 
         function initPageReveal() {
+            // Hide the nav initially so it doesn't show during page reveal
+            gsap.set('.site-nav', { opacity: 0, y: -40 });
+
             const overlay = document.getElementById('page-reveal');
             const wordmark = document.getElementById('reveal-wordmark');
             const wrapEl = wordmark ? wordmark.closest('.reveal-wordmark-wrap') : null;
@@ -935,13 +985,11 @@
             const nav = document.querySelector('.site-nav');
             if (!nav) return;
 
-            gsap.set(nav, { y: 0, opacity: 1 });
-            gsap.from(nav, {
-                y: -28,
-                opacity: 0,
+            gsap.to(nav, {
+                y: 0,
+                opacity: 1,
                 duration: 0.8,
                 ease: 'power2.out',
-                delay: 0.15,
                 clearProps: 'opacity,transform'
             });
         }
@@ -953,26 +1001,187 @@
             if (!nav || !toggle || !panel) return;
 
             const icon = toggle.querySelector('.material-symbols-outlined');
-            const links = panel.querySelectorAll('.mobile-nav-link');
+            const links = gsap.utils.toArray(panel.querySelectorAll('.mobile-nav-link'));
+            let menuState = 'closed';
+            let activeTimeline = null;
+            let closedNavBounds = null;
+            const navBarInner = nav.querySelector('.nav-bar-inner');
+
+            function getViewportHeight() {
+                return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            }
+
+            function lockScroll(locked) {
+                document.body.style.overflow = locked ? 'hidden' : '';
+            }
+
+            function resetClosedState() {
+                gsap.set(nav, { clearProps: 'all' });
+                gsap.set(navBarInner, { clearProps: 'all' });
+                gsap.set(panel, { clearProps: 'all' });
+                gsap.set(links, { clearProps: 'all' });
+                
+                nav.style.removeProperty('transform');
+                gsap.set(panel, { autoAlpha: 0, y: 18 });
+                gsap.set(links, { autoAlpha: 0, y: 22 });
+            }
+
+            function syncOpenLayout() {
+                const viewportHeight = getViewportHeight();
+                gsap.set(nav, {
+                    left: 0,
+                    top: 0,
+                    width: window.innerWidth,
+                    height: viewportHeight,
+                    borderRadius: 0,
+                    margin: 0,
+                    maxWidth: 'none',
+                    clipPath: 'none'
+                });
+                if (closedNavBounds) {
+                    gsap.set(navBarInner, {
+                        y: closedNavBounds.top
+                    });
+                }
+            }
 
             function closeMenu() {
-                panel.classList.remove('is-open');
+                if (menuState !== 'open') return;
+                menuState = 'closing';
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.setAttribute('aria-label', 'Open navigation menu');
                 if (icon) icon.textContent = 'menu';
+
+                if (activeTimeline) activeTimeline.kill();
+
+                const bounds = closedNavBounds || { left: 12, top: 8, width: window.innerWidth - 24, height: 76 };
+
+                syncOpenLayout(); // ensure we have no scaling anomalies before animating bounding box
+
+                activeTimeline = gsap.timeline({
+                    defaults: { ease: 'power4.inOut' },
+                    onComplete: () => {
+                        menuState = 'closed';
+                        nav.classList.remove('is-open');
+                        lockScroll(false);
+                        resetClosedState();
+                    }
+                });
+
+                activeTimeline
+                    .to(links, {
+                        autoAlpha: 0,
+                        y: 16,
+                        duration: 0.2,
+                        stagger: -0.04
+                    }, 0)
+                    .to(panel, {
+                        autoAlpha: 0,
+                        y: 18,
+                        duration: 0.2
+                    }, 0)
+                    .to(nav, {
+                        top: bounds.top,
+                        left: bounds.left,
+                        width: bounds.width,
+                        height: bounds.height,
+                        duration: 0.6
+                    }, 0)
+                    .to(nav, {
+                        borderRadius: 999,
+                        duration: 0.35,
+                        ease: 'power3.in'
+                    }, 0.25)
+                    .to(navBarInner, {
+                        y: 0,
+                        duration: 0.6
+                    }, 0);
             }
 
             function openMenu() {
-                panel.classList.add('is-open');
+                if (menuState !== 'closed') return;
+                menuState = 'opening';
+                
+                // Dynamically lock EXACT rendered physical metrics before tampering
+                const rect = nav.getBoundingClientRect();
+                closedNavBounds = {
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height
+                };
+
+                nav.classList.add('is-open');
+                lockScroll(true);
                 toggle.setAttribute('aria-expanded', 'true');
                 toggle.setAttribute('aria-label', 'Close navigation menu');
                 if (icon) icon.textContent = 'close';
+
+                if (activeTimeline) activeTimeline.kill();
+
+                const viewportHeight = getViewportHeight();
+                
+                // Natively lock it in absolute space so math translates perfectly
+                gsap.set(nav, {
+                    left: closedNavBounds.left,
+                    top: closedNavBounds.top,
+                    width: closedNavBounds.width,
+                    height: closedNavBounds.height,
+                    borderRadius: 999,
+                    margin: 0,
+                    right: 'auto',
+                    bottom: 'auto',
+                    transform: 'none',
+                    clipPath: 'none'
+                });
+                
+                gsap.set(navBarInner, { y: 0 });
+                gsap.set(panel, { autoAlpha: 0, y: 18 });
+                gsap.set(links, { autoAlpha: 0, y: 24 });
+
+                activeTimeline = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
+                activeTimeline
+                    .to(nav, {
+                        top: 0,
+                        left: 0,
+                        width: window.innerWidth,
+                        height: viewportHeight,
+                        duration: 0.6
+                    }, 0)
+                    .to(nav, {
+                        borderRadius: 0,
+                        duration: 0.35,
+                        ease: 'power3.out'
+                    }, 0)
+                    .to(navBarInner, {
+                        // Move content negatively by identical amount nav expanded vertically to keep visual coordinate perfectly zero
+                        y: closedNavBounds.top,
+                        duration: 0.6
+                    }, 0)
+                    .to(panel, {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.3
+                    }, 0.3)
+                    .to(links, {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.4,
+                        stagger: 0.05,
+                        ease: 'power3.out'
+                    }, 0.3)
+                    .call(() => {
+                        menuState = 'open';
+                        syncOpenLayout();
+                    });
             }
 
+            resetClosedState();
+
             toggle.addEventListener('click', () => {
-                if (panel.classList.contains('is-open')) {
+                if (menuState === 'open') {
                     closeMenu();
-                } else {
+                } else if (menuState === 'closed') {
                     openMenu();
                 }
             });
@@ -986,7 +1195,18 @@
             });
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 768) closeMenu();
+                if (window.innerWidth >= 768) {
+                    closeMenu();
+                    resetClosedState();
+                    menuState = 'closed';
+                    return;
+                }
+
+                if (menuState === 'open' || menuState === 'opening') {
+                    syncOpenLayout();
+                } else if (menuState === 'closed') {
+                    resetClosedState();
+                }
             });
         }
 
@@ -1012,7 +1232,7 @@
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: heading,
-                        start: 'top 80%',
+                        start: heading.dataset.scrollStart || 'top 80%',
                         toggleActions: 'play none none reverse'
                     }
                 });
@@ -1052,17 +1272,21 @@
                 });
             });
 
+            const isMobile = window.innerWidth < 768;
+
             document.querySelectorAll('#services .grid > div').forEach((card, i) => {
-                gsap.from(card, {
-                    y: 40, opacity: 0,
-                    duration: 0.8, ease: 'power3.out',
-                    delay: i * 0.1,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
-                    }
-                });
+                if (!isMobile) {
+                    gsap.from(card, {
+                        y: 40, opacity: 0,
+                        duration: 0.8, ease: 'power3.out',
+                        delay: i * 0.1,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+                }
             });
 
             document.querySelectorAll('.project-card').forEach((card, i) => {
@@ -1142,27 +1366,49 @@
             const processItems = document.querySelectorAll('.process-item');
             if (processItems.length === 0) return;
 
+            const isMobile = window.innerWidth < 768;
             let lastHoveredIndex = 0; // Starts with the first section being active (index 0)
 
-            processItems.forEach((item, index) => {
-                item.addEventListener('mouseenter', () => {
-                    // Remove active class from all
-                    processItems.forEach(i => i.classList.remove('is-active'));
-                    // Add active class to hovered
-                    item.classList.add('is-active');
-                    lastHoveredIndex = index;
+            if (!isMobile) {
+                processItems.forEach((item, index) => {
+                    item.addEventListener('mouseenter', () => {
+                        // Remove active class from all
+                        processItems.forEach(i => i.classList.remove('is-active'));
+                        // Add active class to hovered
+                        item.classList.add('is-active');
+                        lastHoveredIndex = index;
+                    });
                 });
-            });
 
-            const processGrid = document.querySelector('.process-grid');
-            if (processGrid) {
-                processGrid.addEventListener('mouseleave', () => {
-                    // Re-apply active state to the last hovered element
-                    processItems.forEach((i, idx) => {
-                        if (idx === lastHoveredIndex) {
-                            i.classList.add('is-active');
-                        } else {
-                            i.classList.remove('is-active');
+                const processGrid = document.querySelector('.process-grid');
+                if (processGrid) {
+                    processGrid.addEventListener('mouseleave', () => {
+                        // Re-apply active state to the last hovered element
+                        processItems.forEach((i, idx) => {
+                            if (idx === lastHoveredIndex) {
+                                i.classList.add('is-active');
+                            } else {
+                                i.classList.remove('is-active');
+                            }
+                        });
+                    });
+                }
+            } else {
+                // Mobile behavior: activate cards automatically when they scroll into view
+                processItems.forEach((item, index) => {
+                    if (index !== 0) item.classList.remove('is-active');
+
+                    ScrollTrigger.create({
+                        trigger: item,
+                        start: "top 60%", // When the card reaches slightly above middle of viewport
+                        end: "bottom 40%", 
+                        onEnter: () => {
+                            processItems.forEach(i => i.classList.remove('is-active'));
+                            item.classList.add('is-active');
+                        },
+                        onEnterBack: () => {
+                            processItems.forEach(i => i.classList.remove('is-active'));
+                            item.classList.add('is-active');
                         }
                     });
                 });
