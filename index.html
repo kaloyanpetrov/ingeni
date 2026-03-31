@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>INGENI | Модерна интериорна архитектура</title>
+    <title>INGENI | Interior design</title>
     <!-- Fonts: Inter (sans-serif) -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -19,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <!-- GSAP -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
@@ -417,9 +418,9 @@
         <div class="nav-bar-inner relative flex justify-center items-center px-6 md:px-10 py-4">
             <a class="absolute left-6 md:left-10 font-display text-2xl tracking-tight brand-link" href="#top">INGENI</a>
             <div class="hidden md:flex items-center space-x-10">
-                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#studio">За нас</a>
-                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Услуги</a>
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#portfolio">Проекти</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Услуги</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#studio">За нас</a>
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#contact">Контакти</a>
             </div>
             <!-- Mobile menu button -->
@@ -429,9 +430,9 @@
         </div>
         <div class="mobile-nav-panel md:hidden" id="mobile-nav-panel">
             <div class="mobile-nav-inner">
-                <a class="mobile-nav-link" href="#studio">За нас</a>
-                <a class="mobile-nav-link" href="#services">Услуги</a>
                 <a class="mobile-nav-link" href="#portfolio">Проекти</a>
+                <a class="mobile-nav-link" href="#services">Услуги</a>
+                <a class="mobile-nav-link" href="#studio">За нас</a>
                 <a class="mobile-nav-link" href="#contact">Контакти</a>
             </div>
         </div>
@@ -472,167 +473,6 @@
         </section>
 
         <!-- ════════════════════════════════════════════════════════════ -->
-        <!-- STUDIO / ABOUT                                              -->
-        <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative py-20 md:py-28 px-8 md:px-16 overflow-hidden" id="studio">
-            <!-- Background decorative number -->
-            <div class="parallax-number absolute -left-[5%] top-[10%] pointer-events-none select-none">
-                <span class="font-display text-[30vw] leading-none text-stroke opacity-20">01</span>
-            </div>
-
-            <div class="max-w-[1920px] mx-auto relative z-10">
-                <!-- Section heading with line -->
-                <div class="section-heading mb-12 md:mb-16">
-                    
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">За нас</h2>
-                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Лицето зад студиото</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-                    <!-- Image -->
-                    <div class="studio-img md:col-span-5 relative">
-                        <div class="relative overflow-hidden group">
-                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.png" />
-                        </div>
-                        
-                        <!-- Moved details under image creatively -->
-                        <div class="mt-8 flex flex-col md:flex-row md:items-end justify-between border-t border-[#1A1A1A]/20 pt-5">
-                            <span class="font-display text-3xl text-[#1A1A1A] block tracking-tight">Весела Желева</span>
-                            <span class="font-body text-[0.65rem] uppercase tracking-[0.2em] text-black font-semibold mt-2 md:mt-0 text-left md:text-right">Основател и<br class="hidden md:block" /> творчески директор</span>
-                        </div>
-                    </div>
-
-                    <!-- Text -->
-                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start md:pl-8">
-                        <h3 class="font-playfair text-4xl md:text-6xl text-[#1A1A1A] mb-8 leading-tight">
-                            Кой стои зад <span class="text-black font-display font-bold font-sans">INGENI?</span>
-                        </h3>
-                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
-                            Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн.
-                        </p>
-                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
-                            Нейният професионален успех е изграден върху ясно структурирани концепции, които съчетават функционалност, дълготрайност и естетика с висок стандарт. В продължение на две десетилетия всеки проект — жилищен, офис, магазин, хотел или заведение — е архитектурно предизвикателство.
-                        </p>
-                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed max-w-2xl">
-                            Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си и очакват завършен резултат без компромиси.
-                        </p>
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ════════════════════════════════════════════════════════════ -->
-        <!-- SERVICES — Accordion + Background Images                    -->
-        <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative py-20 md:py-28 overflow-hidden" id="services">
-            <!-- Background element -->
-            <div class="absolute inset-0 bg-sand-900 pointer-events-none z-0"></div>
-            
-            <div class="relative z-10 max-w-[1920px] mx-auto px-8 md:px-16">
-                <!-- Heading -->
-                <div class="section-heading mb-10 md:mb-16" data-scroll-start="top 100%">
-                    
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">Процеси</h2>
-                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Четири етапа до завършения интериор</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full relative z-10 process-grid">
-                
-                <!-- Service 1 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111] is-active">
-                    <img src="assets/plan.png" alt="Планиране" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
-                    <!-- Inactive Overlay -->
-                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
-                    <!-- Active Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
-                    
-                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
-                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">01</span>
-                    </div>
-                    
-                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
-                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Планиране</h3>
-                        
-                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
-                            Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
-                    <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="3D Визуализация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
-                    <!-- Inactive Overlay -->
-                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
-                    <!-- Active Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
-                    
-                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
-                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">02</span>
-                    </div>
-                    
-                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
-                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Визуализация</h3>
-                        
-                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
-                            Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
-                    <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="Техническа документация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
-                    <!-- Inactive Overlay -->
-                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
-                    <!-- Active Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
-                    
-                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
-                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">03</span>
-                    </div>
-                    
-                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
-                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Документация</h3>
-                        
-                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
-                            Подробни чертежи, спецификации и детайли. Мостът между визията и строителния процес
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="process-item group relative overflow-hidden h-[550px] md:h-[750px] flex flex-col justify-end p-6 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
-                    <img src="assets/workers-helmet.png" alt="Авторски контрол" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
-                    <!-- Inactive Overlay -->
-                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
-                    <!-- Active Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
-                    
-                    <div class="absolute top-6 right-8 md:top-8 md:right-10 z-10 text-right">
-                        <span class="font-display text-[6rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">04</span>
-                    </div>
-                    
-                    <div class="relative z-10 border-0 p-5 md:p-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
-                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Тематичен контрол</h3>
-                        
-                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
-                            Проследяване на изпълнението. Гаранцията, че пространството ще изглежда точно както е проектирано
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ════════════════════════════════════════════════════════════ -->
         <!-- PROJECTS                                                    -->
         <!-- ════════════════════════════════════════════════════════════ -->
         <section class="relative py-20 md:py-28" id="portfolio">
@@ -665,10 +505,10 @@
             <!-- Notice px-8 md:px-16 is moved back to the container, and scroll-pl-8 md:scroll-pl-16 added so snap-start doesn't swallow the padding -->
             <div class="flex overflow-x-auto no-scrollbar gap-6 md:gap-8 max-w-[1920px] mx-auto px-8 md:px-16 pb-12 snap-x scroll-pl-8 md:scroll-pl-16 cursor-grab active:cursor-grabbing select-none" id="projects-slider">
                 <!-- Project 1 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                <div class="project-card w-[85vw] md:w-[42vw] lg:w-[30vw] shrink-0 snap-start group cursor-grab active:cursor-grabbing">
                     <div class="relative aspect-[3/4] overflow-hidden">
                         <img draggable="false" alt="Резиденция Обсидиан" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            src="assets/projects/pexels-achraf-borkadi-440724799-28254552.jpg" />
+                            src="assets/projects/the-longevity-store/the-longevity-store-11.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
                         
                         <!-- Large project number -->
@@ -676,10 +516,10 @@
 
                         <!-- Bottom details -->
                         <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
-                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Апартамент | Бояна</h4>
+                            <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">The Longevity Store</h4>
                             <div class="flex justify-between items-center gap-4">
                                 <div class="glass-dark rounded-full px-5 py-3">
-                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Лондон, Великобритания • 2023</p>
+                                    <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Sofia, Bulgaria | 2025</p>
                                 </div>
                                 <!-- Right arrow circle -->
                                 <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
@@ -691,81 +531,242 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                <!-- <div class="project-card w-[85vw] md:w-[42vw] lg:w-[30vw] shrink-0 snap-start group cursor-grab active:cursor-grabbing">
                     <div class="relative aspect-[3/4] overflow-hidden">
                         <img draggable="false" alt="Мазилка и светлина" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-orlovamaria-4906249.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
                         
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">02</span>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">02</span> -->
 
                         <!-- Bottom details -->
-                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                        <!-- <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
                             <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Къща | Бистрица</h4>
                             <div class="flex justify-between items-center gap-4">
                                 <div class="glass-dark rounded-full px-5 py-3">
                                     <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Ибиса, Испания • 2022</p>
-                                </div>
+                                </div> -->
                                 <!-- Right arrow circle -->
-                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                <!-- <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
                                     <span class="material-symbols-outlined text-white">arrow_outward</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Project 3 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                <!-- <div class="project-card w-[85vw] md:w-[42vw] lg:w-[30vw] shrink-0 snap-start group cursor-grab active:cursor-grabbing">
                     <div class="relative aspect-[3/4] overflow-hidden">
                         <img draggable="false" alt="Бетонен лофт" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-perqued-9757618.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
                         
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">03</span>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">03</span> -->
 
                         <!-- Bottom details -->
-                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                        <!-- <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
                             <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Бетонен лофт</h4>
                             <div class="flex justify-between items-center gap-4">
                                 <div class="glass-dark rounded-full px-5 py-3">
                                     <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Берлин, Германия • 2023</p>
-                                </div>
+                                </div> -->
                                 <!-- Right arrow circle -->
-                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                <!-- <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
                                     <span class="material-symbols-outlined text-white">arrow_outward</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Project 4 -->
-                <div class="project-card min-w-[85vw] md:min-w-[42vw] lg:min-w-[30vw] snap-start group cursor-grab active:cursor-grabbing">
+                <!-- <div class="project-card w-[85vw] md:w-[42vw] lg:w-[30vw] shrink-0 snap-start group cursor-grab active:cursor-grabbing">
                     <div class="relative aspect-[3/4] overflow-hidden">
                         <img draggable="false" alt="Офис Етос" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="assets/projects/pexels-sinara-bianchet-2154511749-36247605.jpg" />
                         <div class="absolute inset-0 project-overlay"></div>
                         
-                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">04</span>
+                        <span class="absolute top-5 left-6 font-display text-7xl text-sand-50/10 pointer-events-none">04</span> -->
 
                         <!-- Bottom details -->
-                        <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
+                        <!-- <div class="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
                             <h4 class="font-display text-xl md:text-2xl text-white drop-shadow-md">Офис Етос</h4>
                             <div class="flex justify-between items-center gap-4">
                                 <div class="glass-dark rounded-full px-5 py-3">
                                     <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Стокхолм, Швеция • 2024</p>
-                                </div>
+                                </div> -->
                                 <!-- Right arrow circle -->
-                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                                <!-- <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
                                     <span class="material-symbols-outlined text-white">arrow_outward</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Right padding spacer for overflow block to fix standard flex right-padding drop -->
                 <div class="shrink-0 w-8 md:w-16"></div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- SERVICES — Accordion + Background Images                    -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative py-20 md:py-28 overflow-hidden" id="services">
+            <!-- Background element -->
+            <div class="absolute inset-0 bg-sand-900 pointer-events-none z-0"></div>
+            
+            <div class="relative z-10 max-w-[1920px] mx-auto px-8 md:px-16">
+                <!-- Heading -->
+                <div class="section-heading mb-10 md:mb-16" data-scroll-start="top 100%">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">Процеси</h2>
+                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Четири етапа до завършения интериор</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full relative z-10 process-grid">
+                
+                <!-- Service 1 -->
+                <div class="process-item group relative overflow-hidden h-[200px] md:h-[750px] flex flex-col justify-end p-0 pb-2 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111] is-active">
+                    <img src="assets/plan.png" alt="Планиране" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-2 right-4 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[4rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">01</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 pr-12 md:pr-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Планиране</h3>
+                        
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Дефиниране на пространствената логика чрез прецизни разпределения и ясна архитектурна структура
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="process-item group relative overflow-hidden h-[200px] md:h-[750px] flex flex-col justify-end p-0 pb-2 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-the-ghazi-2152398165-33962193.jpg" alt="3D Визуализация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-2 right-4 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[4rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">02</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 pr-12 md:pr-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Визуализация</h3>
+                        
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Фотореалистични изображения, които превеждат концепцията в ясна и убедителна визия
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="process-item group relative overflow-hidden h-[200px] md:h-[750px] flex flex-col justify-end p-0 pb-2 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/pexels-tiago-alves-710726839-19357343.jpg" alt="Техническа документация" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-2 right-4 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[4rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">03</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 pr-12 md:pr-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Документация</h3>
+                        
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Подробни чертежи, спецификации и детайли. Мостът между визията и строителния процес
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="process-item group relative overflow-hidden h-[200px] md:h-[750px] flex flex-col justify-end p-0 pb-2 md:p-8 cursor-pointer transition-all duration-500 bg-[#111111]">
+                    <img src="assets/workers-helmet.png" alt="Авторски контрол" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0 group-[.is-active]:scale-105" />
+                    <!-- Inactive Overlay -->
+                    <div class="absolute inset-0 bg-[#111111]/95 backdrop-blur-md z-0 transition-all duration-500 group-[.is-active]:opacity-0"></div>
+                    <!-- Active Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-0 opacity-0 group-[.is-active]:opacity-100 transition-all duration-500"></div>
+                    
+                    <div class="absolute top-2 right-4 md:top-8 md:right-10 z-10 text-right">
+                        <span class="font-display text-[4rem] md:text-[8rem] tracking-tighter text-transparent stroke-white opacity-40 group-[.is-active]:opacity-100 group-[.is-active]:text-white/10 transition-all duration-500 leading-none" style="-webkit-text-stroke: 1px rgba(245,245,243,0.5);">04</span>
+                    </div>
+                    
+                    <div class="relative z-10 border-0 p-5 md:p-6 pr-12 md:pr-6 transform translate-y-4 group-[.is-active]:translate-y-0 opacity-80 group-[.is-active]:opacity-100 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-xl md:text-2xl text-white mb-3 uppercase tracking-widest text-left">Тематичен контрол</h3>
+                        
+                        <p class="font-body text-xs text-sand-800 leading-relaxed text-left">
+                            Проследяване на изпълнението. Гаранцията, че пространството ще изглежда точно както е проектирано
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <!-- STUDIO / ABOUT                                              -->
+        <!-- ════════════════════════════════════════════════════════════ -->
+        <section class="relative py-20 md:py-28 overflow-hidden" id="studio">
+            <!-- Background decorative number -->
+            <div class="parallax-number absolute -left-[5%] top-[10%] pointer-events-none select-none">
+                <span class="font-display text-[30vw] leading-none text-stroke opacity-20">01</span>
+            </div>
+
+            <div class="px-8 md:px-16 max-w-[1920px] mx-auto relative z-10">
+                <!-- Section heading with line -->
+                <div class="section-heading mb-12 md:mb-16">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <h2 class="heading-text font-playfair text-6xl md:text-8xl text-sand-50 tracking-tight">За нас</h2>
+                        <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Лицето зад студиото</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+                    <!-- Image -->
+                    <div class="studio-img md:col-span-5 relative order-last md:order-first">
+                        <div class="relative overflow-hidden group">
+                            <img alt="Весела Желева" class="w-full aspect-[3/4] object-cover" src="assets/vessela.jpg" />
+                        </div>
+                        
+                        <!-- Moved details under image creatively -->
+                        <div class="mt-8 flex flex-col md:flex-row md:items-end justify-between border-t border-[#1A1A1A]/20 pt-5">
+                            <span class="font-display text-3xl text-[#1A1A1A] block tracking-tight">инж. Весела Желева</span>
+                            <span class="font-body text-[0.65rem] uppercase tracking-[0.2em] text-black font-semibold mt-2 md:mt-0 text-left md:text-right">Основател и<br class="hidden md:block" /> творчески директор</span>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start md:pl-8">
+                        <h3 class="font-playfair text-4xl md:text-6xl text-[#1A1A1A] mb-8 leading-tight">
+                            Кой стои зад <span class="text-black font-display font-bold font-sans">INGENI?</span>
+                        </h3>
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
+                            Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио INGENI, носител на професионални награди в сферата на интериорния дизайн.
+                        </p>
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
+                            Нейният професионален успех е изграден върху ясно структурирани концепции, които съчетават функционалност, дълготрайност и естетика с висок стандарт. В продължение на две десетилетия всеки проект — жилищен, офис, магазин, хотел или заведение — е архитектурно предизвикателство.
+                        </p>
+                        <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed max-w-2xl">
+                            Весела работи с ограничен брой проекти годишно, за да гарантира лично присъствие, дълбоко разбиране на индивидуалните нужди и постоянен контрол върху целия процес. Клиентите ѝ са хора, които ценят времето си и очакват завършен резултат без компромиси.
+                        </p>
+                        
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -773,8 +774,8 @@
     <!-- ════════════════════════════════════════════════════════════════ -->
     <!-- FOOTER                                                          -->
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <footer class="site-footer w-full pt-20 pb-10 px-8 md:px-16 bg-[#111111]" id="contact">
-        <div class="max-w-[1920px] mx-auto">
+    <footer class="site-footer w-full pt-20 pb-10 bg-[#111111]" id="contact">
+        <div class="px-8 md:px-16 max-w-[1920px] mx-auto">
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
                 <!-- Left: Brand -->
@@ -797,10 +798,15 @@
                 <!-- Right: Contact -->
                 <div class="md:col-span-4">
                     <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-white/40 mb-6">Контакт</p>
+                    <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300 block mb-2" href="tel:+359897935364">+359 89 7935364</a>
                     <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300 block mb-3" href="mailto:office@ingeni.bg">office@ingeni.bg</a>
                     <div class="flex gap-6 mt-6">
-                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-white/60 hover:text-white transition-colors" href="#">Instagram</a>
-                        <a class="font-body text-[0.65rem] uppercase tracking-[0.15em] text-white/60 hover:text-white transition-colors" href="#">Facebook</a>
+                        <a class="text-white/60 hover:text-white transition-colors" href="#" aria-label="Instagram">
+                            <i class="ri-instagram-line text-2xl"></i>
+                        </a>
+                        <a class="text-white/60 hover:text-white transition-colors" href="#" aria-label="Facebook">
+                            <i class="ri-facebook-circle-line text-2xl"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1394,21 +1400,19 @@
                     });
                 }
             } else {
-                // Mobile behavior: activate cards automatically when they scroll into view
+                // Mobile behavior: activate cards when they cross the center of the screen
                 processItems.forEach((item, index) => {
                     if (index !== 0) item.classList.remove('is-active');
 
                     ScrollTrigger.create({
                         trigger: item,
-                        start: "top 60%", // When the card reaches slightly above middle of viewport
-                        end: "bottom 40%", 
-                        onEnter: () => {
-                            processItems.forEach(i => i.classList.remove('is-active'));
-                            item.classList.add('is-active');
-                        },
-                        onEnterBack: () => {
-                            processItems.forEach(i => i.classList.remove('is-active'));
-                            item.classList.add('is-active');
+                        start: "top 50%",
+                        end: "bottom 50%",
+                        onToggle: self => {
+                            if (self.isActive) {
+                                processItems.forEach(i => i.classList.remove('is-active'));
+                                item.classList.add('is-active');
+                            }
                         }
                     });
                 });

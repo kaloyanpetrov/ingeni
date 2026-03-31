@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INGENI</title>
+    <style>
+        @font-face {
+            font-family: 'Ingeni';
+            src: url('assets/logo/ingeni.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --font-size: clamp(50px, 14vw, 140px);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .scene {
+            perspective: 1000px;
+            perspective-origin: center center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            transform-style: preserve-3d;
+            visibility: hidden;
+        }
+
+        .logo.ready {
+            visibility: visible;
+        }
+
+        .panel {
+            display: flex;
+            align-items: baseline;
+            transform-style: preserve-3d;
+            background: var(--bg);
+            position: relative;
+            font-family: 'Ingeni', serif;
+            font-size: var(--font-size);
+            color: white;
+            line-height: 1;
+            white-space: nowrap;
+            padding: 0.3em 0.15em;
+        }
+
+        .panel-ni {
+            z-index: 10;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            background: none;
+        }
+
+        .panel-ni .face {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: baseline;
+            backface-visibility: hidden;
+            background: var(--bg);
+            padding: 0.3em 0.15em;
+        }
+
+        .panel-ni .face-front {
+            z-index: 2;
+        }
+
+        .panel-ni .face-back {
+            transform: rotateY(180deg);
+        }
+
+        .panel-in {
+            z-index: 5;
+            transform-origin: right center;
+            opacity: 0;
+        }
+
+        .panel-ge {
+            z-index: 1;
+        }
+
+        /* Subtle fold-line dividers in final state */
+        .panel-ge::before,
+        .panel-ge::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0);
+            transition: background 1s ease 0.5s;
+        }
+        .panel-ge::before { left: -1px; }
+        .panel-ge::after { right: -1px; }
+
+        .logo.done .panel-ge::before,
+        .logo.done .panel-ge::after {
+            background: rgba(255, 255, 255, 0.06);
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="logo" id="logo">
+            <div class="panel panel-in" id="panel-in">in</div>
+            <div class="panel panel-ge" id="panel-ge">ge</div>
+            <div class="panel panel-ni" id="panel-ni">
+                <span class="face face-front">in</span>
+                <span class="face face-back">ni</span>
+                <span style="visibility:hidden">ni</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function animateEl(el, keyframes, options) {
+            return el.animate(keyframes, options).finished;
+        }
+
+        window.addEventListener('load', async () => {
+            const logo = document.getElementById('logo');
+            const panelIn = document.getElementById('panel-in');
+            const panelGe = document.getElementById('panel-ge');
+            const panelNi = document.getElementById('panel-ni');
+
+            // Measure natural flex positions
+            const inRect = panelIn.getBoundingClientRect();
+            const geRect = panelGe.getBoundingClientRect();
+            const niRect = panelNi.getBoundingClientRect();
+
+            // Calculate center of each panel and of GE (the overlap target)
+            const geCx = geRect.left + geRect.width / 2;
+            const niCx = niRect.left + niRect.width / 2;
+            const inCx = inRect.left + inRect.width / 2;
+
+            // Displacement to center both NI and IN over GE
+            const niDx = geCx - niCx;
+            const inDx = geCx - inCx;
+
+            // Set initial folded positions
+            panelNi.style.transform = `translateX(${niDx}px)`;
+            panelIn.style.transform = `translateX(${inDx}px)`;
+
+            // Show the logo (NI visible on top at center)
+            logo.classList.add('ready');
+
+            // Brief pause — NI is visible
+            await wait(1000);
+
+            // Phase 1: NI card flips over to the right — front shows "in", back reveals "ni"
+            const niUnfold = animateEl(panelNi, [
+                {
+                    transform: `translateX(${niDx}px) rotateY(0deg)`,
+                    filter: 'drop-shadow(0px 0 0px rgba(0,0,0,0))',
+                    offset: 0
+                },
+                {
+                    transform: `translateX(${niDx * 0.4}px) rotateY(-90deg)`,
+                    filter: 'drop-shadow(8px 0 25px rgba(0,0,0,0.6))',
+                    offset: 0.4
+                },
+                {
+                    transform: `translateX(${niDx * 0.1}px) rotateY(-160deg)`,
+                    filter: 'drop-shadow(4px 0 10px rgba(0,0,0,0.25))',
+                    offset: 0.75
+                },
+                {
+                    transform: 'translateX(0px) rotateY(-180deg)',
+                    filter: 'drop-shadow(0px 0 0px rgba(0,0,0,0))',
+                    offset: 1
+                }
+            ], {
+                duration: 1600,
+                easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                fill: 'forwards'
+            });
+
+            // Overlap: start IN unfold while NI is still finishing
+            await wait(900);
+
+            // Phase 2: IN appears and unfolds to the left, flipping over (toward viewer)
+            // GE is revealed underneath as IN moves away
+            const inUnfold = animateEl(panelIn, [
+                {
+                    opacity: 0,
+                    transform: `translateX(${inDx}px) rotateY(0deg)`,
+                    filter: 'drop-shadow(0px 0 0px rgba(0,0,0,0))',
+                    offset: 0
+                },
+                {
+                    opacity: 1,
+                    transform: `translateX(${inDx}px) rotateY(0deg)`,
+                    filter: 'drop-shadow(0px 0 0px rgba(0,0,0,0))',
+                    offset: 0.08
+                },
+                {
+                    opacity: 1,
+                    transform: `translateX(${inDx * 0.45}px) rotateY(55deg)`,
+                    filter: 'drop-shadow(-8px 0 20px rgba(0,0,0,0.5))',
+                    offset: 0.4
+                },
+                {
+                    opacity: 1,
+                    transform: `translateX(${inDx * 0.15}px) rotateY(20deg)`,
+                    filter: 'drop-shadow(-4px 0 10px rgba(0,0,0,0.25))',
+                    offset: 0.7
+                },
+                {
+                    opacity: 1,
+                    transform: 'translateX(0px) rotateY(0deg)',
+                    filter: 'drop-shadow(0px 0 0px rgba(0,0,0,0))',
+                    offset: 1
+                }
+            ], {
+                duration: 1400,
+                easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                fill: 'forwards'
+            });
+
+            // Mark animation complete
+            logo.classList.add('done');
+        });
+    </script>
+</body>
+</html>
