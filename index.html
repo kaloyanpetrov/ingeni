@@ -202,6 +202,7 @@
             letter-spacing: normal;
             line-height: 0.9;
             /* text-transform: uppercase; */
+            position: relative;
         }
         .hero-title-lockup .hero-letter {
             display: inline-block;
@@ -463,13 +464,35 @@
             <!-- Content -->
             <div class="relative z-10 w-full px-8 md:px-16 max-w-[1920px] mx-auto flex flex-col items-center justify-center h-full">
                 <div class="hero-wordmark-wrap flex flex-col items-start">
-                    <h1 class="hero-title hero-title-lockup text-white" aria-label="INGENI">
-                        <span class="font-ingeni hero-letter">i</span>
-                        <span class="font-ingeni hero-letter">n</span>
-                        <span class="font-ingeni hero-letter">g</span>
-                        <span class="font-ingeni hero-letter">e</span>
-                        <span class="font-ingeni hero-letter">n</span>
-                        <span class="font-ingeni hero-letter">i</span>
+                    <h1 class="hero-title hero-title-lockup" aria-label="INGENI" style="position: relative;">
+                        <!-- Invisible real text for defining exact HTML layout bounds and SEO -->
+                        <div style="opacity: 0.001; pointer-events: none; display: inline-flex; align-items: center; justify-content: center;">
+                            <span class="font-ingeni hero-letter">i</span>
+                            <span class="font-ingeni hero-letter">n</span>
+                            <span class="font-ingeni hero-letter">g</span>
+                            <span class="font-ingeni hero-letter">e</span>
+                            <span class="font-ingeni hero-letter">n</span>
+                            <span class="font-ingeni hero-letter">i</span>
+                        </div>
+                        
+                        <!-- Frosted background overlay padded slightly to ensure no box-clipping occurs -->
+                        <div style="
+                            position: absolute; top: -10%; bottom: -10%; left: -5%; right: -5%;
+                            background: rgba(245, 245, 243, 0.12);
+                            backdrop-filter: blur(28px) saturate(1.45);
+                            -webkit-backdrop-filter: blur(28px) saturate(1.45);
+                            clip-path: url(#frosted-ingeni-clip);
+                            -webkit-clip-path: url(#frosted-ingeni-clip);
+                            pointer-events: none;
+                            z-index: 10;
+                        "></div>
+                        
+                        <!-- SVG that acts strictly as the clipping mask for the blur container -->
+                        <svg style="position: absolute; top: -10%; bottom: -10%; left: -5%; right: -5%; width: 110%; height: 120%; pointer-events: none; overflow: visible;">
+                            <clipPath id="frosted-ingeni-clip">
+                                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="white" font-family="'Ingeni', sans-serif" font-size="clamp(3.5rem, 15vw, 15rem)">ingeni</text>
+                            </clipPath>
+                        </svg>
                     </h1>
                     <div class="mt-6 md:mt-8 flex items-center gap-3 md:gap-5 ml-1 md:ml-2">
                         <div class="w-8 md:w-16 h-[1px] bg-white/60"></div>
