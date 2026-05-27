@@ -9,7 +9,7 @@ This project contains the source code and assets for the Ingeni website, includi
 ## Project Structure
 
 - `index.html` - Main entry point.
-- `the-longevity-store.html` / `longevity-store-main.html` - Storefront showcase pages.
+- `the-longevity-store.html` - Storefront showcase page.
 - `assets/` - Contains JavaScript animations, logos, and project-specific galleries.
 - `others/` - Experimental and test pages (e.g., animation tests).
 
