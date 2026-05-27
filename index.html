@@ -695,9 +695,9 @@
                 <div class="md:col-span-4">
                     <p class="font-body text-[0.6rem] uppercase tracking-[0.2em] text-white/40 mb-6">Навигация</p>
                     <div class="flex flex-col gap-3">
-                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#studio">За нас</a>
-                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#services">Услуги</a>
                         <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#portfolio">Проекти</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#services">Процеси</a>
+                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#studio">За Нас</a>
                     </div>
                 </div>
                 <!-- Right: Contact -->
@@ -760,6 +760,31 @@
                     el.appendChild(span);
                 }
                 return span;
+            });
+        }
+
+        function scrollToHashTarget(behavior = 'smooth') {
+            if (!window.location.hash) return;
+
+            const targetId = decodeURIComponent(window.location.hash.slice(1));
+            const target = document.getElementById(targetId);
+            if (!target) return;
+
+            const nav = document.querySelector('.site-nav');
+            const navOffset = nav ? nav.getBoundingClientRect().height + 16 : 16;
+            const targetTop = Math.max(target.getBoundingClientRect().top + window.pageYOffset - navOffset, 0);
+
+            window.scrollTo({ top: targetTop, behavior });
+        }
+
+        function handleInitialHashNavigation() {
+            if (!window.location.hash) return;
+
+            // Wait for layout + ScrollTrigger init + reveal unlock, then scroll to hash target.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    scrollToHashTarget('smooth');
+                });
             });
         }
 
@@ -828,6 +853,7 @@
                         overlay.style.display = 'none';
                         document.body.classList.remove('reveal-active');
                         initEntranceAnimations();
+                        handleInitialHashNavigation();
                     }
                 });
             };
@@ -1372,6 +1398,10 @@
             initMagneticButtons();
             initMarquee();
             initMobileNav();
+
+            // Support direct hash navigation on first load and on hash changes.
+            handleInitialHashNavigation();
+            window.addEventListener('hashchange', () => scrollToHashTarget('smooth'));
         });
     </script>
 </body>
