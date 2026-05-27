@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <title>INGENI | Interior design</title>
     <!-- Fonts: Inter (sans-serif) -->
@@ -72,6 +72,34 @@
             scrollbar-gutter: stable;
         }
 
+        :root {
+            --safe-top: env(safe-area-inset-top);
+        }
+
+        @supports (height: 100svh) {
+            section#top {
+                height: 100svh !important;
+            }
+        }
+
+        .hero-bleed-top {
+            min-height: 100vh;
+        }
+
+        @supports (height: 100dvh) {
+            .hero-bleed-top {
+                min-height: 100dvh;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-bleed-top {
+                margin-top: calc(var(--safe-top) * -1);
+                min-height: calc(100svh + var(--safe-top));
+                padding-top: var(--safe-top);
+            }
+        }
+
         .font-display {
             font-family: 'Inter', system-ui, sans-serif;
             font-weight: 500;
@@ -89,108 +117,54 @@
             z-index: 9999;
             display: grid;
             place-items: center;
-            background: #D9D2C5;
-            clip-path: inset(0 0 0 0);
+            background: #D7D2C6;
             overflow: hidden;
-        }
-        #page-reveal::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            /* background:
-                radial-gradient(circle at top left, rgba(255, 255, 255, 0.68), transparent 28%),
-                radial-gradient(circle at 80% 20%, rgba(143, 106, 49, 0.13), transparent 30%),
-                linear-gradient(135deg, #ebe4d6 0%, #d9cfbc 100%); */
-        }
-        .reveal-shell {
-            position: relative;
-            z-index: 1;
-            width: min(100%, 1000px);
-            display: grid;
-            place-items: center;
-            padding: 2rem;
-        }
-        .reveal-wordmark-wrap {
-            position: relative;
-            display: inline-grid;
-            place-items: center;
-            padding: clamp(1rem, 2vw, 2rem);
-        }
-        .reveal-wordmark {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 0;
-            font-family: 'Ingeni', sans-serif;
-            font-size: clamp(3.5rem, 15vw, 12rem);
-            font-weight: normal;
-            letter-spacing: normal;
-            /* text-transform: uppercase; */
-            line-height: 0.9;
-            color: #171512;
-        }
-        .reveal-wordmark .reveal-letter {
-            position: relative;
-            display: inline-block;
-            will-change: transform, opacity, filter;
-        }
-        .reveal-split-n {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 0;
-            height: 0;
-            pointer-events: none;
-            isolation: isolate;
-            z-index: 3;
-        }
-        /* .reveal-split-n::before {
-			content: "";
-			position: absolute;
-			inset: -0.2em -0.2em !important;
-			background: red;
-			border-radius: 0.2em;
-			box-shadow: 50px 50px 50px red;
-			z-index: -1;
-		} */
-        .reveal-full-n {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: inline-block;
-            font-family: 'Ingeni', sans-serif;
-            font-size: clamp(3.5rem, 15vw, 12rem);
-            font-weight: normal;
-            letter-spacing: normal;
-            line-height: 0.9;
-            color: #171512;
-            z-index: 1;
+            height: 100vh;
+            height: 100svh;
+            line-height: 0;
+            transform: translate3d(0, 0, 0);
             will-change: transform, opacity;
         }
-        .reveal-full-n::before {
-			content: "";
-			position: absolute;
-			inset: -0.03em -0.07em -0.07em -0.02em !important;
-			background: #D9D2C5;
-            /* opacity: 0.5; */
-			z-index: -1;
-        }
-        .reveal-glow {
+        #page-reveal::after {
+            content: '';
             position: absolute;
-            inset: auto 50% 16%;
-            width: min(62vw, 700px);
-            height: 3rem;
-            transform: translateX(-50%);
-            background: radial-gradient(circle, rgba(143, 106, 49, 0.3), transparent 72%);
-            filter: blur(14px);
-            opacity: 0.35;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 6px;
+            background: #D7D2C6;
             pointer-events: none;
+            z-index: 2;
+        }
+        #page-reveal video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #D7D2C6;
+            transform: translateZ(0);
+            z-index: 1;
+        }
+        .reveal-fit-mask {
+            position: absolute;
+            pointer-events: none;
+            z-index: 3;
+            box-shadow: inset 0 0 0 2px #D7D2C6;
+            background: transparent;
+        }
+        body.reveal-active {
+            overflow: hidden;
         }
         .hero-wordmark-wrap {
             position: relative;
             display: inline-grid;
             place-items: center;
             padding: clamp(1rem, 2vw, 2rem);
+        }
+        .hero-logo-wrap {
+            padding: 0;
         }
         .hero-title-lockup {
             display: inline-flex;
@@ -207,6 +181,33 @@
         }
         .hero-title-lockup .hero-letter {
             display: inline-block;
+        }
+        .hero-logo-glass {
+            width: 100%;
+            aspect-ratio: 1920 / 1080;
+            background: rgba(245, 245, 243, 0.3);
+            backdrop-filter: blur(34px) saturate(1.7);
+            -webkit-backdrop-filter: blur(34px) saturate(1.7);
+            border: 1px solid rgba(245, 245, 243, 0.36);
+            -webkit-mask-image: url('assets/ingeni-header.svg');
+            mask-image: url('assets/ingeni-header.svg');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+            display: block;
+        }
+        @media (min-width: 768px) {
+            .hero-media-video {
+                transform: scale(0.6);
+                transform-origin: center center;
+            }
+            .hero-logo-glass {
+                width: 60%;
+                margin: 0 auto;
+            }
         }
 
         /* ─── Horizontal lines ─── */
@@ -312,7 +313,7 @@
         @media (max-width: 767px) {
             .site-nav {
                 width: calc(100vw - 1.5rem);
-                top: 0.5rem;
+                top: calc(0.5rem + env(safe-area-inset-top));
                 border-radius: 999px;
                 overflow: hidden;
                 will-change: width, height, top, left, border-radius;
@@ -334,8 +335,8 @@
                 font-size: 1.6rem;
             }
             .site-nav .nav-bar-inner {
-                min-height: 4.75rem;
-                padding: 0.8rem 1rem;
+                min-height: 3.75rem;
+                padding: 0.6rem 1.5rem;
                 max-width: calc(100vw - 1.5rem);
                 margin: 0 auto;
                 width: 100%;
@@ -351,7 +352,7 @@
                 pointer-events: auto;
             }
             .site-nav.is-open .nav-bar-inner {
-                min-height: 4.75rem;
+                min-height: 3.75rem;
             }
         }
 
@@ -400,34 +401,21 @@
 <body class="bg-sand-900 text-sand-50">
 
     <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PAGE REVEAL — INI to INGENI                                   -->
+    <!-- PAGE REVEAL VIDEO                                              -->
     <!-- ════════════════════════════════════════════════════════════════ -->
     <div id="page-reveal">
-        <div class="reveal-shell" aria-label="INGENI logo reveal">
-            <div class="reveal-wordmark-wrap">
-                <div class="reveal-glow"></div>
-                <div class="reveal-wordmark" id="reveal-wordmark">
-                    <span class="font-ingeni reveal-letter reveal-i-left">i</span>
-                    <span class="font-ingeni reveal-letter reveal-n-first">n</span>
-                    <span class="font-ingeni reveal-letter reveal-g">g</span>
-                    <span class="font-ingeni reveal-letter reveal-e">e</span>
-                    <span class="font-ingeni reveal-letter reveal-n-second">n</span>
-                    <span class="font-ingeni reveal-letter reveal-i-right">i</span>
-                </div>
-                <div class="reveal-split-n" id="reveal-split-n" aria-hidden="true">
-                    <span class="font-ingeni reveal-full-n reveal-full-n-left">n</span>
-                    <span class="reveal-full-n reveal-full-n-right">n</span>
-                </div>
-            </div>
-        </div>
+        <video id="reveal-video" autoplay muted playsinline preload="auto" aria-label="Page reveal animation">
+            <source src="assets/intro.webm" type="video/webm" />
+        </video>
+        <div id="reveal-fit-mask" class="reveal-fit-mask" aria-hidden="true"></div>
     </div>
 
     <!-- ════════════════════════════════════════════════════════════════ -->
     <!-- NAV                                                             -->
     <!-- ════════════════════════════════════════════════════════════════ -->
     <nav class="site-nav fixed top-2 md:top-6 md:left-1/2 md:-translate-x-1/2 inset-x-0 mx-auto w-[94%] max-w-7xl z-50 rounded-full">
-        <div class="nav-bar-inner relative flex justify-center items-center px-6 md:px-10 py-4">
-            <a class="absolute left-6 md:left-10 font-ingeni text-2xl brand-link" href="#top">ingeni</a>
+        <div class="nav-bar-inner relative flex justify-center items-center px-6 md:px-8 py-4 md:py-5">
+            <a class="absolute left-6 md:left-8 font-ingeni text-2xl brand-link" href="#top">ingeni</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#portfolio">Проекти</a>
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Услуги</a>
@@ -453,54 +441,20 @@
         <!-- ════════════════════════════════════════════════════════════ -->
         <!-- HERO                                                        -->
         <!-- ════════════════════════════════════════════════════════════ -->
-        <section class="relative h-screen flex items-end overflow-hidden" id="top">
+        <section class="relative hero-bleed-top flex items-end overflow-hidden" id="top">
             <!-- Video -->
             <div class="absolute inset-0 z-0">
-                <video autoplay loop muted playsinline preload="auto" class="w-full h-full object-cover scale-105">
+                <video autoplay loop muted playsinline preload="auto" class="hero-media-video w-full h-full object-cover scale-105">
                     <source src="assets/interior-hd.mp4" type="video/mp4" />
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80"></div>
             </div>
 
             <!-- Content -->
-            <div class="relative z-10 w-full px-8 md:px-16 max-w-[1920px] mx-auto flex flex-col items-center justify-center h-full">
-                <div class="hero-wordmark-wrap flex flex-col items-start">
-                    <h1 class="hero-title hero-title-lockup" aria-label="INGENI" style="position: relative;">
-                        <!-- Invisible real text for defining exact HTML layout bounds and SEO -->
-                        <div style="opacity: 0.001; pointer-events: none; display: inline-flex; align-items: center; justify-content: center;">
-                            <span class="font-ingeni hero-letter">i</span>
-                            <span class="font-ingeni hero-letter">n</span>
-                            <span class="font-ingeni hero-letter">g</span>
-                            <span class="font-ingeni hero-letter">e</span>
-                            <span class="font-ingeni hero-letter">n</span>
-                            <span class="font-ingeni hero-letter">i</span>
-                        </div>
-                        
-                        <!-- Frosted background overlay padded slightly to ensure no box-clipping occurs -->
-                        <div style="
-                            position: absolute; top: -10%; bottom: -10%; left: -5%; right: -5%;
-                            background: rgba(245, 245, 243, 0.12);
-                            backdrop-filter: blur(28px) saturate(1.45);
-                            -webkit-backdrop-filter: blur(28px) saturate(1.45);
-                            clip-path: url(#frosted-ingeni-clip);
-                            -webkit-clip-path: url(#frosted-ingeni-clip);
-                            pointer-events: none;
-                            z-index: 10;
-                        "></div>
-                        
-                        <!-- SVG that acts strictly as the clipping mask for the blur container -->
-                        <svg style="position: absolute; top: -10%; bottom: -10%; left: -5%; right: -5%; width: 110%; height: 120%; pointer-events: none; overflow: visible;">
-                            <clipPath id="frosted-ingeni-clip">
-                                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="white" font-family="'Ingeni', sans-serif" font-size="clamp(3.5rem, 15vw, 15rem)">ingeni</text>
-                            </clipPath>
-                        </svg>
-                    </h1>
-                    <div class="mt-6 md:mt-8 flex items-center gap-3 md:gap-5 ml-1 md:ml-2">
-                        <div class="w-8 md:w-16 h-[1px] bg-white/60"></div>
-                        <p class="font-body text-[0.65rem] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-white/80 font-medium">
-                            INTERIOR DESIGN
-                        </p>
-                    </div>
+            <div class="relative z-10 w-full h-full flex flex-col items-center justify-center">
+                <div class="hero-wordmark-wrap hero-logo-wrap w-full">
+                    <h1 class="sr-only">INGENI Interior Design</h1>
+                    <div class="hero-logo-glass" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
@@ -510,10 +464,6 @@
         <!-- ════════════════════════════════════════════════════════════ -->
         <section class="relative py-20 md:py-28" id="portfolio">
             <!-- Background decorative -->
-            <div class="parallax-number absolute left-[50%] -translate-x-1/2 -top-[5%] pointer-events-none select-none">
-                <span class="font-display text-[20vw] leading-none text-stroke opacity-10">WORK</span>
-            </div>
-
             <div class="px-8 md:px-16 max-w-[1920px] mx-auto relative z-10">
                 <!-- Heading -->
                 <div class="section-heading mb-10 md:mb-16">
@@ -555,7 +505,7 @@
                                     <p class="font-body text-[0.55rem] md:text-[0.6rem] text-white uppercase tracking-[0.1em] m-0">Sofia, Bulgaria | 2025</p>
                                 </div>
                                 <!-- Right arrow circle -->
-                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center transition-transform duration-500 origin-bottom-right group-hover:scale-125">
+                                <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center">
                                     <span class="material-symbols-outlined text-white transition-transform duration-500 group-hover:rotate-45">arrow_outward</span>
                                 </div>
                             </div>
@@ -748,7 +698,6 @@
                         <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#studio">За нас</a>
                         <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#services">Услуги</a>
                         <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#portfolio">Проекти</a>
-                        <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300" href="#">Политика за поверителност</a>
                     </div>
                 </div>
                 <!-- Right: Contact -->
@@ -815,129 +764,81 @@
         }
 
         function initPageReveal() {
-            // Hide the nav initially so it doesn't show during page reveal
             gsap.set('.site-nav', { opacity: 0, y: -40 });
 
             const overlay = document.getElementById('page-reveal');
-            const wordmark = document.getElementById('reveal-wordmark');
-            const wrapEl = wordmark ? wordmark.closest('.reveal-wordmark-wrap') : null;
-            const splitN = document.getElementById('reveal-split-n');
-            if (!overlay || !wordmark || !wrapEl || !splitN) {
+            const revealVideo = document.getElementById('reveal-video');
+            const fitMask = document.getElementById('reveal-fit-mask');
+            if (!overlay || !revealVideo || !fitMask) {
                 initEntranceAnimations();
                 return;
             }
 
-            const leftFullN = splitN.querySelector('.reveal-full-n-left');
-            const rightFullN = splitN.querySelector('.reveal-full-n-right');
-            const leftI = wordmark.querySelector('.reveal-i-left');
-            const rightI = wordmark.querySelector('.reveal-i-right');
-            const middleLetters = [
-                wordmark.querySelector('.reveal-n-first'),
-                wordmark.querySelector('.reveal-g'),
-                wordmark.querySelector('.reveal-e'),
-                wordmark.querySelector('.reveal-n-second')
-            ];
-            const revealTargets = [leftI, rightI, ...middleLetters, splitN, leftFullN, rightFullN];
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    overlay.style.pointerEvents = 'none';
-                    initEntranceAnimations();
+            const positionRevealMask = () => {
+                const rect = overlay.getBoundingClientRect();
+                const vw = revealVideo.videoWidth || 0;
+                const vh = revealVideo.videoHeight || 0;
+                if (!vw || !vh || !rect.width || !rect.height) return;
+
+                const videoRatio = vw / vh;
+                const boxRatio = rect.width / rect.height;
+
+                let renderWidth;
+                let renderHeight;
+                let left;
+                let top;
+
+                if (boxRatio > videoRatio) {
+                    renderHeight = rect.height;
+                    renderWidth = renderHeight * videoRatio;
+                    left = (rect.width - renderWidth) / 2;
+                    top = 0;
+                } else {
+                    renderWidth = rect.width;
+                    renderHeight = renderWidth / videoRatio;
+                    left = 0;
+                    top = (rect.height - renderHeight) / 2;
                 }
+
+                fitMask.style.left = `${left - 1}px`;
+                fitMask.style.top = `${top - 1}px`;
+                fitMask.style.width = `${renderWidth + 2}px`;
+                fitMask.style.height = `${renderHeight + 2}px`;
+            };
+
+            document.body.classList.add('reveal-active');
+            positionRevealMask();
+            revealVideo.addEventListener('loadedmetadata', positionRevealMask, { once: true });
+            window.addEventListener('resize', positionRevealMask, { passive: true });
+            window.addEventListener('orientationchange', positionRevealMask);
+
+            let closed = false;
+            const finishReveal = () => {
+                if (closed) return;
+                closed = true;
+                gsap.to(overlay, {
+                    yPercent: -100,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.inOut',
+                    onComplete: () => {
+                        window.removeEventListener('resize', positionRevealMask);
+                        window.removeEventListener('orientationchange', positionRevealMask);
+                        overlay.style.pointerEvents = 'none';
+                        overlay.style.display = 'none';
+                        document.body.classList.remove('reveal-active');
+                        initEntranceAnimations();
+                    }
+                });
+            };
+
+            revealVideo.currentTime = 0;
+            revealVideo.play().catch(() => {
+                setTimeout(finishReveal, 1400);
             });
 
-            let measured = {};
-
-            function setInitialState() {
-                gsap.set(revealTargets, { clearProps: 'all' });
-
-                const wrapRect = wrapEl.getBoundingClientRect();
-                const wordRect = wordmark.getBoundingClientRect();
-                const leftIRect = leftI.getBoundingClientRect();
-                const rightIRect = rightI.getBoundingClientRect();
-                const nRect = middleLetters[0].getBoundingClientRect();
-
-                const nWidth = nRect.width;
-                const leftIWidth = leftIRect.width;
-                const rightIWidth = rightIRect.width;
-                const compactGap = nWidth * 0.08;
-
-                measured = { splitDist: nWidth * 1.485 };
-
-                const centerX = wordRect.left - wrapRect.left + wordRect.width / 2;
-                const centerY = wordRect.top - wrapRect.top + wordRect.height / 2;
-
-                gsap.set(splitN, { left: centerX, top: centerY, opacity: 1, zIndex: 3 });
-                gsap.set(leftFullN, { xPercent: -50, yPercent: -50, opacity: 1 });
-                gsap.set(rightFullN, { xPercent: -50, yPercent: -50, opacity: 1 });
-
-                const compactLeftCenter = centerX - nWidth / 2 - compactGap - leftIWidth / 2;
-                const compactRightCenter = centerX + nWidth / 2 + compactGap + rightIWidth / 2;
-                const currentLeftCenter = leftIRect.left - wrapRect.left + leftIWidth / 2;
-                const currentRightCenter = rightIRect.left - wrapRect.left + rightIWidth / 2;
-
-                gsap.set(leftI, { x: compactLeftCenter - currentLeftCenter, zIndex: 2 });
-                gsap.set(rightI, { x: compactRightCenter - currentRightCenter, zIndex: 2 });
-
-                middleLetters.forEach(letter => {
-                    const rect = letter.getBoundingClientRect();
-                    const letterCenter = rect.left - wrapRect.left + rect.width / 2;
-                    gsap.set(letter, {
-                        x: centerX - letterCenter,
-                        // opacity: 0,
-                        // scale: 0.82,
-                        // filter: 'blur(10px)',
-                        zIndex: 0
-                    });
-                });
-            }
-
-            setInitialState();
-
-            tl.to({}, { duration: 0.6 })
-              .to(leftFullN, {
-                  x: -measured.splitDist,
-                  opacity: 0,
-                  duration: 1.15,
-                  ease: 'expo.inOut'
-              }, 0.85)
-              .to(rightFullN, {
-                  x: measured.splitDist,
-                  opacity: 0,
-                  duration: 1.15,
-                  ease: 'expo.inOut'
-              }, 0.85)
-              .to(leftI, {
-                  x: 0,
-                  duration: 1.15,
-                  ease: 'expo.inOut'
-              }, 0.85)
-              .to(rightI, {
-                  x: 0,
-                  duration: 1.15,
-                  ease: 'expo.inOut'
-              }, 0.85)
-              .to(middleLetters, {
-                  x: 0,
-                  opacity: 1,
-                  scale: 1,
-                //   filter: 'blur(0px)',
-                  duration: 1.15,
-                  ease: 'expo.inOut'
-              }, 0.85)
-              .fromTo('.reveal-glow', {
-                  scaleX: 0.6,
-                  opacity: 0.1
-              }, {
-                  scaleX: 1,
-                  opacity: 0.4,
-                  duration: 1.1,
-                  ease: 'power2.out'
-              }, 1.25)
-              .to(overlay, {
-                  clipPath: 'inset(0 0 100% 0)',
-                  duration: 0.8,
-                  ease: 'power3.inOut'
-              }, 2.15);
+            revealVideo.addEventListener('ended', finishReveal, { once: true });
+            setTimeout(finishReveal, 9000);
         }
 
         function initNavAnimations() {
@@ -970,6 +871,12 @@
                 return window.visualViewport ? window.visualViewport.height : window.innerHeight;
             }
 
+            function getSafeTopInset() {
+                const safeTop = getComputedStyle(document.documentElement).getPropertyValue('--safe-top').trim();
+                const parsed = parseFloat(safeTop);
+                return Number.isFinite(parsed) ? parsed : 0;
+            }
+
             function lockScroll(locked) {
                 document.body.style.overflow = locked ? 'hidden' : '';
             }
@@ -987,11 +894,12 @@
 
             function syncOpenLayout() {
                 const viewportHeight = getViewportHeight();
+                const safeTopInset = getSafeTopInset();
                 gsap.set(nav, {
                     left: 0,
-                    top: 0,
+                    top: -safeTopInset,
                     width: window.innerWidth,
-                    height: viewportHeight,
+                    height: viewportHeight + safeTopInset,
                     borderRadius: 0,
                     margin: 0,
                     maxWidth: 'none',
@@ -999,7 +907,7 @@
                 });
                 if (closedNavBounds) {
                     gsap.set(navBarInner, {
-                        y: closedNavBounds.top
+                        y: 0
                     });
                 }
             }
@@ -1079,6 +987,7 @@
                 if (activeTimeline) activeTimeline.kill();
 
                 const viewportHeight = getViewportHeight();
+                const safeTopInset = getSafeTopInset();
                 
                 // Natively lock it in absolute space so math translates perfectly
                 gsap.set(nav, {
@@ -1101,10 +1010,10 @@
                 activeTimeline = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
                 activeTimeline
                     .to(nav, {
-                        top: 0,
+                        top: -safeTopInset,
                         left: 0,
                         width: window.innerWidth,
-                        height: viewportHeight,
+                        height: viewportHeight + safeTopInset,
                         duration: 0.6
                     }, 0)
                     .to(nav, {
@@ -1113,8 +1022,7 @@
                         ease: 'power3.out'
                     }, 0)
                     .to(navBarInner, {
-                        // Move content negatively by identical amount nav expanded vertically to keep visual coordinate perfectly zero
-                        y: closedNavBounds.top,
+                        y: 0,
                         duration: 0.6
                     }, 0)
                     .to(panel, {
