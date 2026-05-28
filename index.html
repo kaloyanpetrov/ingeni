@@ -138,13 +138,14 @@
         }
         #page-reveal video {
             position: absolute;
-            inset: 0;
+            left: 50%;
+            top: 50%;
             width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
             background: #D7D2C6;
-            transform: translateZ(0);
+            transform: translate(-50%, -50%) translateZ(0);
             z-index: 1;
         }
         .reveal-fit-mask {
@@ -418,7 +419,7 @@
             <a class="absolute left-6 md:left-8 font-ingeni text-2xl brand-link" href="#top">ingeni</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#portfolio">Проекти</a>
-                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Услуги</a>
+                <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#services">Процеси</a>
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#studio">За нас</a>
                 <a class="nav-link font-body font-medium tracking-[0.08em] uppercase text-[0.65rem]" href="#contact">Контакти</a>
             </div>
@@ -430,7 +431,7 @@
         <div class="mobile-nav-panel md:hidden" id="mobile-nav-panel">
             <div class="mobile-nav-inner">
                 <a class="mobile-nav-link" href="#portfolio">Проекти</a>
-                <a class="mobile-nav-link" href="#services">Услуги</a>
+                <a class="mobile-nav-link" href="#services">Процеси</a>
                 <a class="mobile-nav-link" href="#studio">За нас</a>
                 <a class="mobile-nav-link" href="#contact">Контакти</a>
             </div>
@@ -771,7 +772,11 @@
             if (!target) return;
 
             const nav = document.querySelector('.site-nav');
-            const navOffset = nav ? nav.getBoundingClientRect().height + 16 : 16;
+            const navBarInner = nav ? nav.querySelector('.nav-bar-inner') : null;
+            const navHeight = navBarInner
+                ? navBarInner.getBoundingClientRect().height
+                : (nav ? nav.getBoundingClientRect().height : 0);
+            const navOffset = navHeight + 16;
             const targetTop = Math.max(target.getBoundingClientRect().top + window.pageYOffset - navOffset, 0);
 
             window.scrollTo({ top: targetTop, behavior });
@@ -806,24 +811,47 @@
                 if (!vw || !vh || !rect.width || !rect.height) return;
 
                 const videoRatio = vw / vh;
-                const boxRatio = rect.width / rect.height;
+                const targetLogo = document.querySelector('.hero-logo-glass');
+                const isDesktop = window.matchMedia('(min-width: 768px)').matches;
 
                 let renderWidth;
                 let renderHeight;
                 let left;
                 let top;
 
-                if (boxRatio > videoRatio) {
-                    renderHeight = rect.height;
-                    renderWidth = renderHeight * videoRatio;
-                    left = (rect.width - renderWidth) / 2;
-                    top = 0;
+                if (isDesktop && targetLogo) {
+                    const logoRect = targetLogo.getBoundingClientRect();
+                    if (logoRect.width > 0 && logoRect.height > 0) {
+                        renderWidth = logoRect.width;
+                        renderHeight = logoRect.height;
+                        left = (rect.width - renderWidth) / 2;
+                        top = (rect.height - renderHeight) / 2;
+                    }
+                }
+
+                if (!renderWidth || !renderHeight) {
+                    const boxRatio = rect.width / rect.height;
+
+                    if (boxRatio > videoRatio) {
+                        renderHeight = rect.height;
+                        renderWidth = renderHeight * videoRatio;
+                        left = (rect.width - renderWidth) / 2;
+                        top = 0;
+                    } else {
+                        renderWidth = rect.width;
+                        renderHeight = renderWidth / videoRatio;
+                        left = 0;
+                        top = (rect.height - renderHeight) / 2;
+                    }
                 } else {
-                    renderWidth = rect.width;
-                    renderHeight = renderWidth / videoRatio;
-                    left = 0;
+                    left = (rect.width - renderWidth) / 2;
                     top = (rect.height - renderHeight) / 2;
                 }
+
+                revealVideo.style.left = '50%';
+                revealVideo.style.top = '50%';
+                revealVideo.style.width = `${renderWidth}px`;
+                revealVideo.style.height = `${renderHeight}px`;
 
                 fitMask.style.left = `${left - 1}px`;
                 fitMask.style.top = `${top - 1}px`;
@@ -938,8 +966,11 @@
                 }
             }
 
-            function closeMenu() {
-                if (menuState !== 'open') return;
+            function closeMenu(onComplete) {
+                if (menuState !== 'open') {
+                    if (typeof onComplete === 'function') onComplete();
+                    return;
+                }
                 menuState = 'closing';
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.setAttribute('aria-label', 'Open navigation menu');
@@ -958,6 +989,7 @@
                         nav.classList.remove('is-open');
                         lockScroll(false);
                         resetClosedState();
+                        if (typeof onComplete === 'function') onComplete();
                     }
                 });
 
@@ -1080,7 +1112,22 @@
             });
 
             links.forEach(link => {
-                link.addEventListener('click', closeMenu);
+                link.addEventListener('click', event => {
+                    const href = link.getAttribute('href') || '';
+
+                    if (window.innerWidth >= 768 || !href.startsWith('#')) {
+                        closeMenu();
+                        return;
+                    }
+
+                    event.preventDefault();
+                    closeMenu(() => {
+                        if (window.location.hash !== href) {
+                            history.pushState(null, '', href);
+                        }
+                        scrollToHashTarget('smooth');
+                    });
+                });
             });
 
             document.addEventListener('keydown', event => {
