@@ -4,47 +4,64 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <title>INGENI | Interior design</title>
+    <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/assets/media-logo.png?v=2" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/assets/media-logo.png?v=2" />
+    <title>INGENI | Интериорен дизайн и архитектура в България</title>
+    <meta name="description" content="INGENI е студио за интериорен дизайн и архитектура в България. Създаваме жилищни, обществени и търговски пространства с прецизен процес, функционалност и отличима естетика." />
+    <meta name="keywords" content="интериорен дизайн, интериорна архитектура, интериорен дизайнер, студио за интериорен дизайн, обществени интериори, търговски интериори, жилищен интериор, INGENI, България, София" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="INGENI Interiors" />
+    <meta name="theme-color" content="#D9D2C5" />
+    <link rel="canonical" href="https://ingeni.bg/index.html" />
+    <link rel="alternate" hreflang="bg-BG" href="https://ingeni.bg/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://ingeni.bg/index.html" />
+
+    <meta property="og:locale" content="bg_BG" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="INGENI" />
+    <meta property="og:title" content="INGENI | Интериорен дизайн и архитектура в България" />
+    <meta property="og:description" content="Студио за интериорен дизайн и архитектура с фокус върху функционални, дълготрайни и естетически издържани пространства." />
+    <meta property="og:url" content="https://ingeni.bg/index.html" />
+    <meta property="og:image" content="https://ingeni.bg/assets/ingeni-header.svg" />
+    <meta property="og:image:alt" content="INGENI - студио за интериорен дизайн" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="INGENI | Интериорен дизайн и архитектура в България" />
+    <meta name="twitter:description" content="Проекти, процес и студио за интериорен дизайн от INGENI." />
+    <meta name="twitter:image" content="https://ingeni.bg/assets/ingeni-header.svg" />
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "INGENI Interiors",
+            "url": "https://ingeni.bg/index.html",
+            "logo": "https://ingeni.bg/assets/logo/ingeni.woff",
+            "email": "office@ingeni.bg",
+            "telephone": "+359897935364",
+            "sameAs": [
+                "https://www.instagram.com/ingenibg/"
+            ],
+            "areaServed": "BG",
+            "description": "Студио за интериорен дизайн и интериорна архитектура с проекти в жилищния, обществения и търговския сектор."
+        }
+    </script>
     <!-- Fonts: Inter (sans-serif) -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic"
-        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic" rel="preload" as="style" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet" media="print" onload="this.media='all'" />
     <!-- Playfair Display -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap&subset=cyrillic"
-        rel="stylesheet" />
-    <!-- Icons -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap&subset=cyrillic" rel="preload" as="style" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap&subset=cyrillic" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap&subset=cyrillic" rel="stylesheet" />
+    </noscript>
     <!-- GSAP -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "sand": { 900: "#D9D2C5", 800: "#EDEAE4", 700: "#E3DED5", 600: "#D9D2C5", 500: "#C4BCB0", 400: "#B8AFA2", 300: "#8C8C8C", 200: "#6B6B6B", 100: "#3D3D3D", 50: "#1A1A1A" },
-                    },
-                    fontFamily: {
-                        "display": ['"Inter"', 'system-ui', 'sans-serif'],
-                        "body": ['"Inter"', 'system-ui', 'sans-serif'],
-                        "playfair": ['"Playfair Display"', 'serif'],
-                        "ingeni": ['"Ingeni"', 'sans-serif'],
-                    },
-                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-                },
-            },
-        }
-    </script>
+    <link href="assets/css/tailwind.generated.css" rel="stylesheet" />
     <style>
         @font-face {
             font-family: 'Ingeni';
@@ -54,8 +71,12 @@
             font-display: swap;
         }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        .icon-svg {
+            display: block;
+            width: 1em;
+            height: 1em;
+            stroke: currentColor;
+            fill: none;
         }
 
         * { -webkit-font-smoothing: antialiased; }
@@ -201,10 +222,6 @@
             display: block;
         }
         @media (min-width: 768px) {
-            .hero-media-video {
-                transform: scale(0.6);
-                transform-origin: center center;
-            }
             .hero-logo-glass {
                 width: 60%;
                 margin: 0 auto;
@@ -332,7 +349,7 @@
                 background: transparent;
                 border-radius: 0;
             }
-            .site-nav .nav-toggle .material-symbols-outlined {
+            .site-nav .nav-toggle .icon-svg {
                 font-size: 1.6rem;
             }
             .site-nav .nav-bar-inner {
@@ -405,7 +422,7 @@
     <!-- PAGE REVEAL VIDEO                                              -->
     <!-- ════════════════════════════════════════════════════════════════ -->
     <div id="page-reveal">
-        <video id="reveal-video" autoplay muted playsinline preload="auto" aria-label="Page reveal animation">
+        <video id="reveal-video" autoplay muted playsinline preload="metadata" aria-label="Page reveal animation">
             <source src="assets/intro.webm" type="video/webm" />
         </video>
         <div id="reveal-fit-mask" class="reveal-fit-mask" aria-hidden="true"></div>
@@ -425,7 +442,9 @@
             </div>
             <!-- Mobile menu button -->
             <button class="nav-toggle absolute right-6 md:right-10 md:hidden flex transition-colors" type="button" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Open navigation menu">
-                <span class="material-symbols-outlined">menu</span>
+                <svg class="icon-svg nav-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h16" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </button>
         </div>
         <div class="mobile-nav-panel md:hidden" id="mobile-nav-panel">
@@ -445,7 +464,7 @@
         <section class="relative hero-bleed-top flex items-end overflow-hidden" id="top">
             <!-- Video -->
             <div class="absolute inset-0 z-0">
-                <video autoplay loop muted playsinline preload="auto" class="hero-media-video w-full h-full object-cover scale-105">
+                <video autoplay loop muted playsinline preload="metadata" class="hero-media-video w-full h-full object-cover scale-105">
                     <source src="assets/interior-hd.mp4" type="video/mp4" />
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80"></div>
@@ -475,10 +494,14 @@
                             <p class="heading-sub font-body text-[0.65rem] uppercase tracking-[0.2em] text-sand-600">Подбрани пространства</p>
                             <div class="hidden md:flex gap-3">
                                 <button class="w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors slider-prev">
-                                    <span class="material-symbols-outlined text-sand-400">west</span>
+                                    <svg class="icon-svg text-sand-400" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 6l-6 6 6 6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
                                 </button>
                                 <button class="w-12 h-12 flex items-center justify-center glass rounded-full hover:bg-sand-300/20 transition-colors slider-next">
-                                    <span class="material-symbols-outlined text-sand-400">east</span>
+                                    <svg class="icon-svg text-sand-400" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M9 6l6 6-6 6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
@@ -491,7 +514,7 @@
                 <!-- Project 1 -->
                 <a href="the-longevity-store.html" class="project-card block w-[85vw] md:w-[42vw] lg:w-[30vw] shrink-0 snap-start group cursor-grab active:cursor-grabbing" aria-label="Open The Longevity Store project page">
                     <div class="relative aspect-[3/4] overflow-hidden">
-                        <img draggable="false" alt="The Longevity Store" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        <img draggable="false" alt="The Longevity Store" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async"
                             src="assets/projects/the-longevity-store.webp" />
                         <div class="absolute inset-0 project-overlay"></div>
                         
@@ -507,7 +530,9 @@
                                 </div>
                                 <!-- Right arrow circle -->
                                 <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 glass-dark rounded-full flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-white transition-transform duration-500 group-hover:rotate-45">arrow_outward</span>
+                                    <svg class="icon-svg text-white transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M8 16L16 8M9 8h7v7" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -707,11 +732,17 @@
                     <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300 block mb-2" href="tel:+359897935364">+359 89 7935364</a>
                     <a class="font-body text-sm text-white/60 hover:text-white transition-colors duration-300 block mb-3" href="mailto:office@ingeni.bg">office@ingeni.bg</a>
                     <div class="flex gap-6 mt-6">
-                        <a class="text-white/60 hover:text-white transition-colors" href="#" aria-label="Instagram">
-                            <i class="ri-instagram-line text-2xl"></i>
+                        <a class="text-white/60 hover:text-white transition-colors" href="https://www.instagram.com/ingenibg/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg class="icon-svg text-2xl" viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="3.5" y="3.5" width="17" height="17" rx="5" ry="5" stroke-width="1.8"></rect>
+                                <circle cx="12" cy="12" r="4" stroke-width="1.8"></circle>
+                                <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle>
+                            </svg>
                         </a>
-                        <a class="text-white/60 hover:text-white transition-colors" href="#" aria-label="Facebook">
-                            <i class="ri-facebook-circle-line text-2xl"></i>
+                        <a class="hidden text-white/60 hover:text-white transition-colors" href="#" aria-label="Facebook">
+                            <svg class="icon-svg text-2xl" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M13 21v-7h3l.5-3H13V9.5c0-.9.3-1.5 1.7-1.5H17V5.2c-.4-.1-1.7-.2-3.2-.2-3.1 0-5.3 1.9-5.3 5.5V11H6v3h2.5v7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -727,6 +758,8 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
@@ -914,7 +947,9 @@
             const panel = document.getElementById('mobile-nav-panel');
             if (!nav || !toggle || !panel) return;
 
-            const icon = toggle.querySelector('.material-symbols-outlined');
+            const icon = toggle.querySelector('.nav-toggle-icon path');
+            const menuPath = 'M4 7h16M4 12h16M4 17h16';
+            const closePath = 'M6 6l12 12M18 6L6 18';
             const links = gsap.utils.toArray(panel.querySelectorAll('.mobile-nav-link'));
             let menuState = 'closed';
             let activeTimeline = null;
@@ -974,7 +1009,7 @@
                 menuState = 'closing';
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.setAttribute('aria-label', 'Open navigation menu');
-                if (icon) icon.textContent = 'menu';
+                if (icon) icon.setAttribute('d', menuPath);
 
                 if (activeTimeline) activeTimeline.kill();
 
@@ -1040,7 +1075,7 @@
                 lockScroll(true);
                 toggle.setAttribute('aria-expanded', 'true');
                 toggle.setAttribute('aria-label', 'Close navigation menu');
-                if (icon) icon.textContent = 'close';
+                if (icon) icon.setAttribute('d', closePath);
 
                 if (activeTimeline) activeTimeline.kill();
 

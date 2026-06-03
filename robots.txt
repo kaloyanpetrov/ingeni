@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block internal or development-only files/folders if added later.
+Disallow: /.git/
+Disallow: /.idea/
+
+# Optional: keep obvious temporary/debug patterns out of index.
+Disallow: /*.log$
+Disallow: /*?*preview=
+Disallow: /*?*debug=
+
+Sitemap: https://ingeni.bg/sitemap.xml

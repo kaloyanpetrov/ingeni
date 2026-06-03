@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ingeni.bg/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ingeni.bg/assets/ingeni-header.svg</image:loc>
+      <image:title>INGENI Interior Design Studio</image:title>
+      <image:caption>INGENI - interior design and architecture studio in Bulgaria.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ingeni.bg/the-longevity-store.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ingeni.bg/assets/the-longevity-store/the-longevity-store-01.webp</image:loc>
+      <image:title>The Longevity Store - Project Photo 01</image:title>
+      <image:caption>Award-winning interior project by INGENI in Sofia.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ingeni.bg/assets/the-longevity-store/the-longevity-store-05.webp</image:loc>
+      <image:title>The Longevity Store - Project Photo 05</image:title>
+      <image:caption>Public interior project recognized by DIBLA DESIGN AWARDS 2025.</image:caption>
+    </image:image>
+  </url>
+</urlset>
