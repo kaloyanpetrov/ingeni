@@ -8,8 +8,9 @@
     <link rel="icon" href="/assets/media-logo.png?v=2" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/assets/media-logo.png?v=2" />
     <title>INGENI | Интериорен дизайн и архитектура в България</title>
-    <meta name="description" content="INGENI е студио за интериорен дизайн и архитектура в България. Създаваме жилищни, обществени и търговски пространства с прецизен процес, функционалност и отличима естетика." />
-    <meta name="keywords" content="интериорен дизайн, интериорна архитектура, интериорен дизайнер, студио за интериорен дизайн, обществени интериори, търговски интериори, жилищен интериор, INGENI, България, София" />
+    <meta name="description" content="INGENI е авторското студио за интериорен дизайн на Весела Желева, специализирано в създаването на жилищни, обществени и търговски пространства с характер." />
+    <meta name="keywords" content="интериорен дизайн, интериорна архитектура, интериорен дизайнер, студио за интериорен дизайн, обществени интериори, търговски интериори, жилищен интериор, INGENI, България, София, ingeni, interior design,
+     design, modern, Vessela Jeleva, Весела Желева, Vessela, Jeleva, Весела, Желева, ingeni.bg, ингени.бг, interior designer, interiors, interior architecture, interior design studio, Sofia, Bulgaria, public interiors" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="INGENI Interiors" />
     <meta name="theme-color" content="#D9D2C5" />
@@ -207,9 +208,9 @@
         .hero-logo-glass {
             width: 100%;
             aspect-ratio: 1920 / 1080;
-            background: rgba(245, 245, 243, 0.3);
-            backdrop-filter: blur(34px) saturate(1.7);
-            -webkit-backdrop-filter: blur(34px) saturate(1.7);
+            background: rgba(245, 245, 243, 0.2);
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
             border: 1px solid rgba(245, 245, 243, 0.36);
             -webkit-mask-image: url('assets/ingeni-header.svg');
             mask-image: url('assets/ingeni-header.svg');
@@ -676,7 +677,7 @@
                         </div>
                         
                         <!-- Moved details under image creatively -->
-                        <div class="mt-8 flex flex-col md:flex-row md:items-end justify-between border-t border-[#1A1A1A]/20 pt-5">
+                        <div class="mt-8 flex flex-col md:flex-row md:items-start justify-between border-t border-[#1A1A1A]/20 pt-5">
                             <span class="font-display text-3xl text-[#1A1A1A] block tracking-tight">инж. Весела Желева</span>
                             <span class="font-body text-[0.65rem] uppercase tracking-[0.2em] text-black font-semibold mt-2 md:mt-0 text-left md:text-right">Основател и<br class="hidden md:block" /> творчески директор</span>
                         </div>
@@ -685,7 +686,7 @@
                     <!-- Text -->
                     <div class="studio-text md:col-span-7 flex flex-col justify-center text-left items-start md:pl-8">
                         <h3 class="font-playfair text-4xl md:text-6xl text-[#1A1A1A] mb-8 leading-tight">
-                            Кой стои зад <span class="text-black font-ingeni text-4xl md:text-6xl inline-block -translate-y-1" style="font-size: 2.4rem !important">ingeni</span>?
+                            Кой стои зад <span class="text-black font-ingeni text-4xl md:text-6xl inline -translate-y-1" style="font-size: 2.4rem !important">ingeni</span>?
                         </h3>
                         <p class="font-body text-base md:text-lg text-[#1A1A1A]/80 leading-relaxed mb-6 max-w-2xl">
                             Весела Желева е инженер – магистър по интериорен дизайн, автор и водещ дизайнер на студио <span class="font-ingeni text-lg -translate-y-[2px] inline-block" style="font-size: 0.75rem !important">ingeni</span>, носител на професионални награди в сферата на интериорния дизайн.
@@ -809,7 +810,8 @@
             const navHeight = navBarInner
                 ? navBarInner.getBoundingClientRect().height
                 : (nav ? nav.getBoundingClientRect().height : 0);
-            const navOffset = navHeight + 16;
+            const anchorOffsetAdjustment = window.innerWidth >= 1800 ? -90 : -200;
+            const navOffset = navHeight + anchorOffsetAdjustment;
             const targetTop = Math.max(target.getBoundingClientRect().top + window.pageYOffset - navOffset, 0);
 
             window.scrollTo({ top: targetTop, behavior });
@@ -822,6 +824,39 @@
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     scrollToHashTarget('smooth');
+                });
+            });
+        }
+
+        function initHashLinkNavigation() {
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', event => {
+                    const href = link.getAttribute('href') || '';
+                    if (!href || href === '#') return;
+
+                    const currentHash = window.location.hash;
+
+                    event.preventDefault();
+
+                    if (currentHash !== href) {
+                        history.pushState(null, '', href);
+                    }
+
+                    scrollToHashTarget('smooth');
+                });
+            });
+        }
+
+        function initHashResizeSync() {
+            let resizeFrame = null;
+
+            window.addEventListener('resize', () => {
+                if (!window.location.hash) return;
+
+                if (resizeFrame) cancelAnimationFrame(resizeFrame);
+                resizeFrame = requestAnimationFrame(() => {
+                    resizeFrame = null;
+                    scrollToHashTarget('auto');
                 });
             });
         }
@@ -1480,6 +1515,8 @@
             initMagneticButtons();
             initMarquee();
             initMobileNav();
+            initHashLinkNavigation();
+            initHashResizeSync();
 
             // Support direct hash navigation on first load and on hash changes.
             handleInitialHashNavigation();
